@@ -1,0 +1,57 @@
+// Typography
+$base-font-family: 'bebas-neue-book';
+$heading-font-family: 'bebas-neue-light';
+
+// Font Sizes
+$base-font-size: 1em;
+$h1-font-size: $base-font-size * 4;
+$h2-font-size: $base-font-size * 3.5;
+$h3-font-size: $base-font-size * 3;
+$h4-font-size: $base-font-size * 2.5;
+$h5-font-size: $base-font-size * 2;
+$h6-font-size: $base-font-size * 1.5;
+
+// Letter Spacing
+$base-letter-spacing: 0.25em;
+
+// Line height
+$base-line-height: 1.0;
+$heading-line-height: 1.0;
+
+// Other Sizes
+$base-border-radius: 5px;
+$base-spacing: $base-line-height * 1em;
+$small-spacing: $base-spacing / 2;
+$base-z-index: 0;
+
+// Colors
+$off-white: #f1f1f1;
+$blue: #477dca;
+$dark-gray: #343434;
+$medium-gray: #999;
+$light-gray: #ddd;
+
+// Background Color
+$base-background-color: $dark-gray;
+
+// Backdrop Color
+$backdrop-dim: $base-background-color;
+$backdrop-luminous: $off-white;
+
+// Font Colors
+$base-font-color: $off-white;
+$base-accent-color: $off-white;
+$action-color: $blue;
+
+// Link Colors
+$base-link-color: $base-accent-color;
+$hover-link-color: darken($base-accent-color, 15);
+$base-button-color: $base-link-color;
+
+// Border
+$base-border-color: $light-gray;
+$base-border: 1px solid $base-border-color;
+
+// Forms
+$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
