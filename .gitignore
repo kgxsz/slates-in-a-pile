@@ -2,5 +2,7 @@ figwheel_server.log
 /target
 /.lein-*
 /.nrepl-port
-/resources/public/cljs/out
+/resources/public/out
+/resources/public/main.js
+/resources/public/style.css
 /.sass-cache
