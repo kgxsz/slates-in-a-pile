@@ -1,6 +1,3 @@
-@include font-face("bebas-neue-light", "../fonts/bebas-neue-light");
-@include font-face("bebas-neue-book", "../fonts/bebas-neue-book");
-
 body {
   @include font-feature-settings("kern", "liga", "pnum");
   -webkit-font-smoothing: antialiased;
@@ -8,7 +5,6 @@ body {
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
-  letter-spacing: $base-letter-spacing;
 }
 
 h1,

@@ -12,15 +12,14 @@
             [lein-figwheel "0.3.1"]]
 
   :clean-targets ^{:protect false} [:target-path
-                                    "resources/public/out/"
-                                    "resources/public/main.js"
-                                    "resources/public/style.css"
-                                    "resources/public/style.css.map"]
+                                    "resources/public/style/"
+                                    "resources/public/scripts/"]
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
                         :compiler {:main everyday-adventures.core
-                                   :asset-path "out"
-                                   :output-to "resources/public/main.js"
-                                   :output-dir "resources/public/out"}
-                        :figwheel {:on-jsload "everyday-adventures.core/init"}}]})
+                                   :asset-path "scripts/out"
+                                   :output-to "resources/public/scripts/main.js"
+                                   :output-dir "resources/public/scripts/out"}
+                        :figwheel {:on-jsload "everyday-adventures.core/init"
+                                   :css-dirs  ["css"]}}]})
