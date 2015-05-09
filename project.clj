@@ -11,12 +11,12 @@
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-figwheel "0.3.1"]]
 
-  :clean-targets ^{:protect false} [:target-path "out"]
+  :clean-targets ^{:protect false} [:target-path]
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
                         :compiler {:main everyday-adventures.core
-                                   :asset-path "cljs/out"
-                                   :output-to "resources/public/cljs/main.js"
-                                   :output-dir "resources/public/cljs/out"}
+                                   :asset-path "out"
+                                   :output-to "resources/public/main.js"
+                                   :output-dir "resources/public/out"}
                         :figwheel {:on-jsload "everyday-adventures.core/init"}}]})
