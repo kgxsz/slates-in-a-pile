@@ -3,10 +3,47 @@
 @import "base/base";
 @import "vendor/neat/neat";
 
-#root-container {
-  display: table;
+#slates-container {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: pink;
+}
+
+.slate-container {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.slate {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.slate-content {
+  @include outer-container;
+  background-color: $dark-gray;
+}
+
+#slate-1 {
+  background-color: #BAA0BA;
+  .slate-content {
+    height: 400px;
+  }
+}
+
+#slate-2 {
+  background-color: #8FC7E0;
+  .slate-content {
+    height: 900px;
+    margin-top: 100px;
+    margin-bottom: 80px;
+  }
+}
+
+#slate-3 {
+  background-color: #AEEAB0;
+  .slate-content {
+    height: 500px;
+  }
 }

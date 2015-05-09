@@ -4,14 +4,23 @@
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))
 
-(defonce state (atom {:slide-number 1}))
+(defonce state (atom {:slate-number 1}))
 
 (defcomponent root-component [state owner]
   (render-state [_ _]
-    (dom/div
-      {:id "slide-number"
-       :on-click #(om/transact! state :slide-number inc)}
-      (str "The sliding number is: " (:slide-number state)))))
+    (dom/div {:id "slates-container"}
+      (dom/div
+        {:class "slate-container"}
+        (dom/div {:id "slate-1" :class "slate"}
+          (dom/div {:class "slate-content"})))
+      (dom/div
+        {:class "slate-container"}
+        (dom/div {:id "slate-2" :class "slate"}
+          (dom/div {:class "slate-content"})))
+      (dom/div
+        {:class "slate-container"}
+        (dom/div {:id "slate-3" :class "slate"}
+          (dom/div {:class "slate-content"}))))))
 
 (defn init []
   (om/root
