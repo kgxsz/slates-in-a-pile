@@ -21,5 +21,6 @@
                                    :asset-path "scripts/out"
                                    :output-to "resources/public/scripts/main.js"
                                    :output-dir "resources/public/scripts/out"}
-                        :figwheel {:on-jsload "everyday-adventures.core/init"
-                                   :css-dirs  ["css"]}}]})
+                        :figwheel {:on-jsload "everyday-adventures.core/init"}}]}
+
+  :figwheel {:css-dirs ["resources/public/style"]})
