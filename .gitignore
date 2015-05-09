@@ -1,14 +1,6 @@
 figwheel_server.log
-instarepl.clj
 /target
-/classes
-/checkouts
-pom.xml
-pom.xml.asc
-*.jar
-*.class
 /.lein-*
 /.nrepl-port
-/resources/public/js
-/resources/public/css
+/resources/public/cljs/out
 /.sass-cache
