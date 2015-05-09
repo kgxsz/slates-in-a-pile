@@ -1,13 +1,22 @@
 (defproject everyday-adventures "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-3211"]]
+                 [org.clojure/clojurescript "0.0-3211"]
+                 [org.omcljs/om "0.8.8"]
+                 [prismatic/dommy "1.1.0"]
+                 [prismatic/om-tools "0.3.11" :exclude [prismatic/schema
+                                                        prismatic/plumbing]]
+                 [prismatic/schema "0.4.2"]
+                 [prismatic/plumbing "0.4.3"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-figwheel "0.3.1"]]
 
   :clean-targets ^{:protect false} [:target-path "out"]
 
-  :cljsbuild {:builds [:id "dev"
+  :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
-                        :figwheel true
-                        :compiler {:main everyday-adventures.core}]})
+                        :compiler {:main everyday-adventures.core
+                                   :asset-path "cljs/out"
+                                   :output-to "resources/public/cljs/main.js"
+                                   :output-dir "resources/public/cljs/out"}
+                        :figwheel {:on-jsload "everyday-adventures.core/init"}}]})
