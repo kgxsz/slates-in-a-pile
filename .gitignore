@@ -4,5 +4,5 @@ figwheel_server.log
 /.nrepl-port
 /resources/public/out
 /resources/public/main.js
-/resources/public/style.css
+/resources/public/*css*
 /.sass-cache
