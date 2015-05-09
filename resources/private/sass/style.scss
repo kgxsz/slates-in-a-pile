@@ -13,35 +13,56 @@
   display: table;
   height: 100%;
   width: 100%;
-}
 
-.slate {
-  display: table-cell;
-  vertical-align: middle;
-}
+  .slate {
+    display: table-cell;
+    vertical-align: middle;
 
-.slate-content {
-  @include outer-container;
-  background-color: $dark-gray;
+    .slate-content {
+      @include outer-container;
+      text-align: center;
+    }
+  }
 }
 
 #slate-1 {
-  background-color: #FEF6E8;
+  background-color: #E5F7FD;
+  color: #70D1F5;
   .slate-content {
-    height: 400px;
   }
 }
 
 #slate-2 {
-  background-color: #70D1F5;
+  background-color: #EAEAF4;
+  color: #2E3192;
   .slate-content {
-    height: 400px;
   }
 }
 
 #slate-3 {
-  background-color: #EAEAF4;
+  background-color: #FDE5F3;
+  color: #ED0F93;
   .slate-content {
-    height: 400px;
+  }
+}
+
+#slate-4 {
+  background-color: #F9E7E8;
+  color: #C4161C;
+  .slate-content {
+  }
+}
+
+#slate-5 {
+  background-color: #FEF6E8;
+  color: #FAA61A;
+  .slate-content {
+  }
+}
+
+#slate-6 {
+  background-color: #F3F9EB;
+  color: #8CC63F;
+  .slate-content {
   }
 }
