@@ -2,6 +2,12 @@
 @import "vendor/bourbon/bourbon";
 @import "base/base";
 @import "vendor/neat/neat";
+@import "slates/slate-1";
+@import "slates/slate-2";
+@import "slates/slate-3";
+@import "slates/slate-4";
+@import "slates/slate-5";
+@import "slates/slate-6";
 
 #slates-container {
   position: absolute;
@@ -21,68 +27,6 @@
     .slate-content {
       @include outer-container;
       text-align: center;
-    }
-  }
-}
-
-#slate-1 {
-  background-color: $soft-blue;
-  color: $hard-blue;
-  .slate-content {
-    #svg-container {
-      circle {
-        fill: $hard-blue;
-      }
-    }
-  }
-}
-
-#slate-2 {
-  background-color: $soft-violet;
-  color: $hard-violet;
-  .slate-content {
-    circle {
-      fill: $hard-violet;
-    }
-  }
-}
-
-#slate-3 {
-  background-color: $soft-pink;
-  color: $hard-pink;
-  .slate-content {
-    circle {
-      fill: $hard-pink;
-    }
-  }
-}
-
-#slate-4 {
-  background-color: $soft-crimson;
-  color: $hard-crimson;
-  .slate-content {
-    circle {
-      fill: $hard-crimson;
-    }
-  }
-}
-
-#slate-5 {
-  background-color: $soft-yellow;
-  color: $hard-yellow;
-  .slate-content {
-    circle {
-      fill: $hard-yellow;
-    }
-  }
-}
-
-#slate-6 {
-  background-color: $soft-green;
-  color: $hard-green;
-  .slate-content {
-    circle {
-      fill: $hard-green;
     }
   }
 }

@@ -1,0 +1,11 @@
+#slate-1 {
+  background-color: $soft-blue;
+  color: $hard-blue;
+  .slate-content {
+    #svg-container {
+      circle {
+        fill: $hard-blue;
+      }
+    }
+  }
+}

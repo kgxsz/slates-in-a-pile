@@ -1,0 +1,9 @@
+#slate-4 {
+  background-color: $soft-crimson;
+  color: $hard-crimson;
+  .slate-content {
+    circle {
+      fill: $hard-crimson;
+    }
+  }
+}

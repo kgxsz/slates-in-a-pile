@@ -1,0 +1,9 @@
+#slate-6 {
+  background-color: $soft-green;
+  color: $hard-green;
+  .slate-content {
+    circle {
+      fill: $hard-green;
+    }
+  }
+}
