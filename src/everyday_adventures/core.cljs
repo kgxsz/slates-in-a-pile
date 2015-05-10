@@ -1,7 +1,7 @@
 (ns everyday-adventures.core
   (:require [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :refer [div h1 p svg]]
+            [om-tools.dom :refer [div]]
             [goog.events :as events]
             [goog.events.EventType :as EventType]
             [goog.dom :as dom]

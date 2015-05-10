@@ -2,8 +2,73 @@
   background-color: $soft-violet;
   color: $hard-violet;
   .slate-content {
-    circle {
-      fill: $hard-violet;
+
+    & > :nth-child(1) {
+      margin-bottom: 60px;
+    }
+
+    .colleague {
+      @include span-columns(6);
+      margin-bottom: 25px;
+      #image {
+        height: 250px;
+        width: 250px;
+        margin: auto;
+        background-size: cover;
+
+        #band {
+          height: 40px;
+          color: white;
+          background-color: black;
+          opacity: 0.3;
+          position: relative;
+          top: 210px;
+        }
+
+        #word {
+          color: $off-white;
+          position: relative;
+          top: 170px;
+        }
+      }
+    }
+
+    #colleague-1 {
+      @include shift(3);
+      #image {
+        background-image: url("../images/colleague-1.png");
+      }
+    }
+
+    #colleague-2 {
+      #image {
+        background-image: url("../images/colleague-2.png");
+      }
+    }
+
+    #colleague-3 {
+      #image {
+        background-image: url("../images/colleague-3.png");
+      }
+    }
+
+    #colleague-4 {
+      @include shift(3);
+      #image {
+        background-image: url("../images/colleague-4.png");
+      }
+    }
+
+    #colleague-5 {
+      #image {
+        background-image: url("../images/colleague-5.png");
+      }
+    }
+
+    #colleague-6 {
+      #image {
+        background-image: url("../images/colleague-6.png");
+      }
     }
   }
 }

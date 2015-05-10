@@ -1,13 +1,9 @@
 (ns everyday-adventures.slates.slate-2
   (:require [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :refer [div h1 p]]))
+            [om-tools.dom :refer [div h2 h3 h4 h6 p img]]))
 
 (defcomponent slate-2 [state owner]
-  (did-mount [_]
-    (let [svg (-> js/d3 (.select "#slate-2 .slate-content") (.append "svg") (.attr "width" 1000) (.attr "height" 300))
-          circle (-> svg (.selectAll "circle") (.data (clj->js (vec (range 20)))))]
-      (-> circle .enter (.append "circle") (.attr "r" 6) (.attr "cy" 150) (.attr "cx" (fn [d i] (+ 20 (* i 50)))))))
   (render-state [_ _]
     (div
       {:class "slate-container"}
@@ -15,5 +11,52 @@
         {:id "slate-2" :class "slate"}
         (div
           {:class "slate-content"}
-          (h1 "SLATE 2")
-          (p "The second slate in the pile."))))))
+          (h3 "A SINGLE WORD")
+          (div
+            {:id "colleague-1" :class "colleague"}
+            (div
+              {:id "image"}
+              (div {:id "band"})
+              (h6
+                {:id "word"}
+                "complexity")))
+          (div
+            {:id "colleague-2" :class "colleague"}
+            (div
+              {:id "image"}
+              (div {:id "band"})
+              (h6
+                {:id "word"}
+                "choreography")))
+          (div
+            {:id "colleague-3" :class "colleague"}
+            (div
+              {:id "image"}
+              (div {:id "band"})
+              (h6
+                {:id "word"}
+                "buzz-word")))
+          (div
+            {:id "colleague-4" :class "colleague"}
+            (div
+              {:id "image"}
+              (div {:id "band"})
+              (h6
+                {:id "word"}
+                "fiddly")))
+          (div
+            {:id "colleague-5" :class "colleague"}
+            (div
+              {:id "image"}
+              (div {:id "band"})
+              (h6
+                {:id "word"}
+                "posh")))
+          (div
+            {:id "colleague-6" :class "colleague"}
+            (div
+              {:id "image"}
+              (div {:id "band"})
+              (h6
+                {:id "word"}
+                "maturity"))))))))

@@ -2,10 +2,8 @@
   background-color: $soft-blue;
   color: $hard-blue;
   .slate-content {
-    #svg-container {
-      circle {
-        fill: $hard-blue;
-      }
+    & > :nth-child(1) {
+      margin-bottom: 20px;
     }
   }
 }
