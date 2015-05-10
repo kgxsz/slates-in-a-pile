@@ -5,8 +5,7 @@
                  [prismatic/om-tools "0.3.11" :exclude [prismatic/schema
                                                         prismatic/plumbing]]
                  [prismatic/schema "0.4.2"]
-                 [prismatic/plumbing "0.4.3"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]]
+                 [prismatic/plumbing "0.4.3"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-figwheel "0.3.1"]]

@@ -26,43 +26,63 @@
 }
 
 #slate-1 {
-  background-color: #E5F7FD;
-  color: #2DBCF0;
+  background-color: $soft-blue;
+  color: $hard-blue;
   .slate-content {
+    #svg-container {
+      circle {
+        fill: $hard-blue;
+      }
+    }
   }
 }
 
 #slate-2 {
-  background-color: #EAEAF4;
-  color: #2E3192;
+  background-color: $soft-violet;
+  color: $hard-violet;
   .slate-content {
+    circle {
+      fill: $hard-violet;
+    }
   }
 }
 
 #slate-3 {
-  background-color: #FDE5F3;
-  color: #ED0F93;
+  background-color: $soft-pink;
+  color: $hard-pink;
   .slate-content {
+    circle {
+      fill: $hard-pink;
+    }
   }
 }
 
 #slate-4 {
-  background-color: #F9E7E8;
-  color: #C4161C;
+  background-color: $soft-crimson;
+  color: $hard-crimson;
   .slate-content {
+    circle {
+      fill: $hard-crimson;
+    }
   }
 }
 
 #slate-5 {
-  background-color: #FEF6E8;
-  color: #FAA61A;
+  background-color: $soft-yellow;
+  color: $hard-yellow;
   .slate-content {
+    circle {
+      fill: $hard-yellow;
+    }
   }
 }
 
 #slate-6 {
-  background-color: #F3F9EB;
-  color: #8CC63F;
+  background-color: $soft-green;
+  color: $hard-green;
   .slate-content {
+    circle {
+      fill: $hard-green;
+    }
   }
 }

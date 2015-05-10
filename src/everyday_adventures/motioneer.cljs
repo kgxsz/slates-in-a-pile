@@ -1,11 +1,5 @@
 (ns everyday-adventures.motioneer
-  (:require [om.core :as om :include-macros true]
-            [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :refer [div]]
-            [goog.events :as events]
-            [goog.events.EventType :as EventType]
-            [goog.dom :as dom]
-            [cljs.core.async :refer [<! put! chan]]))
+  (:require [goog.dom :as dom]))
 
 (defn arrow-key-handler [direction]
   (let [slate-height (.. (dom/getElementByClass "slate") -offsetHeight)
