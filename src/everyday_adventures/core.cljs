@@ -67,7 +67,7 @@
     state
     {:target (dom/getElement "root-container")}))
 
-(defonce key-down-event-listener-registration
+(defonce key-down-handler-registration
   (events/listen js/window EventType/KEYDOWN #(key-down-handler %)))
 
 (init)

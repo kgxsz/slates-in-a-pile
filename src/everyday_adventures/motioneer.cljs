@@ -18,8 +18,9 @@
       :down (scroll-to-slate (inc current-slate)))))
 
 (defn key-down-handler [event]
-  (let [key-code (.. event -keyCode)]
+  (let [key-code (.. event -keyCode)
+        with-prevent-default (fn [f x] (.preventDefault event) (f x))]
     (case key-code
-      38 (do (.preventDefault event) (arrow-key-handler :up))
-      40 (do (.preventDefault event) (arrow-key-handler :down))
+      38 (with-prevent-default arrow-key-handler :up)
+      40 (with-prevent-default arrow-key-handler :down)
       "default")))
