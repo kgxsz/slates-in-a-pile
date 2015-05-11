@@ -11,7 +11,6 @@
         {:id "slate-2" :class "slate"}
         (div
           {:class "slate-content"}
-          (h3 "A SINGLE WORD")
           (div
             {:id "colleague-1" :class "colleague"}
             (div
@@ -35,7 +34,7 @@
               (div {:id "band"})
               (h6
                 {:id "word"}
-                "buzz-word")))
+                "fashionable")))
           (div
             {:id "colleague-4" :class "colleague"}
             (div

@@ -1,7 +1,7 @@
 (ns everyday-adventures.slates.slate-4
   (:require [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :refer [div h1 p svg]]))
+            [om-tools.dom :refer [div h1 p]]))
 
 (defcomponent slate-4 [state owner]
   (render-state [_ _]

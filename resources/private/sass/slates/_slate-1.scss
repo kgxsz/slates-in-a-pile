@@ -2,7 +2,7 @@
   background-color: $soft-blue;
   color: $hard-blue;
   .slate-content {
-    & > :nth-child(1) {
+    h4:nth-child(1) {
       margin-bottom: 20px;
     }
   }

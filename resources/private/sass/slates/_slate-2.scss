@@ -2,11 +2,6 @@
   background-color: $soft-violet;
   color: $hard-violet;
   .slate-content {
-
-    & > :nth-child(1) {
-      margin-bottom: 60px;
-    }
-
     .colleague {
       @include span-columns(6);
       margin-bottom: 25px;
