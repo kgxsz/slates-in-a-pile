@@ -1,5 +1,6 @@
 (ns everyday-adventures.motioneer
-  (:require [goog.dom :as dom]))
+  (:require [goog.dom :as dom]
+            [everyday-adventures.slates.slate-3 :refer [move-left move-right]]))
 
 (defn arrow-key-handler [direction]
   (let [slate-height (.. (dom/getElementByClass "slate") -offsetHeight)
@@ -9,7 +10,9 @@
         scroll-to-slate (fn [n] (. js/window (scrollTo 0 (* n slate-height))))]
     (case direction
       :up (if offset-flush (scroll-to-slate (dec current-slate)) (scroll-to-slate current-slate))
-      :down (scroll-to-slate (inc current-slate)))))
+      :down (scroll-to-slate (inc current-slate))
+      :right (move-right)
+      :left (move-left))))
 
 (defn key-down-handler [event]
   (let [key-code (.. event -keyCode)
@@ -17,4 +20,6 @@
     (case key-code
       38 (with-prevent-default arrow-key-handler :up)
       40 (with-prevent-default arrow-key-handler :down)
+      39 (with-prevent-default arrow-key-handler :right)
+      37 (with-prevent-default arrow-key-handler :left)
       "default")))
