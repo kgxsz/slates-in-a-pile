@@ -17,20 +17,14 @@
 (defonce state (atom {:slate-1 {}
                       :slate-2 {}
                       :slate-3 {:step 0}
-                      :slate-4 {:step 0}
+                      :slate-4 {}
                       :slate-5 {}
                       :slate-6 {}}))
 
-(defn increment-step [current-slate-n]
+(defn change-current-slate-step [current-slate-n f]
   (let [current-slate (keyword (str "slate-" (inc current-slate-n)))
         cursor (om/ref-cursor (current-slate (om/root-cursor state)))]
-    (.log js/console (str current-slate))
-    (om/transact! cursor :step inc)))
-
-(defn decrement-step [current-slate-n]
-  (let [current-slate (keyword (str "slate-" (inc current-slate-n)))
-        cursor (om/ref-cursor (current-slate (om/root-cursor state)))]
-    (om/transact! cursor :step dec)))
+    (om/transact! cursor :step #(let [r (f %)] (if (neg? r) % r)))))
 
 (defn arrow-key-handler [direction]
   (let [slate-height (.. (dom/getElementByClass "slate") -offsetHeight)
@@ -43,8 +37,8 @@
             (scroll-to-slate (dec current-slate-n))
             (scroll-to-slate current-slate-n))
       :down (scroll-to-slate (inc current-slate-n))
-      :right (increment-step current-slate-n)
-      :left (decrement-step current-slate-n))))
+      :right (change-current-slate-step current-slate-n inc)
+      :left (change-current-slate-step current-slate-n dec))))
 
 (defn key-down-handler [event]
   (case (.-keyCode event)
