@@ -3,7 +3,11 @@
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :refer [div h1 p]]))
 
-(defcomponent slate-4 [state owner]
+(defcomponent slate-4 [cursor owner]
+  (did-mount [_]
+    (.log js/console "Slate 4 step at mount is: " (:step cursor)))
+  (did-update [_ _ _]
+    (.log js/console "Slate 4 step at update is: " (:step cursor)))
   (render-state [_ _]
     (div
       {:class "slate-container"}

@@ -3,7 +3,7 @@
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :refer [div h1 h2 h3 h4 h5 h6 p]]))
 
-(defcomponent slate-1 [state owner]
+(defcomponent slate-1 [cursor owner]
   (render-state [_ _]
     (div
       {:class "slate-container"}
