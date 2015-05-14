@@ -12,15 +12,21 @@
             (.attr "width" 1088)
             (.attr "height" 400)))
 
+(defn use-attribute [element attribute]
+  (.attr element attribute (fn [d _] (aget d attribute))))
+
+(defn use-attributes [element & attributes]
+  (reduce use-attribute element attributes))
+
+#_(defn enter-with-attributes [container element data]
+  (let [t (-> container (.selectAll element) (.data (clj->js data)) .enter (.append element))]
+    ))
+
 (defn create-service-line [svg]
   (let [g (-> svg (.append "g") (.attr "transform" "translate(0, 200)") (.attr "class" "service-line"))]
+    #_(enter-with-attributes g "rect" [{:width 100 :height 28 :x 5 :rx 10 :ry 10}])
     (-> g (.selectAll "rect") (.data (clj->js [{:width 100 :height 28 :x 5 :rx 10 :ry 10}]))
-          .enter (.append "rect")
-          (.attr "ry" (fn [d _] (.-ry d)))
-          (.attr "rx" (fn [d _] (.-rx d)))
-          (.attr "x" (fn [d _] (.-x d)))
-          (.attr "height" (fn [d _] (.-height d)))
-          (.attr "width" (fn [d _] (.-width d))))
+          .enter (.append "rect") (use-attributes "width" "height" "x" "rx" "ry"))
     (-> g (.selectAll "text") (.data #js ["service a"]) .enter
                     (.append "text") (.text (fn [d i] d)) (.attr "dy" 19) (.attr "dx" 24))
     (-> g (.selectAll "line")
@@ -93,6 +99,7 @@
                   (.attr "y1" (fn [d _] (.-y1 d)))
                   (.attr "y2" (fn [d _] (.-y2 d)))
                   (.attr "class" (fn [d _] (.-class d))))))
+
 
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (init-state [_]
