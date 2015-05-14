@@ -9,7 +9,7 @@
             [cljs.core.async :refer [put! chan <!]]
             [everyday-adventures.slates.slate-1 :refer [slate-1]]
             [everyday-adventures.slates.slate-2 :refer [slate-2]]
-            [everyday-adventures.slates.slate-3 :refer [slate-3 move-left move-right]]
+            [everyday-adventures.slates.slate-3 :refer [slate-3]]
             [everyday-adventures.slates.slate-4 :refer [slate-4]]
             [everyday-adventures.slates.slate-5 :refer [slate-5]]
             [everyday-adventures.slates.slate-6 :refer [slate-6]]))
