@@ -2,19 +2,47 @@
   background-color: $soft-green;
   color: $hard-green;
   .slate-content {
-    circle {
-      fill: $hard-green;
+
+    .service-line {
+      circle {
+        fill: $hard-violet;
+      }
+      rect {
+        stroke: $hard-violet;
+        stroke-width: 2;
+        fill: none;
+      }
+      line {
+        stroke: $hard-violet;
+        stroke-width: 2;
+        &.dashed {
+          stroke-dasharray: 5 5;
+        }
+      }
+      text {
+        fill: $hard-violet;
+      }
     }
-    rect {
-      stroke: $hard-green;
-      stroke-width: 2;
-      fill: none;
-    }
-    line {
-      stroke: $hard-green;
-      stroke-width: 2;
-      &.dashed {
-        stroke-dasharray: 5 5;
+
+    .dev-line,
+    .qa-line,
+    .prod-line {
+      circle {
+        stroke: $hard-green;
+        stroke-width: 2;
+        fill: none;
+      }
+
+      line {
+        stroke: $hard-green;
+        stroke-width: 2;
+        &.dashed {
+          stroke-dasharray: 5 5;
+        }
+      }
+      text {
+        fill: $hard-green;
+        text-anchor: middle;
       }
     }
   }
