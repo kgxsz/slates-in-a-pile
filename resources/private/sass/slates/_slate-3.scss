@@ -3,7 +3,7 @@
   color: $hard-green;
   .slate-content {
 
-    .service-line {
+    .service {
       circle {
         fill: $hard-violet;
       }
@@ -24,9 +24,9 @@
       }
     }
 
-    .dev-line,
-    .qa-line,
-    .prod-line {
+    .dev,
+    .qa,
+    .prod {
       circle {
         stroke: $hard-green;
         stroke-width: 2;
