@@ -33,7 +33,8 @@
     (create-text-join g [{:text service :dx 24 :dy 19}])
     (create-element-join g "line" [{:x1 105 :x2 320 :y1 14 :y2 14 :class "dashed"}
                                    {:x1 340 :x2 620 :y1 14 :y2 14}
-                                   {:x1 640 :x2 920 :y1 14 :y2 14}])))
+                                   {:x1 640 :x2 920 :y1 14 :y2 14}
+                                   {:x1 940 :x2 970 :y1 14 :y2 14}])))
 
 (defn create-env [parent-element env x]
   (let [g (create-element-grouping parent-element env x 100)]
@@ -51,18 +52,29 @@
                                    {:x1 20 :x2 28 :y1 0 :y2 8}
                                    {:x1 28 :x2 20 :y1 6 :y2 14}])))
 
-(defn create-build [parent-element x y n]
-  (let [g (create-element-grouping parent-element "build" x y)
-        build-n (str "b" n)]
-    (create-text-join g [{:text build-n :dx 7 :dy 15}])
-    (create-element-join g "circle" [{:cx 0 :cy 0 :r 7}])))
+(defn create-build [parent-element {:keys [label opacity x y]}]
+  (let [group (create-element-grouping parent-element "build" x y)]
+    (-> group (.attr "opacity" opacity))
+    (create-text-join group [{:text label :dx 7 :dy 15}])
+    (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])
+    group))
+
+(defn update-build [build {:keys [opacity x y]}]
+  (let [transform (str "translate(" x "," y ")")]
+    (-> build .transition (.duration 700) (.attr "transform" transform) (.attr "opacity" opacity))))
+
+(defn gen-build-1-data [step]
+  {:label "b1"
+   :opacity (if (pos? step) 1 0)
+   :x (+ 330 (if (> step 1)  (* (dec step) 300) 0))
+   :y 214})
 
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (did-mount [_]
     (.log js/console "Slate 3 mounted with step: " step)
     (let [svg (create-svg)
           commit (create-commit svg 201 207)
-          build (create-build svg 330 214 1)]
+          build (create-build svg (gen-build-1-data step))]
       (create-service svg "service a" 200)
       (create-env svg "dev" 300)
       (create-env svg "qa" 600)
@@ -72,7 +84,8 @@
       (om/set-state! owner :build build)))
   (did-update [_ _ _]
     (.log js/console "Slate 3 updated with step: " step)
-    (let [svg ()]))
+    (let [build (om/get-state owner :build)]
+      (update-build build (gen-build-1-data step))))
   (render-state [_ _]
     (div
       {:class "slate-container"}
