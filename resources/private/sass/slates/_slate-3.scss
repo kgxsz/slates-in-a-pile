@@ -45,5 +45,24 @@
         text-anchor: middle;
       }
     }
+
+    .commit {
+      line {
+        stroke: $hard-violet;
+        stroke-width: 4;
+      }
+    }
+
+    .build {
+      circle {
+        fill: $hard-violet;
+      }
+
+      text {
+        fill: $hard-violet;
+        font-size: small;
+        text-anchor: left;
+      }
+    }
   }
 }

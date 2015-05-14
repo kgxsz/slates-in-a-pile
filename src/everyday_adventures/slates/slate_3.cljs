@@ -27,34 +27,52 @@
   (let [transform (str "translate(" x "," y ")")]
     (-> parent-element (.append "g") (.attr "class" class) (.attr "transform" transform))))
 
-(defn create-service-static [parent-element service y-offset]
-  (let [g (create-element-grouping parent-element "service" 0 y-offset)]
+(defn create-service [parent-element service y]
+  (let [g (create-element-grouping parent-element "service" 0 y)]
     (create-element-join g "rect" [{:width 100 :height 28 :x 5 :rx 10 :ry 10}])
     (create-text-join g [{:text service :dx 24 :dy 19}])
     (create-element-join g "line" [{:x1 105 :x2 320 :y1 14 :y2 14 :class "dashed"}
-                                   {:x1 340 :x2 620 :y1 14 :y2 14 :class "solid"}
-                                   {:x1 640 :x2 920 :y1 14 :y2 14 :class "solid"}])))
+                                   {:x1 340 :x2 620 :y1 14 :y2 14}
+                                   {:x1 640 :x2 920 :y1 14 :y2 14}])))
 
-(defn create-env-static [parent-element env x-offset]
-  (let [g (create-element-grouping parent-element env x-offset 100)]
+(defn create-env [parent-element env x]
+  (let [g (create-element-grouping parent-element env x 100)]
     (create-element-join g "circle" [{:cx 30 :cy 10 :r 24}])
     (create-text-join g [{:text env :dx 30 :dy 15}])
-    (create-element-join g "line" [{:x1 30 :x2 30 :y1 34 :y2 103 :class "solid"}
-                                   {:x1 30 :x2 30 :y1 125 :y2 153 :class "solid"}])))
+    (create-element-join g "line" [{:x1 30 :x2 30 :y1 34 :y2 103}
+                                   {:x1 30 :x2 30 :y1 125 :y2 153}])))
+
+(defn create-commit [parent-element x y]
+  (let [g (create-element-grouping parent-element "commit" x y)]
+    (create-element-join g "line" [{:x1 0 :x2 8 :y1 0 :y2 8}
+                                   {:x1 8 :x2 0 :y1 6 :y2 14}
+                                   {:x1 10 :x2 18 :y1 0 :y2 8}
+                                   {:x1 18 :x2 10 :y1 6 :y2 14}
+                                   {:x1 20 :x2 28 :y1 0 :y2 8}
+                                   {:x1 28 :x2 20 :y1 6 :y2 14}])))
+
+(defn create-build [parent-element x y n]
+  (let [g (create-element-grouping parent-element "build" x y)
+        build-n (str "b" n)]
+    (create-text-join g [{:text build-n :dx 7 :dy 15}])
+    (create-element-join g "circle" [{:cx 0 :cy 0 :r 7}])))
 
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (did-mount [_]
     (.log js/console "Slate 3 mounted with step: " step)
-    (let [svg (create-svg)]
-      (create-service-static svg "service a" 200)
-      (create-env-static svg "dev" 300)
-      (create-env-static svg "qa" 600)
-      (create-env-static svg "prod" 900)
-      (om/set-state! owner :svg svg)))
+    (let [svg (create-svg)
+          commit (create-commit svg 201 207)
+          build (create-build svg 330 214 1)]
+      (create-service svg "service a" 200)
+      (create-env svg "dev" 300)
+      (create-env svg "qa" 600)
+      (create-env svg "prod" 900)
+      (om/set-state! owner :svg svg)
+      (om/set-state! owner :commit commit)
+      (om/set-state! owner :build build)))
   (did-update [_ _ _]
     (.log js/console "Slate 3 updated with step: " step)
-    (let [svg (-> js/d3 (.select "#slate-3 .slate-content"))
-          circle (-> svg (.selectAll "circle"))]))
+    (let [svg ()]))
   (render-state [_ _]
     (div
       {:class "slate-container"}
