@@ -28,20 +28,20 @@
     .qa,
     .prod {
       circle {
-        stroke: $hard-green;
+        stroke: $dark-gray;
         stroke-width: 2;
-        fill: none;
+        fill: $light-gray;
       }
 
       line {
-        stroke: $hard-green;
+        stroke: $dark-gray;
         stroke-width: 2;
         &.dashed {
           stroke-dasharray: 5 5;
         }
       }
       text {
-        fill: $hard-green;
+        fill: $dark-gray;
         text-anchor: middle;
       }
     }

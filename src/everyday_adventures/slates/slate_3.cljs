@@ -38,7 +38,8 @@
 
 (defn create-env [parent-element env x]
   (let [g (create-element-grouping parent-element env x 100)]
-    (create-element-join g "circle" [{:cx 30 :cy 10 :r 24}])
+    (create-element-join g "circle" [{:cx 30 :cy 10 :r 24}
+                                     {:cx 30 :cy 114 :r 10}])
     (create-text-join g [{:text env :dx 30 :dy 15}])
     (create-element-join g "line" [{:x1 30 :x2 30 :y1 34 :y2 103}
                                    {:x1 30 :x2 30 :y1 125 :y2 153}])))
@@ -62,13 +63,13 @@
 (defn animate-commit [commit step]
   (when (contains? #{1 2 3} step)
     (-> commit
-        .transition (.duration 1000) (.attr "transform" "translate(271,207)") (.attr "opacity" 1)
-        .transition (.duration 1000) (.attr "transform" "translate(121,207)") (.attr "opacity" 0))))
+        .transition (.duration 1000) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
+        .transition (.duration 1000) (.attr "transform" "translate(151,207)") (.attr "opacity" 0))))
 
 (defn create-build [parent-element {:keys [label opacity x y]}]
   (let [group (create-element-grouping parent-element "build" x y)]
     (-> group (.attr "opacity" opacity))
-    (create-text-join group [{:text label :dx 7 :dy 15}])
+    (create-text-join group [{:text label :dx 10 :dy 16}])
     (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])
     group))
 
@@ -97,20 +98,16 @@
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (did-mount [_]
     (.log js/console "Slate 3 mounted with step: " step)
-    (let [svg (create-svg)
-          commit (create-commit svg (gen-commit-a-data step))
-          build-1 (create-build svg (gen-build-1-data step))
-          build-2 (create-build svg (gen-build-2-data step))
-          build-3 (create-build svg (gen-build-3-data step))]
-      (create-service svg "service a" 200)
+    (let [svg (create-svg)]
       (create-env svg "dev" 300)
       (create-env svg "qa" 600)
       (create-env svg "prod" 900)
-      (om/set-state! owner :svg svg)
-      (om/set-state! owner :commit commit)
-      (om/set-state! owner :build-1 build-1)
-      (om/set-state! owner :build-2 build-2)
-      (om/set-state! owner :build-3 build-3)))
+      (create-service svg "service a" 200)
+      (om/set-state! owner :commit (create-commit svg (gen-commit-a-data step)))
+      (om/set-state! owner :build-1 (create-build svg (gen-build-1-data step)))
+      (om/set-state! owner :build-2 (create-build svg (gen-build-2-data step)))
+      (om/set-state! owner :build-3 (create-build svg (gen-build-3-data step)))
+      (om/set-state! owner :svg svg)))
   (did-update [_ _ _]
     (.log js/console "Slate 3 updated with step: " step)
     (let [build-1 (om/get-state owner :build-1)
