@@ -43,14 +43,27 @@
     (create-element-join g "line" [{:x1 30 :x2 30 :y1 34 :y2 103}
                                    {:x1 30 :x2 30 :y1 125 :y2 153}])))
 
-(defn create-commit [parent-element x y]
-  (let [g (create-element-grouping parent-element "commit" x y)]
-    (create-element-join g "line" [{:x1 0 :x2 8 :y1 0 :y2 8}
-                                   {:x1 8 :x2 0 :y1 6 :y2 14}
-                                   {:x1 10 :x2 18 :y1 0 :y2 8}
-                                   {:x1 18 :x2 10 :y1 6 :y2 14}
-                                   {:x1 20 :x2 28 :y1 0 :y2 8}
-                                   {:x1 28 :x2 20 :y1 6 :y2 14}])))
+(defn create-commit [parent-element {:keys [opacity x y]}]
+  (let [group (create-element-grouping parent-element "commit" x y)]
+    (-> group (.attr "opacity" opacity))
+    (create-element-join group "line" [{:x1 0 :x2 8 :y1 0 :y2 8}
+                                       {:x1 8 :x2 0 :y1 6 :y2 14}
+                                       {:x1 10 :x2 18 :y1 0 :y2 8}
+                                       {:x1 18 :x2 10 :y1 6 :y2 14}
+                                       {:x1 20 :x2 28 :y1 0 :y2 8}
+                                       {:x1 28 :x2 20 :y1 6 :y2 14}])
+    group))
+
+(defn gen-commit-a-data [step]
+  {:opacity (if (contains? #{1 4} step) 1 0)
+   :x (if ( contains? #{1 2 4} step) 271 121)
+   :y 207})
+
+(defn animate-commit [commit step]
+  (when (contains? #{1 2 3} step)
+    (-> commit
+        .transition (.duration 1000) (.attr "transform" "translate(271,207)") (.attr "opacity" 1)
+        .transition (.duration 1000) (.attr "transform" "translate(121,207)") (.attr "opacity" 0))))
 
 (defn create-build [parent-element {:keys [label opacity x y]}]
   (let [group (create-element-grouping parent-element "build" x y)]
@@ -61,31 +74,53 @@
 
 (defn update-build [build {:keys [opacity x y]}]
   (let [transform (str "translate(" x "," y ")")]
-    (-> build .transition (.duration 700) (.attr "transform" transform) (.attr "opacity" opacity))))
+    (-> build .transition (.duration 1000) (.attr "transform" transform) (.attr "opacity" opacity))))
 
 (defn gen-build-1-data [step]
   {:label "b1"
-   :opacity (if (pos? step) 1 0)
-   :x (+ 330 (if (> step 1)  (* (dec step) 300) 0))
+   :opacity (if (contains? #{1 2 3} step) 1 0)
+   :x (+ 330 (if (contains? #{1 2 3} step) (* (dec step) 300) (if (> step 3) 600 0)))
+   :y 214})
+
+(defn gen-build-2-data [step]
+  {:label "b2"
+   :opacity (if (contains? #{2 3 4} step) 1 0)
+   :x (+ 330 (if (contains? #{2 3 4} step) (* (- step 2) 300) (if (> step 4) 600 0)))
+   :y 214})
+
+(defn gen-build-3-data [step]
+  {:label "b3"
+   :opacity (if (contains? #{3 4 5} step) 1 0)
+   :x (+ 330 (if (contains? #{3 4 5} step) (* (- step 3) 300) (if (> step 5) 600 0)))
    :y 214})
 
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (did-mount [_]
     (.log js/console "Slate 3 mounted with step: " step)
     (let [svg (create-svg)
-          commit (create-commit svg 201 207)
-          build (create-build svg (gen-build-1-data step))]
+          commit (create-commit svg (gen-commit-a-data step))
+          build-1 (create-build svg (gen-build-1-data step))
+          build-2 (create-build svg (gen-build-2-data step))
+          build-3 (create-build svg (gen-build-3-data step))]
       (create-service svg "service a" 200)
       (create-env svg "dev" 300)
       (create-env svg "qa" 600)
       (create-env svg "prod" 900)
       (om/set-state! owner :svg svg)
       (om/set-state! owner :commit commit)
-      (om/set-state! owner :build build)))
+      (om/set-state! owner :build-1 build-1)
+      (om/set-state! owner :build-2 build-2)
+      (om/set-state! owner :build-3 build-3)))
   (did-update [_ _ _]
     (.log js/console "Slate 3 updated with step: " step)
-    (let [build (om/get-state owner :build)]
-      (update-build build (gen-build-1-data step))))
+    (let [build-1 (om/get-state owner :build-1)
+          build-2 (om/get-state owner :build-2)
+          build-3 (om/get-state owner :build-3)
+          commit (om/get-state owner :commit)]
+      (update-build build-1 (gen-build-1-data step))
+      (update-build build-2 (gen-build-2-data step))
+      (update-build build-3 (gen-build-3-data step))
+      (animate-commit commit step)))
   (render-state [_ _]
     (div
       {:class "slate-container"}
