@@ -13,7 +13,8 @@
 
   :clean-targets ^{:protect false} [:target-path
                                     "resources/public/style/"
-                                    "resources/public/scripts/"]
+                                    "resources/public/scripts/out"
+                                    "resources/public/scripts/main.js"]
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
