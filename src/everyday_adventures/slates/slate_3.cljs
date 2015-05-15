@@ -33,6 +33,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;; statics ;;;;;;;;;;;;;;;;;;;;;;;;
+; statics get created with constant data, and are always static
 
 (defn create-service [parent-element service y]
   (let [group (create-element-grouping parent-element "service" 0 y 1)]
@@ -60,11 +61,10 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;; animatics ;;;;;;;;;;;;;;;;;;;;;;;;
+; animatics get created with constant data, but are subject to animizing as a function of step
 
-(defn generate-trigger-data [step]
-  {:opacity (if (contains? #{1 4} step) 1 0)
-   :x (if ( contains? #{1 2 4} step) 271 121)
-   :y 207})
+(defn generate-triggers-data []
+  [{:opacity 0 :x 121 :y 207}])
 
 (defn create-trigger [parent-element {:keys [opacity x y]}]
   (let [group (create-element-grouping parent-element "trigger" x y opacity)]
@@ -76,10 +76,10 @@
                                        {:x1 28 :x2 20 :y1 6 :y2 14}])
     group))
 
-(defn register-trigger [parent-element owner step]
-  (->> (generate-trigger-data step)
-       (create-trigger parent-element)
-       (om/set-state! owner :trigger)))
+(defn register-triggers [parent-element owner]
+  (->> (generate-triggers-data)
+       (mapv #(create-trigger parent-element %))
+       (om/set-state! owner :triggers)))
 
 (defn animize-trigger [trigger step]
   (when (contains? #{1 2 3} step)
@@ -87,9 +87,13 @@
         .transition (.duration 1000) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
         .transition (.duration 1000) (.attr "transform" "translate(151,207)") (.attr "opacity" 0))))
 
+(defn animize-triggers [triggers step]
+  (mapv #(animize-trigger % step) triggers))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;
+; dynamics get created with data as a function of step, are are subject to dynamizing as a function of step
 
 (defn generate-builds-data [step]
   [{:label "b1"
@@ -113,7 +117,7 @@
 
 (defn register-builds [parent-element owner step]
   (->> (generate-builds-data step)
-       (map #(create-build parent-element %))
+       (mapv #(create-build parent-element %))
        (om/set-state! owner :builds)))
 
 (defn dynamize-build [build {:keys [opacity x y]}]
@@ -130,15 +134,15 @@
     (.log js/console "Slate 3 mounted with step: " step)
     (let [canvas (create-canvas)]
       (register-statics canvas)
-      (register-trigger canvas owner step)
+      (register-triggers canvas owner)
       (register-builds canvas owner step)
       (om/set-state! owner :canvas canvas)))
 
   (did-update [_ _ _]
     (.log js/console "Slate 3 updated with step: " step)
     (let [builds (om/get-state owner :builds)
-          trigger (om/get-state owner :trigger)]
-      (animize-trigger trigger step)
+          triggers (om/get-state owner :triggers)]
+      (animize-triggers triggers step)
       (dynamize-builds builds step)))
 
   (render-state [_ _]
