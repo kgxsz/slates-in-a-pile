@@ -24,9 +24,7 @@
       }
     }
 
-    .dev,
-    .qa,
-    .prod {
+    .environment {
       circle {
         stroke: $dark-gray;
         stroke-width: 2;

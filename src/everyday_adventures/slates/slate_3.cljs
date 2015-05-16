@@ -26,7 +26,7 @@
           use-text (fn [element] (.text element (fn [d _] (aget d "text"))))]
       (-> join .enter (.append "text") (use-attribute "dx") (use-attribute "dy") (use-text))))
 
-(defn create-element-grouping [parent-element class x y opacity]
+(defn create-element-grouping [parent-element {:keys [class x y opacity]}]
   (let [transform (str "translate(" x "," y ")")]
     (-> parent-element (.append "g") (.attr "class" class) (.attr "transform" transform) (.attr "opacity" opacity))))
 
@@ -35,28 +35,42 @@
 ;;;;;;;;;;;;;;;;;;;;; statics ;;;;;;;;;;;;;;;;;;;;;;;;
 ; statics get created with constant data, and are always static
 
-(defn create-service [parent-element service y]
-  (let [group (create-element-grouping parent-element "service" 0 y 1)]
+(defn generate-services-data []
+  [{:name "service a" :y 200}])
+
+(defn generate-environments-data []
+  [{:name "dev" :x 300}
+   {:name "qa" :x 600}
+   {:name "prod" :x 900}])
+
+(defn create-service [parent-element {:keys [name y]}]
+  (let [group-data {:class "service" :x 0 :y y :opacity 1}
+        group (create-element-grouping parent-element group-data)]
     (create-element-join group "rect" [{:width 100 :height 28 :x 5 :rx 10 :ry 10}])
-    (create-text-join group [{:text service :dx 24 :dy 19}])
+    (create-text-join group [{:text name :dx 24 :dy 19}])
     (create-element-join group "line" [{:x1 105 :x2 320 :y1 14 :y2 14 :class "dashed"}
                                        {:x1 340 :x2 620 :y1 14 :y2 14}
                                        {:x1 640 :x2 920 :y1 14 :y2 14}
                                        {:x1 940 :x2 970 :y1 14 :y2 14}])))
 
-(defn create-env [parent-element env x]
-  (let [group (create-element-grouping parent-element env x 100 1)]
+(defn create-environment [parent-element {:keys [name x]}]
+  (let [group-data {:class "environment" :x x :y 100 :opacity 1}
+        group (create-element-grouping parent-element group-data)]
     (create-element-join group "circle" [{:cx 30 :cy 10 :r 24}
                                          {:cx 30 :cy 114 :r 10}])
-    (create-text-join group [{:text env :dx 30 :dy 15}])
+    (create-text-join group [{:text name :dx 30 :dy 15}])
     (create-element-join group "line" [{:x1 30 :x2 30 :y1 34 :y2 103}
                                        {:x1 30 :x2 30 :y1 125 :y2 153}])))
 
-(defn register-statics [parent-element]
-  (create-env parent-element "dev" 300)
-  (create-env parent-element "qa" 600)
-  (create-env parent-element "prod" 900)
-  (create-service parent-element "service a" 200))
+(defn initialize-services [parent-element]
+  (mapv (partial create-service parent-element) (generate-services-data)))
+
+(defn initialize-environments [parent-element]
+  (mapv (partial create-environment parent-element) (generate-environments-data)))
+
+(defn initialize-statics [parent-element]
+  (initialize-services parent-element)
+  (initialize-environments parent-element))
 
 
 
@@ -67,7 +81,8 @@
   [{:opacity 0 :x 121 :y 207}])
 
 (defn create-trigger [parent-element {:keys [opacity x y]}]
-  (let [group (create-element-grouping parent-element "trigger" x y opacity)]
+  (let [group-data {:class "trigger" :x x :y y :opacity opacity}
+        group (create-element-grouping parent-element group-data)]
     (create-element-join group "line" [{:x1 0 :x2 8 :y1 0 :y2 8}
                                        {:x1 8 :x2 0 :y1 6 :y2 14}
                                        {:x1 10 :x2 18 :y1 0 :y2 8}
@@ -76,7 +91,7 @@
                                        {:x1 28 :x2 20 :y1 6 :y2 14}])
     group))
 
-(defn register-triggers [parent-element owner]
+(defn initialize-triggers [parent-element owner]
   (->> (generate-triggers-data)
        (mapv #(create-trigger parent-element %))
        (om/set-state! owner :triggers)))
@@ -93,7 +108,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;
-; dynamics get created with data as a function of step, are are subject to dynamizing as a function of step
+; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step
 
 (defn generate-builds-data [step]
   [{:label "b1"
@@ -110,12 +125,13 @@
     :y 214}])
 
 (defn create-build [parent-element {:keys [label opacity x y]}]
-  (let [group (create-element-grouping parent-element "build" x y opacity)]
+  (let [group-data {:class "build" :x x :y y :opacity opacity}
+        group (create-element-grouping parent-element group-data)]
     (create-text-join group [{:text label :dx 10 :dy 16}])
     (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])
     group))
 
-(defn register-builds [parent-element owner step]
+(defn initialize-builds [parent-element owner step]
   (->> (generate-builds-data step)
        (mapv #(create-build parent-element %))
        (om/set-state! owner :builds)))
@@ -133,9 +149,9 @@
   (did-mount [_]
     (.log js/console "Slate 3 mounted with step: " step)
     (let [canvas (create-canvas)]
-      (register-statics canvas)
-      (register-triggers canvas owner)
-      (register-builds canvas owner step)
+      (initialize-statics canvas)
+      (initialize-triggers canvas owner)
+      (initialize-builds canvas owner step)
       (om/set-state! owner :canvas canvas)))
 
   (did-update [_ _ _]
