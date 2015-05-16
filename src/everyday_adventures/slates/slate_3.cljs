@@ -96,7 +96,7 @@
     :y 207
     :opacity 0
     :animize (fn [self step]
-               (if (contains? #{1 2 3} step)
+               (if (contains? #{1 2 3 4} step)
                  (-> self
                      .transition
                      (.duration 700)
@@ -105,21 +105,6 @@
                      .transition
                      (.duration 600)
                      (.attr "transform" "translate(121,207)")
-                     (.attr "opacity" 0))))}
-   {:id "trigger-b"
-    :x 121
-    :y 257
-    :opacity 0
-    :animize (fn [self step]
-               (if (contains? #{4} step)
-                 (-> self
-                     .transition
-                     (.duration 700)
-                     (.attr "transform" "translate(231,257)")
-                     (.attr "opacity" 1)
-                     .transition
-                     (.duration 600)
-                     (.attr "transform" "translate(121,257)")
                      (.attr "opacity" 0))))}])
 
 (defn create-trigger-construct
@@ -147,21 +132,34 @@
 ;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step ;;
 
+(defn standard-build-opacity [start-step]
+  (let [steps (->> (+ start-step 3) (range start-step) set)]
+    (fn [step] (if (contains? steps step) 1 0))))
+
+(defn standard-build-x [start-step]
+  (let [steps (->> (range 3) (mapv #(+ start-step %)) set)]
+    (fn [step] (+ 330 (if (contains? steps step) (* (- step start-step) 300) (if (> step (+ 2 start-step)) 600 0))))))
+
 (def builds-properties
   [{:id "b1"
     :text "b1"
-    :opacity (fn [step] (if (contains? #{1 2 3} step) 1 0))
-    :x (fn [step] (+ 330 (if (contains? #{1 2 3} step) (* (dec step) 300) (if (> step 3) 600 0))))
+    :opacity (standard-build-opacity 1)
+    :x (standard-build-x 1)
     :y 214}
    {:id "b2"
     :text "b2"
-    :opacity (fn [step] (if (contains? #{2 3 4} step) 1 0))
-    :x (fn [step] (+ 330 (if (contains? #{2 3 4} step) (* (- step 2) 300) (if (> step 4) 600 0))))
+    :opacity (standard-build-opacity 2)
+    :x (standard-build-x 2)
     :y 214}
    {:id "b3"
     :text "b3"
-    :opacity (fn [step] (if (contains? #{3 4 5} step) 1 0))
-    :x (fn [step] (+ 330 (if (contains? #{3 4 5} step) (* (- step 3) 300) (if (> step 5) 600 0))))
+    :opacity (standard-build-opacity 3)
+    :x (standard-build-x 3)
+    :y 214}
+   {:id "b4"
+    :text "b4"
+    :opacity (standard-build-opacity 4)
+    :x (standard-build-x 4)
     :y 214}])
 
 (defn create-build-construct [{:keys [id text x y opacity]}]
