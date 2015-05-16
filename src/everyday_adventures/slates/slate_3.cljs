@@ -44,6 +44,10 @@
         (.attr "transform" transform)
         (.attr "opacity" opacity))))
 
+(defn vectorize-constructs [constructs-data]
+  (let [select-by-id (fn [id] (.select js/d3 (str "#" id)))]
+    (mapv (comp select-by-id :id) constructs-data)))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;; statics ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -112,11 +116,10 @@
       .transition (.duration 700) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
       .transition (.duration 600) (.attr "transform" "translate(151,207)") (.attr "opacity" 0)))
 
-(defn select-all-triggers []
-  (mapv #(.select js/d3 (str "#" (:id %))) (generate-triggers-data)))
+
 
 (defn animize-animatics [step]
-  (let [triggers (select-all-triggers)
+  (let [triggers (vectorize-constructs (generate-triggers-data))
         trigger-animatics (generate-triggers-animatics-data step)]
     (mapv #(when (:animize? %1) (animize-trigger %2)) trigger-animatics triggers)))
 
@@ -162,7 +165,7 @@
   (mapv #(.select js/d3 (str "#" (:id %))) (generate-builds-data step)))
 
 (defn dynamize-dynamics [step]
-  (let [builds (select-all-builds step)]
+  (let [builds (vectorize-constructs (generate-builds-data step))]
     (mapv dynamize-build builds (generate-builds-data step))))
 
 
