@@ -87,9 +87,6 @@
 (defn generate-triggers-data []
   [{:id "trigger-a" :x 121 :y 207 :opacity 0}])
 
-(defn generate-animatics-data [step]
-  [{:id "trigger-a" :animize? (contains? #{1 2 3} step)}])
-
 (defn create-trigger [parent-element {:keys [id x y opacity]}]
   (let [group-data {:class "trigger" :id id :x x :y y :opacity opacity}
         group (create-element-grouping parent-element group-data)]
@@ -107,15 +104,18 @@
          (mapv (partial create-construct parent-element))
          (om/set-state! owner key))))
 
+(defn generate-triggers-animatics-data [step]
+  [{:id "trigger-a" :animize? (contains? #{1 2 3} step)}])
+
 (defn animize-trigger [trigger]
   (-> trigger
-      .transition (.duration 1000) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
-      .transition (.duration 1000) (.attr "transform" "translate(151,207)") (.attr "opacity" 0)))
+      .transition (.duration 700) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
+      .transition (.duration 600) (.attr "transform" "translate(151,207)") (.attr "opacity" 0)))
 
 (defn animize-animatics [step owner]
   (let [triggers (om/get-state owner :triggers)
-        animize (generate-animatics-data step)]
-    (mapv #(when %1 (animize-trigger %2)) animize triggers)))
+        trigger-animatics (generate-triggers-animatics-data step)]
+    (mapv #(when %1 (animize-trigger %2)) trigger-animatics triggers)))
 
 
 
@@ -172,7 +172,6 @@
     (.log js/console "Slate 3 updated with step: " step)
     (let [builds (om/get-state owner :builds)]
       (animize-animatics step owner)
-      #_(animize-triggers triggers step)
       (dynamize-builds builds step)))
 
   (render-state [_ _]
