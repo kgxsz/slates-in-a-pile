@@ -32,7 +32,8 @@
           (use-attribute "dy")
           (use-text))))
 
-(defn create-element-grouping [parent-element {:keys [class id x y opacity]}]
+(defn create-element-grouping
+  [parent-element {:keys [class id x y opacity]}]
   (let [transform (str "translate(" x "," y ")")]
     (-> parent-element
         (.append "g")
@@ -50,11 +51,13 @@
 ;; statics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; statics get created with constant data, and are always static ;;
 
-(def services-properties [{:id "service-a" :text "service a" :y 200}])
+(def services-properties
+  [{:id "service-a" :text "service a" :y 200}])
 
-(def environments-properties [{:id "dev" :text "dev" :x 300}
-                              {:id "qa" :text "qa" :x 600}
-                              {:id "prod" :text "prod" :x 900}])
+(def environments-properties
+  [{:id "dev" :text "dev" :x 300}
+   {:id "qa" :text "qa" :x 600}
+   {:id "prod" :text "prod" :x 900}])
 
 (defn create-service-construct
   [{:keys [id text x y opacity] :or {x 0 opacity 1}}]
@@ -87,10 +90,11 @@
 ;; animatics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; animatics get created with constant data, but are subject to animizing as a function of step ;;
 
-(defn generate-triggers-data []
+(def triggers-properties
   [{:id "trigger-a" :x 121 :y 207 :opacity 0}])
 
-(defn create-trigger [{:keys [id x y opacity]}]
+(defn create-trigger-construct
+  [{:keys [id x y opacity]}]
   (let [group-data {:class "trigger" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "line" [{:x1 0 :x2 8 :y1 0 :y2 8}
@@ -101,23 +105,20 @@
                                        {:x1 28 :x2 20 :y1 6 :y2 14}])))
 
 (defn initialize-animatics []
-  (doseq [[create-construct generate-constructs-data] [[create-trigger generate-triggers-data]]]
-    (mapv (partial create-construct) (generate-constructs-data))))
+  (doseq [[create-construct constructs-properties] [[create-trigger-construct triggers-properties]]]
+    (mapv (partial create-construct) constructs-properties)))
 
-(defn generate-triggers-animatics-data [step]
-  [{:id "trigger-a" :animize? (contains? #{1 2 3} step)}])
+(def triggers-animatics
+  [{:id "trigger-a" :animize? (fn [step] ( contains? #{1 2 3} step))}])
 
 (defn animize-trigger [trigger]
   (-> trigger
       .transition (.duration 700) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
       .transition (.duration 600) (.attr "transform" "translate(151,207)") (.attr "opacity" 0)))
 
-
-
 (defn animize-animatics [step]
-  (let [triggers (vectorize-constructs (generate-triggers-data))
-        trigger-animatics (generate-triggers-animatics-data step)]
-    (mapv #(when (:animize? %1) (animize-trigger %2)) trigger-animatics triggers)))
+  (let [triggers (vectorize-constructs triggers-properties)]
+    (mapv #(when ((:animize? %1) step) (animize-trigger %2)) triggers-animatics triggers)))
 
 
 
