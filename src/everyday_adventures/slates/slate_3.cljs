@@ -3,9 +3,6 @@
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :refer [div h1 p]]))
 
-
-;;;;;;;;;;;;;;;;;;;;; helpers ;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defn select-canvas []
   (.select js/d3 "#canvas"))
 
@@ -50,8 +47,8 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;; statics ;;;;;;;;;;;;;;;;;;;;;;;;
-; statics get created with constant data, and are always static
+;; statics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; statics get created with constant data, and are always static ;;
 
 (defn generate-services-data []
   [{:id "service-a" :text "service a" :y 200}])
@@ -87,8 +84,8 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;; animatics ;;;;;;;;;;;;;;;;;;;;;;;;
-; animatics get created with constant data, but are subject to animizing as a function of step
+;; animatics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; animatics get created with constant data, but are subject to animizing as a function of step ;;
 
 (defn generate-triggers-data []
   [{:id "trigger-a" :x 121 :y 207 :opacity 0}])
@@ -125,8 +122,8 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;
-; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step
+;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step ;;
 
 (defn generate-builds-data [step]
   [{:id "b1"
@@ -170,7 +167,7 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;; om component ;;;;;;;;;;;;;;;;;;;;;;;;
+;; om component ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (did-mount [_]
