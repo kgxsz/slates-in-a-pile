@@ -50,15 +50,14 @@
 ;; statics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; statics get created with constant data, and are always static ;;
 
-(defn generate-services-data []
-  [{:id "service-a" :text "service a" :y 200}])
+(def services-properties [{:id "service-a" :text "service a" :y 200}])
 
-(defn generate-environments-data []
-  [{:id "dev" :text "dev" :x 300}
-   {:id "qa" :text "qa" :x 600}
-   {:id "prod" :text "prod" :x 900}])
+(def environments-properties [{:id "dev" :text "dev" :x 300}
+                              {:id "qa" :text "qa" :x 600}
+                              {:id "prod" :text "prod" :x 900}])
 
-(defn create-service [{:keys [id text x y opacity] :or {x 0 opacity 1}}]
+(defn create-service-construct
+  [{:keys [id text x y opacity] :or {x 0 opacity 1}}]
   (let [group-data {:class "service" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 100 :height 28 :x 5 :rx 10 :ry 10}])
@@ -68,7 +67,8 @@
                                        {:x1 640 :x2 920 :y1 14 :y2 14}
                                        {:x1 940 :x2 970 :y1 14 :y2 14}])))
 
-(defn create-environment [{:keys [id text x y opacity] :or {y 100 opacity 1}}]
+(defn create-environment-construct
+  [{:keys [id text x y opacity] :or {y 100 opacity 1}}]
   (let [group-data {:class "environment" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "circle" [{:cx 30 :cy 10 :r 24}
@@ -78,9 +78,9 @@
                                        {:x1 30 :x2 30 :y1 125 :y2 153}])))
 
 (defn initialize-statics []
-  (doseq [[create-construct generate-constructs-data] [[create-service generate-services-data]
-                                                       [create-environment generate-environments-data]]]
-    (mapv (partial create-construct) (generate-constructs-data))))
+  (doseq [[create-construct construct-properties] [[create-service-construct services-properties]
+                                                   [create-environment-construct environments-properties]]]
+    (mapv (partial create-construct) construct-properties)))
 
 
 
@@ -98,8 +98,7 @@
                                        {:x1 10 :x2 18 :y1 0 :y2 8}
                                        {:x1 18 :x2 10 :y1 6 :y2 14}
                                        {:x1 20 :x2 28 :y1 0 :y2 8}
-                                       {:x1 28 :x2 20 :y1 6 :y2 14}])
-    group))
+                                       {:x1 28 :x2 20 :y1 6 :y2 14}])))
 
 (defn initialize-animatics []
   (doseq [[create-construct generate-constructs-data] [[create-trigger generate-triggers-data]]]
@@ -146,8 +145,7 @@
   (let [group-data {:class "build" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-text-join group [{:text text :dx 10 :dy 16}])
-    (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])
-    group))
+    (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])))
 
 (defn initialize-dynamics [step]
   (doseq [[create-construct generate-constructs-data] [[create-build generate-builds-data]]]
