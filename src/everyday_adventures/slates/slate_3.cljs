@@ -125,44 +125,46 @@
 ;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step ;;
 
-(defn generate-builds-data [step]
+(def builds-properties
   [{:id "b1"
     :text "b1"
-    :opacity (if (contains? #{1 2 3} step) 1 0)
-    :x (+ 330 (if (contains? #{1 2 3} step) (* (dec step) 300) (if (> step 3) 600 0)))
+    :opacity (fn [step] (if (contains? #{1 2 3} step) 1 0))
+    :x (fn [step] (+ 330 (if (contains? #{1 2 3} step) (* (dec step) 300) (if (> step 3) 600 0))))
     :y 214}
    {:id "b2"
     :text "b2"
-    :opacity (if (contains? #{2 3 4} step) 1 0)
-    :x (+ 330 (if (contains? #{2 3 4} step) (* (- step 2) 300) (if (> step 4) 600 0)))
+    :opacity (fn [step] (if (contains? #{2 3 4} step) 1 0))
+    :x (fn [step] (+ 330 (if (contains? #{2 3 4} step) (* (- step 2) 300) (if (> step 4) 600 0))))
     :y 214}
    {:id "b3"
     :text "b3"
-    :opacity (if (contains? #{3 4 5} step) 1 0)
-    :x (+ 330 (if (contains? #{3 4 5} step) (* (- step 3) 300) (if (> step 5) 600 0)))
+    :opacity (fn [step] (if (contains? #{3 4 5} step) 1 0))
+    :x (fn [step] (+ 330 (if (contains? #{3 4 5} step) (* (- step 3) 300) (if (> step 5) 600 0))))
     :y 214}])
 
-(defn create-build [{:keys [id text x y opacity]}]
+(defn create-build-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "build" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-text-join group [{:text text :dx 10 :dy 16}])
     (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])))
 
+(defn evaluate [constructs-properties step]
+  (let [apply-step (fn [v step] (if (fn? v) (v step) v))]
+    (mapv
+      #(reduce (fn [m [k v]] (assoc m k (apply-step v step))) {} %)
+      constructs-properties)))
+
 (defn initialize-dynamics [step]
-  (doseq [[create-construct generate-constructs-data] [[create-build generate-builds-data]]]
-    (->> (generate-constructs-data step)
-         (mapv (partial create-construct)))))
+  (doseq [[create-construct constructs-properties] [[create-build-construct builds-properties]]]
+    (mapv (partial create-construct) (evaluate constructs-properties step))))
 
 (defn dynamize-build [build {:keys [opacity x y]}]
   (let [transform (str "translate(" x "," y ")")]
     (-> build .transition (.duration 1000) (.attr "transform" transform) (.attr "opacity" opacity))))
 
-(defn select-all-builds [step]
-  (mapv #(.select js/d3 (str "#" (:id %))) (generate-builds-data step)))
-
 (defn dynamize-dynamics [step]
-  (let [builds (vectorize-constructs (generate-builds-data step))]
-    (mapv dynamize-build builds (generate-builds-data step))))
+  (let [builds (vectorize-constructs builds-properties)]
+    (mapv dynamize-build builds (evaluate builds-properties step))))
 
 
 
