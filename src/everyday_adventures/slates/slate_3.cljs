@@ -6,14 +6,16 @@
 
 ;;;;;;;;;;;;;;;;;;;;; helpers ;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn create-canvas []
-  (-> js/d3 (.select "#slate-3 .slate-content")
-            (.append "svg")
-            (.attr "width" 1088)
-            (.attr "height" 400)))
+(defn initialize-canvas [owner]
+  (let [canvas (-> (.select js/d3 "#slate-3 .slate-content")
+                   (.append "svg")
+                   (.attr "width" 1088)
+                   (.attr "height" 400))]
+    (om/set-state! owner :canvas canvas)
+    canvas))
 
 (defn use-attribute [element attribute]
-  (.attr element attribute (fn [d _] (aget d attribute))))
+  (.attr element attribute (fn [data _] (aget data attribute))))
 
 (defn create-element-join [parent-element element-name data]
     (let [join (-> parent-element (.selectAll element-name) (.data (clj->js data)))
@@ -23,12 +25,22 @@
 
 (defn create-text-join [parent-element data]
     (let [join (-> parent-element (.selectAll "text") (.data (clj->js data)))
-          use-text (fn [element] (.text element (fn [d _] (aget d "text"))))]
-      (-> join .enter (.append "text") (use-attribute "dx") (use-attribute "dy") (use-text))))
+          use-text (fn [element] (.text element (fn [data _] (aget data "text"))))]
+      (-> join
+          .enter
+          (.append "text")
+          (use-attribute "dx")
+          (use-attribute "dy")
+          (use-text))))
 
-(defn create-element-grouping [parent-element {:keys [class x y opacity]}]
+(defn create-element-grouping [parent-element {:keys [class id x y opacity]}]
   (let [transform (str "translate(" x "," y ")")]
-    (-> parent-element (.append "g") (.attr "class" class) (.attr "transform" transform) (.attr "opacity" opacity))))
+    (-> parent-element
+        (.append "g")
+        (.attr "class" class)
+        (.attr "id" id)
+        (.attr "transform" transform)
+        (.attr "opacity" opacity))))
 
 
 
@@ -36,41 +48,36 @@
 ; statics get created with constant data, and are always static
 
 (defn generate-services-data []
-  [{:name "service a" :y 200}])
+  [{:id "service-a" :text "service a" :y 200}])
 
 (defn generate-environments-data []
-  [{:name "dev" :x 300}
-   {:name "qa" :x 600}
-   {:name "prod" :x 900}])
+  [{:id "dev" :text "dev" :x 300}
+   {:id "qa" :text "qa" :x 600}
+   {:id "prod" :text "prod" :x 900}])
 
-(defn create-service [parent-element {:keys [name y]}]
-  (let [group-data {:class "service" :x 0 :y y :opacity 1}
+(defn create-service [parent-element {:keys [id text x y opacity] :or {x 0 opacity 1}}]
+  (let [group-data {:class "service" :id id :x x :y y :opacity opacity}
         group (create-element-grouping parent-element group-data)]
     (create-element-join group "rect" [{:width 100 :height 28 :x 5 :rx 10 :ry 10}])
-    (create-text-join group [{:text name :dx 24 :dy 19}])
+    (create-text-join group [{:text text :dx 24 :dy 19}])
     (create-element-join group "line" [{:x1 105 :x2 320 :y1 14 :y2 14 :class "dashed"}
                                        {:x1 340 :x2 620 :y1 14 :y2 14}
                                        {:x1 640 :x2 920 :y1 14 :y2 14}
                                        {:x1 940 :x2 970 :y1 14 :y2 14}])))
 
-(defn create-environment [parent-element {:keys [name x]}]
-  (let [group-data {:class "environment" :x x :y 100 :opacity 1}
+(defn create-environment [parent-element {:keys [id text x y opacity] :or {y 100 opacity 1}}]
+  (let [group-data {:class "environment" :id id :x x :y y :opacity opacity}
         group (create-element-grouping parent-element group-data)]
     (create-element-join group "circle" [{:cx 30 :cy 10 :r 24}
                                          {:cx 30 :cy 114 :r 10}])
-    (create-text-join group [{:text name :dx 30 :dy 15}])
+    (create-text-join group [{:text text :dx 30 :dy 15}])
     (create-element-join group "line" [{:x1 30 :x2 30 :y1 34 :y2 103}
                                        {:x1 30 :x2 30 :y1 125 :y2 153}])))
 
-(defn initialize-services [parent-element]
-  (mapv (partial create-service parent-element) (generate-services-data)))
-
-(defn initialize-environments [parent-element]
-  (mapv (partial create-environment parent-element) (generate-environments-data)))
-
 (defn initialize-statics [parent-element]
-  (initialize-services parent-element)
-  (initialize-environments parent-element))
+  (doseq [[create-construct generate-constructs-data] [[create-service generate-services-data]
+                                                        [create-environment generate-environments-data]]]
+    (mapv (partial create-construct parent-element) (generate-constructs-data))))
 
 
 
@@ -78,10 +85,13 @@
 ; animatics get created with constant data, but are subject to animizing as a function of step
 
 (defn generate-triggers-data []
-  [{:opacity 0 :x 121 :y 207}])
+  [{:id "trigger-a" :x 121 :y 207 :opacity 0}])
 
-(defn create-trigger [parent-element {:keys [opacity x y]}]
-  (let [group-data {:class "trigger" :x x :y y :opacity opacity}
+(defn generate-animatics-data [step]
+  [{:id "trigger-a" :animize? (contains? #{1 2 3} step)}])
+
+(defn create-trigger [parent-element {:keys [id x y opacity]}]
+  (let [group-data {:class "trigger" :id id :x x :y y :opacity opacity}
         group (create-element-grouping parent-element group-data)]
     (create-element-join group "line" [{:x1 0 :x2 8 :y1 0 :y2 8}
                                        {:x1 8 :x2 0 :y1 6 :y2 14}
@@ -91,19 +101,21 @@
                                        {:x1 28 :x2 20 :y1 6 :y2 14}])
     group))
 
-(defn initialize-triggers [parent-element owner]
-  (->> (generate-triggers-data)
-       (mapv #(create-trigger parent-element %))
-       (om/set-state! owner :triggers)))
+(defn initialize-animatics [parent-element owner]
+  (doseq [[create-construct generate-constructs-data key] [[create-trigger generate-triggers-data :triggers]]]
+    (->> (generate-constructs-data)
+         (mapv (partial create-construct parent-element))
+         (om/set-state! owner key))))
 
-(defn animize-trigger [trigger step]
-  (when (contains? #{1 2 3} step)
-    (-> trigger
-        .transition (.duration 1000) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
-        .transition (.duration 1000) (.attr "transform" "translate(151,207)") (.attr "opacity" 0))))
+(defn animize-trigger [trigger]
+  (-> trigger
+      .transition (.duration 1000) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
+      .transition (.duration 1000) (.attr "transform" "translate(151,207)") (.attr "opacity" 0)))
 
-(defn animize-triggers [triggers step]
-  (mapv #(animize-trigger % step) triggers))
+(defn animize-animatics [step owner]
+  (let [triggers (om/get-state owner :triggers)
+        animize (generate-animatics-data step)]
+    (mapv #(when %1 (animize-trigger %2)) animize triggers)))
 
 
 
@@ -111,23 +123,26 @@
 ; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step
 
 (defn generate-builds-data [step]
-  [{:label "b1"
+  [{:id "b1"
+    :text "b1"
     :opacity (if (contains? #{1 2 3} step) 1 0)
     :x (+ 330 (if (contains? #{1 2 3} step) (* (dec step) 300) (if (> step 3) 600 0)))
     :y 214}
-   {:label "b2"
+   {:id "b2"
+    :text "b2"
     :opacity (if (contains? #{2 3 4} step) 1 0)
     :x (+ 330 (if (contains? #{2 3 4} step) (* (- step 2) 300) (if (> step 4) 600 0)))
     :y 214}
-   {:label "b3"
+   {:id "b3"
+    :text "b3"
     :opacity (if (contains? #{3 4 5} step) 1 0)
     :x (+ 330 (if (contains? #{3 4 5} step) (* (- step 3) 300) (if (> step 5) 600 0)))
     :y 214}])
 
-(defn create-build [parent-element {:keys [label opacity x y]}]
-  (let [group-data {:class "build" :x x :y y :opacity opacity}
+(defn create-build [parent-element {:keys [id text x y opacity]}]
+  (let [group-data {:class "build" :id id :x x :y y :opacity opacity}
         group (create-element-grouping parent-element group-data)]
-    (create-text-join group [{:text label :dx 10 :dy 16}])
+    (create-text-join group [{:text text :dx 10 :dy 16}])
     (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])
     group))
 
@@ -148,17 +163,16 @@
 (defcomponent slate-3 [{:keys [step] :as cursor} owner]
   (did-mount [_]
     (.log js/console "Slate 3 mounted with step: " step)
-    (let [canvas (create-canvas)]
+    (let [canvas (initialize-canvas owner)]
       (initialize-statics canvas)
-      (initialize-triggers canvas owner)
-      (initialize-builds canvas owner step)
-      (om/set-state! owner :canvas canvas)))
+      (initialize-animatics canvas owner)
+      (initialize-builds canvas owner step)))
 
   (did-update [_ _ _]
     (.log js/console "Slate 3 updated with step: " step)
-    (let [builds (om/get-state owner :builds)
-          triggers (om/get-state owner :triggers)]
-      (animize-triggers triggers step)
+    (let [builds (om/get-state owner :builds)]
+      (animize-animatics step owner)
+      #_(animize-triggers triggers step)
       (dynamize-builds builds step)))
 
   (render-state [_ _]
