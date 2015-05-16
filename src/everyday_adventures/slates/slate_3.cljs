@@ -91,7 +91,36 @@
 ;; animatics get created with constant data, but are subject to animizing as a function of step ;;
 
 (def triggers-properties
-  [{:id "trigger-a" :x 121 :y 207 :opacity 0}])
+  [{:id "trigger-a"
+    :x 121
+    :y 207
+    :opacity 0
+    :animize (fn [self step]
+               (if (contains? #{1 2 3} step)
+                 (-> self
+                     .transition
+                     (.duration 700)
+                     (.attr "transform" "translate(231,207)")
+                     (.attr "opacity" 1)
+                     .transition
+                     (.duration 600)
+                     (.attr "transform" "translate(121,207)")
+                     (.attr "opacity" 0))))}
+   {:id "trigger-b"
+    :x 121
+    :y 257
+    :opacity 0
+    :animize (fn [self step]
+               (if (contains? #{4} step)
+                 (-> self
+                     .transition
+                     (.duration 700)
+                     (.attr "transform" "translate(231,257)")
+                     (.attr "opacity" 1)
+                     .transition
+                     (.duration 600)
+                     (.attr "transform" "translate(121,257)")
+                     (.attr "opacity" 0))))}])
 
 (defn create-trigger-construct
   [{:keys [id x y opacity]}]
@@ -108,17 +137,10 @@
   (doseq [[create-construct constructs-properties] [[create-trigger-construct triggers-properties]]]
     (mapv (partial create-construct) constructs-properties)))
 
-(def triggers-animatics
-  [{:id "trigger-a" :animize? (fn [step] ( contains? #{1 2 3} step))}])
-
-(defn animize-trigger [trigger]
-  (-> trigger
-      .transition (.duration 700) (.attr "transform" "translate(231,207)") (.attr "opacity" 1)
-      .transition (.duration 600) (.attr "transform" "translate(151,207)") (.attr "opacity" 0)))
-
 (defn animize-animatics [step]
-  (let [triggers (vectorize-constructs triggers-properties)]
-    (mapv #(when ((:animize? %1) step) (animize-trigger %2)) triggers-animatics triggers)))
+  (let [animizers (mapv :animize triggers-properties)
+        triggers (vectorize-constructs triggers-properties)]
+    (mapv (fn [animizer trigger] (animizer trigger step)) animizers triggers)))
 
 
 
