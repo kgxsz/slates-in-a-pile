@@ -1,49 +1,22 @@
 (ns everyday-adventures.slates.slate-3
   (:require [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :refer [div h1 p]]))
-
+            [om-tools.dom :refer [div h1 p]]
+            [everyday-adventures.slates.slate-utils :refer [create-element-join
+                                                            create-element-grouping
+                                                            create-text-join]]))
 (defn select-canvas []
-  (.select js/d3 "#canvas"))
+  (.select js/d3 "#slate-3 .canvas"))
 
 (defn initialize-canvas []
   (-> (.select js/d3 "#slate-3 .slate-content")
       (.append "svg")
-      (.attr "id" "canvas")
+      (.attr "class" "canvas")
       (.attr "width" 1088)
       (.attr "height" 500)))
 
-(defn use-attribute [element attribute]
-  (.attr element attribute (fn [data _] (aget data attribute))))
-
-(defn create-element-join [parent-element element-name data]
-    (let [join (-> parent-element (.selectAll element-name) (.data (clj->js data)))
-          attributes (->> data first keys (mapv name))
-          use-attributes (fn [element attributes] (reduce use-attribute element attributes))]
-      (-> join .enter (.append element-name) (use-attributes attributes))))
-
-(defn create-text-join [parent-element data]
-    (let [join (-> parent-element (.selectAll "text") (.data (clj->js data)))
-          use-text (fn [element] (.text element (fn [data _] (aget data "text"))))]
-      (-> join
-          .enter
-          (.append "text")
-          (use-attribute "dx")
-          (use-attribute "dy")
-          (use-text))))
-
-(defn create-element-grouping
-  [parent-element {:keys [class id x y opacity]}]
-  (let [transform (str "translate(" x "," y ")")]
-    (-> parent-element
-        (.append "g")
-        (.attr "class" class)
-        (.attr "id" id)
-        (.attr "transform" transform)
-        (.attr "opacity" opacity))))
-
 (defn vectorize-constructs [constructs-data]
-  (let [select-by-id (fn [id] (.select js/d3 (str "#" id)))]
+  (let [select-by-id (fn [id] (.select js/d3 (str "#slate-3 #" id)))]
     (mapv (comp select-by-id :id) constructs-data)))
 
 
@@ -53,6 +26,7 @@
 
 (def services-properties
   [{:id "service-a" :text "service a" :y 200}])
+
 
 (def environments-properties
   [{:id "dev" :text "dev" :x 300}
@@ -96,7 +70,7 @@
     :y 207
     :opacity 0
     :animize (fn [self step]
-               (if (contains? #{1 2 3 4} step)
+               (when (contains? #{1 2 3} step)
                  (-> self
                      .transition
                      (.duration 700)
@@ -132,38 +106,28 @@
 ;; dynamics ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dynamics get created with data as a function of step, and are subject to dynamizing as a function of step ;;
 
-(defn standard-build-opacity [start-step]
-  (let [steps (->> (+ start-step 3) (range start-step) set)]
-    (fn [step] (if (contains? steps step) 1 0))))
-
-(defn standard-build-x [start-step]
-  (let [steps (->> (range 3) (mapv #(+ start-step %)) set)]
-    (fn [step] (+ 330 (if (contains? steps step) (* (- step start-step) 300) (if (> step (+ 2 start-step)) 600 0))))))
-
 (def builds-properties
-  [{:id "b1"
+  [{:id "b1-a"
+    :class "service-a"
     :text "b1"
-    :opacity (standard-build-opacity 1)
-    :x (standard-build-x 1)
+    :opacity (fn [step] (if (> step 0) 1 0))
+    :x (fn [step] (condp >= step 1 330 2 630 930))
     :y 214}
-   {:id "b2"
+   {:id "b2-a"
+    :class "service-a"
     :text "b2"
-    :opacity (standard-build-opacity 2)
-    :x (standard-build-x 2)
+    :opacity (fn [step] (if (> step 1) 1 0))
+    :x (fn [step] (if (> step 2) 630 330))
     :y 214}
-   {:id "b3"
+   {:id "b3-a"
+    :class "service-a"
     :text "b3"
-    :opacity (standard-build-opacity 3)
-    :x (standard-build-x 3)
-    :y 214}
-   {:id "b4"
-    :text "b4"
-    :opacity (standard-build-opacity 4)
-    :x (standard-build-x 4)
+    :opacity (fn [step] (if (> step 2) 1 0))
+    :x 330
     :y 214}])
 
-(defn create-build-construct [{:keys [id text x y opacity]}]
-  (let [group-data {:class "build" :id id :x x :y y :opacity opacity}
+(defn create-build-construct [{:keys [id class text x y opacity]}]
+  (let [group-data {:class (str "build " class) :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-text-join group [{:text text :dx 10 :dy 16}])
     (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])))
