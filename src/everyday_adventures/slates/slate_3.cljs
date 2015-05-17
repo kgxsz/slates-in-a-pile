@@ -13,7 +13,7 @@
       (.append "svg")
       (.attr "class" "canvas")
       (.attr "width" 1088)
-      (.attr "height" 500)))
+      (.attr "height" 300)))
 
 (defn vectorize-constructs [constructs-data]
   (let [select-by-id (fn [id] (.select js/d3 (str "#slate-3 #" id)))]

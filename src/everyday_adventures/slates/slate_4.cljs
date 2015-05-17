@@ -13,7 +13,7 @@
       (.append "svg")
       (.attr "class" "canvas")
       (.attr "width" 1088)
-      (.attr "height" 500)))
+      (.attr "height" 600)))
 
 (defn vectorize-constructs [constructs-data]
   (let [select-by-id (fn [id] (.select js/d3 (str "#slate-4 #" id)))]
@@ -78,7 +78,7 @@
     :y 207
     :opacity 0
     :animize (fn [self step]
-               (when (contains? #{1 2 3 4} step)
+               (when (contains? #{1 2 3 4 8 10} step)
                  (-> self
                      .transition
                      (.duration 700)
@@ -169,37 +169,49 @@
    {:id "b2-a"
     :class "service-a"
     :text "b2"
-    :opacity 1
+    :opacity (fn [step] (condp >= step 7 1 0))
     :x (fn [step] (condp >= step 5 630 930))
     :y 214}
    {:id "b3-a"
     :class "service-a"
     :text "b3"
-    :opacity 1
-    :x (fn [step] (condp >= step 0 330 5 560 630))
+    :opacity (fn [step] (condp >= step 8 1 0))
+    :x (fn [step] (condp >= step 0 330 5 560 7 630 930))
     :y 214}
    {:id "b4-a"
     :class "service-a"
     :text "b4"
-    :opacity (fn [step] (condp >= step 0 0 1))
-    :x (fn [step] (condp >= step 1 330 5 515 560))
+    :opacity (fn [step] (condp >= step 0 0 9 1 0))
+    :x (fn [step] (condp >= step 1 330 5 515 7 560 8 630 930))
     :y 214}
    {:id "b5-a"
     :class "service-a"
     :text "b5"
-    :opacity (fn [step] (condp >= step 1 0 1))
-    :x (fn [step] (condp >= step 2 330 5 470 515))
+    :opacity (fn [step] (condp >= step 0 0 1))
+    :x (fn [step] (condp >= step 2 330 5 470 7 515 8 560 9 630 930))
     :y 214}
    {:id "b6-a"
     :class "service-a"
     :text "b6"
     :opacity (fn [step] (condp >= step 2 0 1))
-    :x (fn [step] (condp >= step 3 330 5 425 470))
+    :x (fn [step] (condp >= step 3 330 5 425 7 470 8 515 9 560 630))
     :y 214}
    {:id "b7-a"
     :class "service-a"
     :text "b7"
     :opacity (fn [step] (condp >= step 3 0 1))
+    :x (fn [step] (condp >= step 7 330 8 470 9 515 560))
+    :y 214}
+   {:id "b8-a"
+    :class "service-a"
+    :text "b8"
+    :opacity (fn [step] (condp >= step 7 0 1))
+    :x (fn [step] (condp >= step 9 330 515))
+    :y 214}
+   {:id "b9-a"
+    :class "service-a"
+    :text "b9"
+    :opacity (fn [step] (condp >= step 9 0 1))
     :x 330
     :y 214}
 
@@ -312,12 +324,14 @@
     (create-element-join group "circle" [{:cx 0 :cy 0 :r 7}])))
 
 (def uberbuilds-properties
-  [{:id "uberbuild"
-    :x (fn [step] (condp >= step
-                    5 600
-                    900))
+  [{:id "uberbuild-1"
+    :x (fn [step] (condp >= step 5 600 900))
     :y 190
-    :opacity (fn [step] (if (> step 4) 0.4 0))}])
+    :opacity (fn [step] (condp >= step 4 0 6 0.4 0))}
+   {:id "uberbuild-2"
+    :x 600
+    :y 190
+    :opacity (fn [step] (condp >= step 5 0 6 0.4 0))}])
 
 (defn create-uberbuild-construct [{:keys [id x y opacity]}]
   (let [group-data {:class "uberbuild" :id id :x x :y y :opacity opacity}
