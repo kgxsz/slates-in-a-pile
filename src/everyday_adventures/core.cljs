@@ -18,7 +18,7 @@
                       :slate-2 {}
                       :slate-3 {:step 0}
                       :slate-4 {:step 0}
-                      :slate-5 {}
+                      :slate-5 {:step 0}
                       :slate-6 {}}))
 
 (defn change-current-slate-step [current-slate-n f]

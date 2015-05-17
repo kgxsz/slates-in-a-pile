@@ -187,7 +187,7 @@
    {:id "b5-a"
     :class "service-a"
     :text "b5"
-    :opacity (fn [step] (condp >= step 0 0 1))
+    :opacity (fn [step] (condp >= step 1 0 1))
     :x (fn [step] (condp >= step 2 330 5 470 7 515 8 560 9 630 930))
     :y 214}
    {:id "b6-a"

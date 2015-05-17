@@ -2,8 +2,98 @@
   background-color: $soft-violet;
   color: $hard-violet;
   .slate-content {
-    circle {
-      fill: $hard-violet;
+
+    .host {
+      rect {
+        stroke: $dark-gray;
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 5 5;
+      }
+      text {
+        fill: $dark-gray;
+        text-anchor: middle;
+      }
+    }
+
+    .service {
+      rect {
+        stroke: $hard-yellow;
+        stroke-width: 2;
+        fill: $soft-yellow;
+      }
+      text {
+        fill: $hard-yellow;
+        text-anchor: middle;
+      }
+    }
+
+    .system-metric {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .service-metric {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .custom-event {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .service-log {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
     }
   }
 }
