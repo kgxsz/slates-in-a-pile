@@ -95,5 +95,25 @@
         fill: $hard-violet;
       }
     }
+
+    .hosted-graphite {
+      rect {
+        fill: $soft-green;
+      }
+      text {
+        fill: $hard-green;
+        text-anchor: middle;
+      }
+    }
+
+    .kibana {
+      rect {
+        fill: $soft-crimson;
+      }
+      text {
+        fill: $hard-crimson;
+        text-anchor: middle;
+      }
+    }
   }
 }

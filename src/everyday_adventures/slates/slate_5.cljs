@@ -86,6 +86,20 @@
     :x 270
     :y 260}])
 
+(def hosted-graphites-properties
+  [{:id "hosted-graphite"
+    :text "hosted graphite"
+    :opacity (fn [step] (condp >= step 0 0 1))
+    :x 615
+    :y 135}])
+
+(def kibanas-properties
+  [{:id "kibana"
+    :text "kibana"
+    :opacity (fn [step] (condp >= step 0 0 1))
+    :x 350
+    :y 320}])
+
 (defn create-system-metric-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "system-metric" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
@@ -108,20 +122,43 @@
 (defn create-custom-event-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "custom-event" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
-    (create-text-join group [{:text text :dx 130 :dy 5}])
+    (create-text-join group [{:text text :dx 129 :dy 5}])
     (create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
     (create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 190 :x2 320 :y1 0 :y2 0 :opacity 0.6}])
-    (create-element-join group "polygon" [{:points "320,-6 330,0 320,6" :opacity 0.6}])))
+                                       {:x1 188 :x2 291 :y1 0 :y2 0 :opacity 0.6}
+                                       {:x1 290 :x2 290 :y1 1 :y2 30 :opacity 0.6}])
+    (create-element-join group "polygon" [{:points "296,30 290,40 284,30" :opacity 0.6}])))
 
 (defn create-service-log-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "custom-event" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
-    (create-text-join group [{:text text :dx 130 :dy 5}])
+    (create-text-join group [{:text text :dx 119 :dy 5}])
     (create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
     (create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 190 :x2 320 :y1 0 :y2 0 :opacity 0.6}])
-    (create-element-join group "polygon" [{:points "320,-6 330,0 320,6" :opacity 0.6}])))
+                                       {:x1 168 :x2 201 :y1 0 :y2 0 :opacity 0.6}
+                                       {:x1 200 :x2 200 :y1 1 :y2 40 :opacity 0.6}])
+    (create-element-join group "polygon" [{:points "206,40 200,50 194,40" :opacity 0.6}])))
+
+(defn create-hosted-graphite-construct [{:keys [id text x y opacity]}]
+  (let [group-data {:class "hosted-graphite" :id id :x x :y y :opacity opacity}
+        group (create-element-grouping (select-canvas) group-data)]
+    (create-element-join group "rect" [{:width 150 :height 100}])
+    (create-text-join group [{:text text :dx 63 :dy 18}])
+    #_(create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
+    #_(create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
+                                       {:x1 168 :x2 201 :y1 0 :y2 0 :opacity 0.6}
+                                       {:x1 200 :x2 200 :y1 1 :y2 40 :opacity 0.6}])
+    #_(create-element-join group "polygon" [{:points "206,40 200,50 194,40" :opacity 0.6}])))
+
+(defn create-kibana-construct [{:keys [id text x y opacity]}]
+  (let [group-data {:class "kibana" :id id :x x :y y :opacity opacity}
+        group (create-element-grouping (select-canvas) group-data)]
+    (create-element-join group "rect" [{:width 150 :height 100}])
+    (create-text-join group [{:text text :dx 33 :dy 18}])
+    #_(create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
+    #_(create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
+                                       {:x1 168 :x2 201 :y1 0 :y2 0 :opacity 0.6}
+                                       {:x1 200 :x2 200 :y1 1 :y2 40 :opacity 0.6}])))
 
 (defn evaluate [constructs-properties step]
   (let [apply-step (fn [v step] (if (fn? v) (v step) v))]
@@ -133,7 +170,9 @@
   (doseq [[create-construct constructs-properties] [[create-system-metric-construct system-metrics-properties]
                                                     [create-service-metric-construct service-metrics-properties]
                                                     [create-custom-event-construct custom-events-properties]
-                                                    [create-service-log-construct service-logs-properties]]]
+                                                    [create-service-log-construct service-logs-properties]
+                                                    [create-hosted-graphite-construct hosted-graphites-properties]
+                                                    [create-kibana-construct kibanas-properties]]]
     (mapv (partial create-construct) (evaluate constructs-properties step))))
 
 (defn dynamize-construct [construct {:keys [opacity x y]}]
@@ -144,7 +183,9 @@
   (doseq [constructs-properties [system-metrics-properties
                                  service-metrics-properties
                                  custom-events-properties
-                                 service-logs-properties]]
+                                 service-logs-properties
+                                 hosted-graphites-properties
+                                 kibanas-properties]]
     (mapv dynamize-construct
           (vectorize-constructs constructs-properties)
           (evaluate constructs-properties step))))
