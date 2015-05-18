@@ -240,7 +240,7 @@
                                                     [create-pager-duty-construct pager-duties-properties]
                                                     [create-custom-event-construct custom-events-properties]
                                                     [create-elasticsearch-construct elasticsearches-properties]
-                                                    [create-graph-construct graphs-properties]]]
+                                                    #_[create-graph-construct graphs-properties]]]
     (mapv (partial create-construct) (evaluate constructs-properties step))))
 
 (defn dynamize-construct [construct {:keys [opacity x y]}]
@@ -257,7 +257,7 @@
                                  pager-duties-properties
                                  custom-events-properties
                                  elasticsearches-properties
-                                 graphs-properties]]
+                                 #_graphs-properties]]
     (mapv dynamize-construct
           (vectorize-constructs constructs-properties)
           (evaluate constructs-properties step))))
