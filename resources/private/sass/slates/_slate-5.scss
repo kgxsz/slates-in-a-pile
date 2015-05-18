@@ -36,6 +36,7 @@
       text {
         fill: $hard-violet;
         text-anchor: middle;
+        font-size: small;
       }
       circle {
         fill: $hard-violet;
@@ -53,6 +54,7 @@
       text {
         fill: $hard-violet;
         text-anchor: middle;
+        font-size: small;
       }
       circle {
         fill: $hard-violet;
@@ -70,6 +72,7 @@
       text {
         fill: $hard-violet;
         text-anchor: middle;
+        font-size: small;
       }
       circle {
         fill: $hard-violet;
@@ -87,6 +90,7 @@
       text {
         fill: $hard-violet;
         text-anchor: middle;
+        font-size: small;
       }
       circle {
         fill: $hard-violet;
@@ -99,20 +103,68 @@
     .hosted-graphite {
       rect {
         fill: $soft-green;
+        stroke-width: 2;
+        stroke: $hard-green;
       }
       text {
         fill: $hard-green;
-        text-anchor: middle;
+        text-anchor: left;
       }
     }
 
-    .kibana {
+    .queue {
+      rect {
+        fill: $soft-pink;
+        stroke-width: 2;
+        stroke: $hard-pink;
+      }
+      text {
+        fill: $hard-pink;
+        text-anchor: left;
+      }
+    }
+
+    .worker {
+      rect {
+        fill: $soft-pink;
+        stroke-width: 2;
+        stroke: $hard-pink;
+      }
+      text {
+        fill: $hard-pink;
+        text-anchor: left;
+      }
+    }
+
+    .pager-duty {
       rect {
         fill: $soft-crimson;
+        stroke-width: 2;
+        stroke: $hard-crimson;
       }
       text {
         fill: $hard-crimson;
-        text-anchor: middle;
+        text-anchor: left;
+      }
+    }
+
+    .elasticsearch {
+      rect {
+        fill: $soft-blue;
+        stroke-width: 2;
+        stroke: $hard-blue;
+      }
+      text {
+        fill: $hard-blue;
+        text-anchor: left;
+      }
+    }
+
+    .graph {
+      rect {
+        fill: none;
+        stroke-width: 2;
+        stroke: $dark-gray;
       }
     }
   }
