@@ -161,25 +161,25 @@
     }
 
     .window {
-      rect:nth-child(1) {
+      rect:nth-of-type(1) {
         fill: $hard-gray;
       }
-      rect:nth-child(2) {
+      rect:nth-of-type(2) {
         fill: $light-gray;
       }
-      rect:nth-child(3) {
+      rect:nth-of-type(3) {
         fill: $hard-gray;
       }
-      rect:nth-child(4) {
+      rect:nth-of-type(4) {
         fill: $medium-gray;
       }
-      circle.a {
+      circle:nth-of-type(1) {
         fill: $hard-crimson;
       }
-      circle.b {
+      circle:nth-of-type(2) {
         fill: $hard-yellow;
       }
-      circle.c {
+      circle:nth-of-type(3) {
         fill: $dark-green;
       }
       line.link {
@@ -189,15 +189,43 @@
     }
 
     .graph {
-
+      line {
+        stroke-width: 4;
+        stroke: $hard-green;
+      }
     }
 
     .alert {
-
+      text {
+        fill: $hard-crimson;
+        text-anchor: left;
+        font-size: 34px;
+      }
+      circle.ring {
+        fill: none;
+        stroke: $hard-crimson;
+        stroke-width: 4;
+      }
     }
 
     .logs {
-      
+      line {
+        stroke-width: 3;
+        stroke: $dark-gray;
+      }
+    }
+
+    .black-box {
+      text {
+        fill: $off-white;
+        text-anchor: middle;
+        font-size: 20px;
+      }
+      rect.text-box {
+        fill: none;
+        stroke-width: 2;
+        stroke: $off-white;
+      }
     }
   }
 }

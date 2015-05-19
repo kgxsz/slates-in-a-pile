@@ -139,6 +139,12 @@
     :x 800
     :y 310}])
 
+(def black-boxes-properties
+  [{:id "black-box"
+    :opacity (fn [step] (condp >= step 6 0 1))
+    :x 300
+    :y 210}])
+
 (defn create-system-metric-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "system-metric" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
@@ -230,10 +236,23 @@
                                        {:width 154 :height 11 :x 3 :y 2}
                                        {:width 154 :height 11 :x 3 :y 13}])
     (create-text-join group [{:text text :dx 12 :dy 45}])
-    (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
-                                         {:cx 17 :cy 7 :r 3 :class "b"}
-                                         {:cx 26 :cy 7 :r 3 :class "c"}])
-    (create-element-join group "line" [{:x1 0 :x2 -89 :y1 85 :y2 85 :class "link"}])))
+    (create-element-join group "circle" [{:cx 8 :cy 7 :r 3}
+                                         {:cx 17 :cy 7 :r 3}
+                                         {:cx 26 :cy 7 :r 3}])
+    (create-element-join group "line" [{:x1 0 :x2 -89 :y1 85 :y2 85 :class "link"}
+                                       {:x1 40 :x2 40 :y1 66 :y2 90}
+                                       {:x1 47 :x2 47 :y1 62 :y2 90}
+                                       {:x1 54 :x2 54 :y1 58 :y2 90}
+                                       {:x1 61 :x2 61 :y1 54 :y2 90}
+                                       {:x1 68 :x2 68 :y1 63 :y2 90}
+                                       {:x1 75 :x2 75 :y1 58 :y2 90}
+                                       {:x1 82 :x2 82 :y1 62 :y2 90}
+                                       {:x1 89 :x2 89 :y1 68 :y2 90}
+                                       {:x1 96 :x2 96 :y1 71 :y2 90}
+                                       {:x1 103 :x2 103 :y1 68 :y2 90}
+                                       {:x1 110 :x2 110 :y1 59 :y2 90}
+                                       {:x1 117 :x2 117 :y1 72 :y2 90}
+                                       {:x1 124 :x2 124 :y1 60 :y2 90}])))
 
 (defn create-alert-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "alert window" :id id :x x :y y :opacity opacity}
@@ -242,16 +261,17 @@
                                        {:width 154 :height 104 :x 3 :y 3}
                                        {:width 154 :height 11 :x 3 :y 2}
                                        {:width 154 :height 11 :x 3 :y 13}])
-    (create-text-join group [{:text text :dx 12 :dy 45}])
+    (create-text-join group [{:text "!" :dx 75 :dy 75}])
     (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
                                          {:cx 17 :cy 7 :r 3 :class "b"}
-                                         {:cx 26 :cy 7 :r 3 :class "c"}])
+                                         {:cx 26 :cy 7 :r 3 :class "c"}
+                                         {:cx 79 :cy 63 :r 20 :class "ring"}])
     (create-element-join group "line" [{:x1 0 :x2 -30 :y1 85 :y2 85 :class "link"}
                                        {:x1 -31 :x2 -31 :y1 84 :y2 159 :class "link"}
                                        {:x1 -30 :x2 -59 :y1 160 :y2 160 :class "link"}])))
 
 (defn create-logs-construct [{:keys [id text x y opacity]}]
-  (let [group-data {:class "alert window" :id id :x x :y y :opacity opacity}
+  (let [group-data {:class "logs window" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 160 :height 110 :x 0 :y 0 :rx 4 :ry 4}
                                        {:width 154 :height 104 :x 3 :y 3}
@@ -261,7 +281,30 @@
     (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
                                          {:cx 17 :cy 7 :r 3 :class "b"}
                                          {:cx 26 :cy 7 :r 3 :class "c"}])
-    (create-element-join group "line" [{:x1 0 :x2 -224 :y1 70 :y2 70 :class "link"}])))
+    (create-element-join group "line" [{:x1 0 :x2 -224 :y1 70 :y2 70 :class "link"}
+                                       {:x1 40 :x2 125 :y1 45 :y2 45}
+                                       {:x1 30 :x2 35 :y1 45 :y2 45}
+                                       {:x1 40 :x2 115 :y1 51 :y2 51}
+                                       {:x1 30 :x2 35 :y1 51 :y2 51}
+                                       {:x1 40 :x2 103 :y1 57 :y2 57}
+                                       {:x1 30 :x2 35 :y1 57 :y2 57}
+                                       {:x1 40 :x2 120 :y1 63 :y2 63}
+                                       {:x1 30 :x2 35 :y1 63 :y2 63}
+                                       {:x1 40 :x2 118 :y1 69 :y2 69}
+                                       {:x1 30 :x2 35 :y1 69 :y2 69}
+                                       {:x1 40 :x2 116 :y1 75 :y2 75}
+                                       {:x1 30 :x2 35 :y1 75 :y2 75}
+                                       {:x1 40 :x2 104 :y1 81 :y2 81}
+                                       {:x1 30 :x2 35 :y1 81 :y2 81}
+                                       {:x1 40 :x2 114 :y1 87 :y2 87}
+                                       {:x1 30 :x2 35 :y1 87 :y2 87}])))
+
+(defn create-black-box-construct [{:keys [id text x y opacity]}]
+  (let [group-data {:class "black-box" :id id :x x :y y :opacity opacity}
+        group (create-element-grouping (select-canvas) group-data)]
+    (create-element-join group "rect" [{:width 460 :height 370 :x 20 :y -170 :rx 3 :ry 3 :opacity 0.8 :class "place-holder"}
+                                       {:width 120 :height 40 :x 190 :y -6 :rx 2 :ry 2 :class "text-box"}])
+    (create-text-join group [{:text "black box" :dx 250 :dy 20}])))
 
 (defn evaluate [constructs-properties step]
   (let [apply-step (fn [v step] (if (fn? v) (v step) v))]
@@ -281,7 +324,8 @@
                                                     [create-elasticsearch-construct elasticsearches-properties]
                                                     [create-graph-construct graphs-properties]
                                                     [create-alert-construct alerts-properties]
-                                                    [create-logs-construct logs-properties]]]
+                                                    [create-logs-construct logs-properties]
+                                                    [create-black-box-construct black-boxes-properties]]]
     (mapv (partial create-construct) (evaluate constructs-properties step))))
 
 (defn dynamize-construct [construct {:keys [opacity x y]}]
@@ -300,7 +344,8 @@
                                  elasticsearches-properties
                                  graphs-properties
                                  alerts-properties
-                                 logs-properties]]
+                                 logs-properties
+                                 black-boxes-properties]]
     (mapv dynamize-construct
           (vectorize-constructs constructs-properties)
           (evaluate constructs-properties step))))
