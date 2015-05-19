@@ -208,18 +208,19 @@
   (let [group-data {:class "elasticsearch" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 140 :height 80 :rx 3 :ry 3}])
-    (create-text-join group [{:text text :dx 12 :dy 45}])
-    #_(create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
-    #_(create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 168 :x2 201 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 200 :x2 200 :y1 1 :y2 40 :opacity 0.6}])))
+    (create-text-join group [{:text text :dx 12 :dy 45}])))
 
 (defn create-graph-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "graph" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
-    (create-element-join group "rect" [{:width 160 :height 120 :rx 3 :ry 3}])
+    (create-element-join group "rect" [{:width 160 :height 110 :x 0 :y 0 :rx 4 :ry 4}
+                                       {:width 154 :height 104 :x 3 :y 3}
+                                       {:width 154 :height 11 :x 3 :y 2}
+                                       {:width 154 :height 11 :x 3 :y 13}])
     (create-text-join group [{:text text :dx 12 :dy 45}])
-    #_(create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
+    (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
+                                         {:cx 17 :cy 7 :r 3 :class "b"}
+                                         {:cx 26 :cy 7 :r 3 :class "c"}])
     #_(create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
                                        {:x1 168 :x2 201 :y1 0 :y2 0 :opacity 0.6}
                                        {:x1 200 :x2 200 :y1 1 :y2 40 :opacity 0.6}])))
@@ -240,7 +241,7 @@
                                                     [create-pager-duty-construct pager-duties-properties]
                                                     [create-custom-event-construct custom-events-properties]
                                                     [create-elasticsearch-construct elasticsearches-properties]
-                                                    #_[create-graph-construct graphs-properties]]]
+                                                    [create-graph-construct graphs-properties]]]
     (mapv (partial create-construct) (evaluate constructs-properties step))))
 
 (defn dynamize-construct [construct {:keys [opacity x y]}]
@@ -257,7 +258,7 @@
                                  pager-duties-properties
                                  custom-events-properties
                                  elasticsearches-properties
-                                 #_graphs-properties]]
+                                 graphs-properties]]
     (mapv dynamize-construct
           (vectorize-constructs constructs-properties)
           (evaluate constructs-properties step))))

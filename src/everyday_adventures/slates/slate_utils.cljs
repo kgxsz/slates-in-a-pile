@@ -1,8 +1,6 @@
 (ns everyday-adventures.slates.slate-utils
   (:require [om.core :as om :include-macros true]))
 
-
-
 (defn use-attribute [element attribute]
   (.attr element attribute (fn [data _] (aget data attribute))))
 
@@ -31,5 +29,3 @@
         (.attr "id" id)
         (.attr "transform" transform)
         (.attr "opacity" opacity))))
-
-

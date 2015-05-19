@@ -161,10 +161,26 @@
     }
 
     .graph {
-      rect {
-        fill: $dark-gray;
-        stroke-width: 2;
-        stroke: $dark-gray;
+      rect:nth-child(1) {
+        fill: $hard-gray;
+      }
+      rect:nth-child(2) {
+        fill: $light-gray;
+      }
+      rect:nth-child(3) {
+        fill: $hard-gray;
+      }
+      rect:nth-child(4) {
+        fill: $medium-gray;
+      }
+      circle.a {
+        fill: $hard-crimson;
+      }
+      circle.b {
+        fill: $hard-yellow;
+      }
+      circle.c {
+        fill: $dark-green;
       }
     }
   }
