@@ -75,14 +75,14 @@
 (def custom-events-properties
   [{:id "custom-event"
     :text "custom events"
-    :opacity (fn [step] (condp >= step 1 0 1))
+    :opacity (fn [step] (condp >= step 2 0 1))
     :x 270
     :y 230}])
 
 (def service-logs-properties
   [{:id "service-log"
     :text "service logs"
-    :opacity (fn [step] (condp >= step 2 0 1))
+    :opacity (fn [step] (condp >= step 4 0 1))
     :x 270
     :y 260}])
 
@@ -96,36 +96,48 @@
 (def queues-properties
   [{:id "queue"
     :text "queue"
-    :opacity (fn [step] (condp >= step 1 0 1))
+    :opacity (fn [step] (condp >= step 2 0 1))
     :x 528
     :y 216}])
 
 (def workers-properties
   [{:id "worker"
     :text "worker"
-    :opacity (fn [step] (condp >= step 1 0 1))
+    :opacity (fn [step] (condp >= step 2 0 1))
     :x 640
     :y 175}])
 
 (def pager-duties-properties
   [{:id "pager-duty"
     :text "pager-duty"
-    :opacity (fn [step] (condp >= step 1 0 1))
+    :opacity (fn [step] (condp >= step 2 0 1))
     :x 600
     :y 285}])
 
 (def elasticsearches-properties
   [{:id "elasticsearch"
     :text "elasticsearch"
-    :opacity (fn [step] (condp >= step 2 0 1))
+    :opacity (fn [step] (condp >= step 4 0 1))
     :x 435
     :y 318}])
 
 (def graphs-properties
   [{:id "graph"
-    :opacity (fn [step] (condp >= step 2 0 1))
+    :opacity (fn [step] (condp >= step 1 0 1))
     :x 800
-    :y 90}])
+    :y 30}])
+
+(def alerts-properties
+  [{:id "alert"
+    :opacity (fn [step] (condp >= step 3 0 1))
+    :x 800
+    :y 170}])
+
+(def logs-properties
+  [{:id "logs"
+    :opacity (fn [step] (condp >= step 5 0 1))
+    :x 800
+    :y 310}])
 
 (defn create-system-metric-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "system-metric" :id id :x x :y y :opacity opacity}
@@ -211,7 +223,7 @@
     (create-text-join group [{:text text :dx 12 :dy 45}])))
 
 (defn create-graph-construct [{:keys [id text x y opacity]}]
-  (let [group-data {:class "graph" :id id :x x :y y :opacity opacity}
+  (let [group-data {:class "graph window" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 160 :height 110 :x 0 :y 0 :rx 4 :ry 4}
                                        {:width 154 :height 104 :x 3 :y 3}
@@ -221,9 +233,35 @@
     (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
                                          {:cx 17 :cy 7 :r 3 :class "b"}
                                          {:cx 26 :cy 7 :r 3 :class "c"}])
-    #_(create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 168 :x2 201 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 200 :x2 200 :y1 1 :y2 40 :opacity 0.6}])))
+    (create-element-join group "line" [{:x1 0 :x2 -89 :y1 85 :y2 85 :class "link"}])))
+
+(defn create-alert-construct [{:keys [id text x y opacity]}]
+  (let [group-data {:class "alert window" :id id :x x :y y :opacity opacity}
+        group (create-element-grouping (select-canvas) group-data)]
+    (create-element-join group "rect" [{:width 160 :height 110 :x 0 :y 0 :rx 4 :ry 4}
+                                       {:width 154 :height 104 :x 3 :y 3}
+                                       {:width 154 :height 11 :x 3 :y 2}
+                                       {:width 154 :height 11 :x 3 :y 13}])
+    (create-text-join group [{:text text :dx 12 :dy 45}])
+    (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
+                                         {:cx 17 :cy 7 :r 3 :class "b"}
+                                         {:cx 26 :cy 7 :r 3 :class "c"}])
+    (create-element-join group "line" [{:x1 0 :x2 -30 :y1 85 :y2 85 :class "link"}
+                                       {:x1 -31 :x2 -31 :y1 84 :y2 159 :class "link"}
+                                       {:x1 -30 :x2 -59 :y1 160 :y2 160 :class "link"}])))
+
+(defn create-logs-construct [{:keys [id text x y opacity]}]
+  (let [group-data {:class "alert window" :id id :x x :y y :opacity opacity}
+        group (create-element-grouping (select-canvas) group-data)]
+    (create-element-join group "rect" [{:width 160 :height 110 :x 0 :y 0 :rx 4 :ry 4}
+                                       {:width 154 :height 104 :x 3 :y 3}
+                                       {:width 154 :height 11 :x 3 :y 2}
+                                       {:width 154 :height 11 :x 3 :y 13}])
+    (create-text-join group [{:text text :dx 12 :dy 45}])
+    (create-element-join group "circle" [{:cx 8 :cy 7 :r 3 :class "a"}
+                                         {:cx 17 :cy 7 :r 3 :class "b"}
+                                         {:cx 26 :cy 7 :r 3 :class "c"}])
+    (create-element-join group "line" [{:x1 0 :x2 -224 :y1 70 :y2 70 :class "link"}])))
 
 (defn evaluate [constructs-properties step]
   (let [apply-step (fn [v step] (if (fn? v) (v step) v))]
@@ -241,7 +279,9 @@
                                                     [create-pager-duty-construct pager-duties-properties]
                                                     [create-custom-event-construct custom-events-properties]
                                                     [create-elasticsearch-construct elasticsearches-properties]
-                                                    [create-graph-construct graphs-properties]]]
+                                                    [create-graph-construct graphs-properties]
+                                                    [create-alert-construct alerts-properties]
+                                                    [create-logs-construct logs-properties]]]
     (mapv (partial create-construct) (evaluate constructs-properties step))))
 
 (defn dynamize-construct [construct {:keys [opacity x y]}]
@@ -258,7 +298,9 @@
                                  pager-duties-properties
                                  custom-events-properties
                                  elasticsearches-properties
-                                 graphs-properties]]
+                                 graphs-properties
+                                 alerts-properties
+                                 logs-properties]]
     (mapv dynamize-construct
           (vectorize-constructs constructs-properties)
           (evaluate constructs-properties step))))

@@ -160,7 +160,7 @@
       }
     }
 
-    .graph {
+    .window {
       rect:nth-child(1) {
         fill: $hard-gray;
       }
@@ -182,6 +182,22 @@
       circle.c {
         fill: $dark-green;
       }
+      line.link {
+        stroke-width: 2;
+        stroke: $hard-gray;
+      }
+    }
+
+    .graph {
+
+    }
+
+    .alert {
+
+    }
+
+    .logs {
+      
     }
   }
 }
