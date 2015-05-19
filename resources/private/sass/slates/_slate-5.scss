@@ -122,6 +122,16 @@
         fill: $hard-pink;
         text-anchor: left;
       }
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
     }
 
     .worker {

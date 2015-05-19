@@ -91,19 +91,19 @@
     :text "hosted graphite"
     :opacity (fn [step] (condp >= step 0 0 1))
     :x 570
-    :y 75}])
+    :y (fn [step] (condp >= step 8 75 55))}])
 
 (def queues-properties
   [{:id "queue"
     :text "queue"
-    :opacity (fn [step] (condp >= step 2 0 1))
+    :opacity (fn [step] (condp >= step 2 0 8 1 0))
     :x 528
     :y 216}])
 
 (def workers-properties
   [{:id "worker"
     :text "worker"
-    :opacity (fn [step] (condp >= step 2 0 1))
+    :opacity (fn [step] (condp >= step 2 0 8 1 0))
     :x 640
     :y 175}])
 
@@ -141,7 +141,7 @@
 
 (def black-boxes-properties
   [{:id "black-box"
-    :opacity (fn [step] (condp >= step 6 0 1))
+    :opacity (fn [step] (condp >= step 6 0 7 1 0))
     :x 300
     :y 210}])
 
@@ -172,21 +172,10 @@
   (let [group-data {:class "custom-event" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-text-join group [{:text text :dx 119 :dy 5}])
-    (create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}
-                                         {:cx 328 :cy 0 :r 5 :opacity 0.6}
-                                         {:cx 345 :cy 0 :r 5 :opacity 0.6}
-                                         {:cx 450 :cy -40 :r 5 :opacity 0.6}])
+    (create-element-join group "circle" [{:cx -5 :cy 0 :r 5 :opacity 0.6}])
     (create-element-join group "line" [{:x1 0 :x2 70 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 168 :x2 242 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 328 :x2 328 :y1 -5 :y2 -39 :opacity 0.6}
-                                       {:x1 327 :x2 355 :y1 -40 :y2 -40 :opacity 0.6}
-                                       {:x1 450 :x2 450 :y1 -35 :y2 -1 :opacity 0.6}
-                                       {:x1 375 :x2 451 :y1 0 :y2 0 :opacity 0.6}
-                                       {:x1 345 :x2 345 :y1 5 :y2 37 :opacity 0.6}])
-    (create-element-join group "polygon" [{:points "242,-6 252,0 242,6" :opacity 0.6}
-                                          {:points "355,-46 365,-40 355,-34" :opacity 0.6}
-                                          {:points "375,6 365,0 375,-6" :opacity 0.6}
-                                          {:points "351,37 345,47 339,37" :opacity 0.6}])))
+                                       {:x1 168 :x2 242 :y1 0 :y2 0 :opacity 0.6}])
+    (create-element-join group "polygon" [{:points "242,-6 252,0 242,6" :opacity 0.6}])))
 
 (defn create-service-log-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "custom-event" :id id :x x :y y :opacity opacity}
@@ -208,7 +197,18 @@
   (let [group-data {:class "queue" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 100 :height 30 :rx 3 :ry 3}])
-    (create-text-join group [{:text text :dx 12 :dy 19}])))
+    (create-element-join group "circle" [{:cx 70 :cy 14 :r 5 :opacity 0.6}
+                                         {:cx 87 :cy 14 :r 5 :opacity 0.6}
+                                         {:cx 192 :cy -26 :r 5 :opacity 0.6}])
+    (create-element-join group "line" [{:x1 70 :x2 70 :y1 9 :y2 -25 :opacity 0.6}
+                                       {:x1 69 :x2 97 :y1 -26 :y2 -26 :opacity 0.6}
+                                       {:x1 87 :x2 87 :y1 19 :y2 52 :opacity 0.6}
+                                       {:x1 192 :x2 192 :y1 -21 :y2 13 :opacity 0.6}
+                                       {:x1 117 :x2 193 :y1 14 :y2 14 :opacity 0.6}])
+    (create-text-join group [{:text text :dx 12 :dy 19}])
+    (create-element-join group "polygon" [{:points "97,-32 107,-26 97,-20" :opacity 0.6}
+                                          {:points "117,20 107,14 117,8" :opacity 0.6}
+                                          {:points "81,52 87,62 93,52" :opacity 0.6}])))
 
 (defn create-worker-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "worker" :id id :x x :y y :opacity opacity}
@@ -220,13 +220,13 @@
   (let [group-data {:class "pager-duty" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 140 :height 80 :rx 3 :ry 3}])
-    (create-text-join group [{:text text :dx 12 :dy 45}])))
+    (create-text-join group [{:text text :dx 28 :dy 45}])))
 
 (defn create-elasticsearch-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "elasticsearch" :id id :x x :y y :opacity opacity}
         group (create-element-grouping (select-canvas) group-data)]
     (create-element-join group "rect" [{:width 140 :height 80 :rx 3 :ry 3}])
-    (create-text-join group [{:text text :dx 12 :dy 45}])))
+    (create-text-join group [{:text text :dx 22 :dy 45}])))
 
 (defn create-graph-construct [{:keys [id text x y opacity]}]
   (let [group-data {:class "graph window" :id id :x x :y y :opacity opacity}
@@ -317,8 +317,8 @@
                                                     [create-service-metric-construct service-metrics-properties]
                                                     [create-service-log-construct service-logs-properties]
                                                     [create-hosted-graphite-construct hosted-graphites-properties]
-                                                    [create-queue-construct queues-properties]
                                                     [create-worker-construct workers-properties]
+                                                    [create-queue-construct queues-properties]
                                                     [create-pager-duty-construct pager-duties-properties]
                                                     [create-custom-event-construct custom-events-properties]
                                                     [create-elasticsearch-construct elasticsearches-properties]
@@ -337,8 +337,8 @@
                                  service-metrics-properties
                                  service-logs-properties
                                  hosted-graphites-properties
-                                 queues-properties
                                  workers-properties
+                                 queues-properties
                                  pager-duties-properties
                                  custom-events-properties
                                  elasticsearches-properties
