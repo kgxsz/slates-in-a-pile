@@ -4,77 +4,23 @@
   .slate-content {
 
     .service {
+      circle {
+        fill: $hard-violet;
+      }
       rect {
+        stroke: $hard-violet;
         stroke-width: 2;
+        fill: $soft-violet;
       }
       line {
+        stroke: $hard-violet;
         stroke-width: 2;
         &.dashed {
           stroke-dasharray: 5 5;
         }
       }
-      &#service-a {
-        circle {
-          fill: $hard-violet;
-        }
-        rect {
-          stroke: $hard-violet;
-          fill: $soft-violet;
-        }
-        line {
-          stroke: $hard-violet;
-        }
-        text {
-          fill: $hard-violet;
-        }
-      }
-
-      &#service-b {
-        circle {
-          fill: $hard-pink;
-        }
-        rect {
-          stroke: $hard-pink;
-          fill: $soft-pink;
-        }
-        line {
-          stroke: $hard-pink;
-        }
-        text {
-          fill: $hard-pink;
-        }
-      }
-
-      &#service-c {
-        circle {
-          fill: $hard-crimson;
-        }
-        rect {
-          stroke: $hard-crimson;
-          fill: $soft-crimson;
-        }
-        line {
-          stroke: $hard-crimson;
-        }
-        text {
-          fill: $hard-crimson;
-        }
-      }
-
-      &#service-d {
-        circle {
-          fill: $hard-yellow;
-        }
-        rect {
-          stroke: $hard-yellow;
-          fill: $soft-yellow;
-        }
-        line {
-          stroke: $hard-yellow;
-        }
-        text {
-          fill: $hard-yellow;
-        }
+      text {
+        fill: $hard-violet;
       }
     }
 
@@ -100,72 +46,20 @@
 
     .trigger {
       line {
+        stroke: $hard-violet;
         stroke-width: 4;
-      }
-      &#trigger-a {
-        line {
-          stroke: $hard-violet;
-        }
-      }
-      &#trigger-b {
-        line {
-          stroke: $hard-pink;
-        }
-      }
-      &#trigger-c {
-        line {
-          stroke: $hard-crimson;
-        }
-      }
-      &#trigger-d {
-        line {
-          stroke: $hard-yellow;
-        }
       }
     }
 
     .build {
+      circle {
+        fill: $hard-violet;
+      }
+
       text {
+        fill: $hard-violet;
         font-size: small;
         text-anchor: left;
-      }
-      &.service-a {
-        circle {
-          fill: $hard-violet;
-        }
-        text {
-          fill: $hard-violet;
-        }
-      }
-      &.service-b {
-        circle {
-          fill: $hard-pink;
-        }
-        text {
-          fill: $hard-pink;
-        }
-      }
-      &.service-c {
-        circle {
-          fill: $hard-crimson;
-        }
-        text {
-          fill: $hard-crimson;
-        }
-      }
-      &.service-d {
-        circle {
-          fill: $hard-yellow;
-        }
-        text {
-          fill: $hard-yellow;
-        }
-      }
-    }
-
-    .uberbuild {
-      rect {
-        fill: $hard-green;
       }
     }
   }

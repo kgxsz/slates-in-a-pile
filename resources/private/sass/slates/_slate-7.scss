@@ -1,0 +1,241 @@
+#slate-7 {
+  background-color: $soft-violet;
+  color: $hard-violet;
+  .slate-content {
+
+    .host {
+      rect {
+        stroke: $dark-gray;
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 5 5;
+      }
+      text {
+        fill: $dark-gray;
+        text-anchor: middle;
+      }
+    }
+
+    .service {
+      rect {
+        stroke: $hard-yellow;
+        stroke-width: 2;
+        fill: $soft-yellow;
+      }
+      text {
+        fill: $hard-yellow;
+        text-anchor: middle;
+      }
+    }
+
+    .system-metric {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+        font-size: small;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .service-metric {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+        font-size: small;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .custom-event {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+        font-size: small;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .service-log {
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      text {
+        fill: $hard-violet;
+        text-anchor: middle;
+        font-size: small;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .hosted-graphite {
+      rect {
+        fill: $soft-green;
+        stroke-width: 2;
+        stroke: $hard-green;
+      }
+      text {
+        fill: $hard-green;
+        text-anchor: left;
+      }
+    }
+
+    .queue {
+      rect {
+        fill: $soft-pink;
+        stroke-width: 2;
+        stroke: $hard-pink;
+      }
+      text {
+        fill: $hard-pink;
+        text-anchor: left;
+      }
+      line {
+        stroke-width: 2;
+        stroke: $hard-violet;
+      }
+      circle {
+        fill: $hard-violet;
+      }
+      polygon {
+        fill: $hard-violet;
+      }
+    }
+
+    .worker {
+      rect {
+        fill: $soft-pink;
+        stroke-width: 2;
+        stroke: $hard-pink;
+      }
+      text {
+        fill: $hard-pink;
+        text-anchor: left;
+      }
+    }
+
+    .pager-duty {
+      rect {
+        fill: $soft-crimson;
+        stroke-width: 2;
+        stroke: $hard-crimson;
+      }
+      text {
+        fill: $hard-crimson;
+        text-anchor: left;
+      }
+    }
+
+    .elasticsearch {
+      rect {
+        fill: $soft-blue;
+        stroke-width: 2;
+        stroke: $hard-blue;
+      }
+      text {
+        fill: $hard-blue;
+        text-anchor: left;
+      }
+    }
+
+    .window {
+      rect:nth-of-type(1) {
+        fill: $hard-gray;
+      }
+      rect:nth-of-type(2) {
+        fill: $light-gray;
+      }
+      rect:nth-of-type(3) {
+        fill: $hard-gray;
+      }
+      rect:nth-of-type(4) {
+        fill: $medium-gray;
+      }
+      circle:nth-of-type(1) {
+        fill: $hard-crimson;
+      }
+      circle:nth-of-type(2) {
+        fill: $hard-yellow;
+      }
+      circle:nth-of-type(3) {
+        fill: $dark-green;
+      }
+      line.link {
+        stroke-width: 2;
+        stroke: $hard-gray;
+      }
+    }
+
+    .graph {
+      line {
+        stroke-width: 4;
+        stroke: $hard-green;
+      }
+    }
+
+    .alert {
+      text {
+        fill: $hard-crimson;
+        text-anchor: left;
+        font-size: 34px;
+      }
+      circle.ring {
+        fill: none;
+        stroke: $hard-crimson;
+        stroke-width: 4;
+      }
+    }
+
+    .logs {
+      line {
+        stroke-width: 3;
+        stroke: $dark-gray;
+      }
+    }
+
+    .black-box {
+      text {
+        fill: $off-white;
+        text-anchor: middle;
+        font-size: 20px;
+      }
+      rect.text-box {
+        fill: none;
+        stroke-width: 2;
+        stroke: $off-white;
+      }
+    }
+  }
+}

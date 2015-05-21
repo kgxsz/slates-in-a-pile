@@ -12,14 +12,18 @@
             [everyday-adventures.slates.slate-3 :refer [slate-3]]
             [everyday-adventures.slates.slate-4 :refer [slate-4]]
             [everyday-adventures.slates.slate-5 :refer [slate-5]]
-            [everyday-adventures.slates.slate-6 :refer [slate-6]]))
+            [everyday-adventures.slates.slate-6 :refer [slate-6]]
+            [everyday-adventures.slates.slate-7 :refer [slate-7]]
+            [everyday-adventures.slates.slate-8 :refer [slate-8]]))
 
 (defonce state (atom {:slate-1 {}
                       :slate-2 {}
                       :slate-3 {:step 0}
                       :slate-4 {:step 0}
                       :slate-5 {:step 0}
-                      :slate-6 {}}))
+                      :slate-6 {:step 0}
+                      :slate-7 {:step 0}
+                      :slate-8 {:step 0}}))
 
 (defn change-current-slate-step [current-slate-n f]
   (let [current-slate (keyword (str "slate-" (inc current-slate-n)))
@@ -63,7 +67,9 @@
       (om/build slate-3 (:slate-3 state))
       (om/build slate-4 (:slate-4 state))
       (om/build slate-5 (:slate-5 state))
-      (om/build slate-6 (:slate-6 state)))))
+      (om/build slate-6 (:slate-6 state))
+      (om/build slate-7 (:slate-7 state))
+      (om/build slate-8 (:slate-8 state)))))
 
 (defn init []
   (om/root
