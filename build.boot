@@ -7,15 +7,18 @@
                   [adzerk/boot-cljs-repl "0.1.9"]
                   [adzerk/boot-reload "0.2.6"]
                   [pandeiro/boot-http "0.6.2"]
+                  [org.martinklepsch/boot-garden "1.2.5-4"]
                   [org.omcljs/om "0.8.8"]
                   [prismatic/om-tools "0.3.10" :exclude [prismatic/schema
                                                          prismatic/plumbing]]
                   [prismatic/schema "0.4.2"]
                   [prismatic/plumbing "0.4.3"]
-                  [prismatic/dommy "1.0.0"]])
+                  [prismatic/dommy "1.0.0"]
+                  [garden "1.2.5"]])
 
 (require
   '[adzerk.boot-cljs :refer [cljs]]
   '[adzerk.boot-reload :refer [reload]]
   '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
-  '[pandeiro.boot-http :refer [serve]])
+  '[pandeiro.boot-http :refer [serve]]
+  '[org.martinklepsch.boot-garden :refer [garden]])

@@ -14,7 +14,14 @@
 (defcomponent root-component [cursor owner]
   (render-state [_ _]
     (println "Rendered root component with state: " cursor)
-    (dom/div {:id "test" :on-click #(om/transact! cursor :a inc)} "Hello there!!")))
+    (dom/div
+      {:id "pile"}
+      (dom/div
+        {:id "slate-1" :class "slate"}
+        (dom/section
+          {:class "slate-content"}
+          (dom/h1 "A SLATE")
+          (dom/h5 "one of many"))))))
 
 (om/root
   root-component
