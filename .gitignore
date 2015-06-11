@@ -1,8 +1,2 @@
-figwheel_server.log
 /target
-/.lein-*
-/.nrepl-port
-/resources/public/scripts/main.js
-/resources/public/scripts/out
-/resources/public/style
-/.sass-cache
+/.nrepl-*
