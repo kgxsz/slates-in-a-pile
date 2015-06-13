@@ -44,4 +44,7 @@
     :text-align "center"})
   ((rule :#slate-1)
    {:background-color (:soft-green colours)
-    :color (:hard-green colours)}))
+    :color (:hard-green colours)})
+  ((rule :#slate-2)
+   {:background-color (:soft-crimson colours)
+    :color (:hard-crimson colours)}))
