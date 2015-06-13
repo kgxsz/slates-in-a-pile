@@ -36,6 +36,19 @@
           (dom/h1 "SLATE 2")
           (dom/h5 "The second slate in the pile."))))))
 
+(defcomponent slate-3
+  [cursor owner]
+  (render-state
+    [_ _]
+    (dom/div
+      {:class "slate-container"}
+      (dom/div
+        {:id "slate-3" :class "slate"}
+        (dom/section
+          {:class "slate-content"}
+          (dom/h1 "SLATE 3")
+          (dom/h5 "The third slate in the pile."))))))
+
 (defcomponent pile
   [cursor owner]
   (render-state [_ _]
@@ -43,7 +56,8 @@
     (dom/div
       {:id "pile"}
       (om/build slate-1 cursor)
-      (om/build slate-2 cursor))))
+      (om/build slate-2 cursor)
+      (om/build slate-3 cursor))))
 
 (om/root
   pile

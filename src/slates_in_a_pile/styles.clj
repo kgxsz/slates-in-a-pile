@@ -47,4 +47,7 @@
     :color (:hard-green colours)})
   ((rule :#slate-2)
    {:background-color (:soft-crimson colours)
-    :color (:hard-crimson colours)}))
+    :color (:hard-crimson colours)})
+  ((rule :#slate-3)
+   {:background-color (:soft-yellow colours)
+    :color (:hard-yellow colours)}))
