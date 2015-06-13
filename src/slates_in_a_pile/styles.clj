@@ -1,6 +1,6 @@
 (ns slates-in-a-pile.styles
   (:require [garden.core :refer [css]]
-            [garden.def :refer [defstyles]]
+            [garden.def :refer [defstyles defrule]]
             [garden.stylesheet :refer [rule]]))
 
 (def colours
@@ -17,37 +17,43 @@
    :soft-green "#F3F9EB"
    :hard-green "#8CC63F"})
 
+(defrule headings :h1 :h2 :h3 :h4 :h5 :h6)
+
+(defstyles common
+  [:body {:margin 0
+          :font-family "Helvetica Neue"}
+   (headings {:margin 0})
+   [:h1 {:font-size "80px"}]
+   [:h5 {:font-size "22px"}]])
+
+(defstyles pile
+  [:#pile {:position "absolute"
+           :height "100%"
+           :width "100%"}
+   [:.slate-container {:display "table"
+                       :height "100%"
+                       :width "100%"}
+    [:.slate {:display "table-cell"
+              :vertical-align "middle"}
+     [:.slate-content {:margin "auto"
+                       :width "1000px"
+                       :text-align "center"}]]]])
+
+(defstyles slate-1
+  [:#slate-1 {:background-color (:soft-green colours)
+              :color (:hard-green colours)}])
+
+(defstyles slate-2
+  [:#slate-2 {:background-color (:soft-crimson colours)
+              :color (:hard-crimson colours)}])
+
+(defstyles slate-3
+  [:#slate-3 {:background-color (:soft-blue colours)
+              :color (:hard-blue colours)}])
+
 (defstyles base
-  ((rule :body)
-   {:margin 0
-    :font-family "Helvetica Neue"})
-  ((rule :h1)
-   {:margin 0
-    :font-size "80px"})
-  ((rule :h5)
-   {:margin 0
-    :font-size "22px"})
-  ((rule :#pile)
-   {:position "absolute"
-    :height "100%"
-    :width "100%"})
-  ((rule :.slate-container)
-   {:display "table"
-    :height "100%"
-    :width "100%"})
-  ((rule :.slate)
-   {:display "table-cell"
-    :vertical-align "middle"})
-  ((rule :.slate-content)
-   {:margin "auto"
-    :width "1000px"
-    :text-align "center"})
-  ((rule :#slate-1)
-   {:background-color (:soft-green colours)
-    :color (:hard-green colours)})
-  ((rule :#slate-2)
-   {:background-color (:soft-crimson colours)
-    :color (:hard-crimson colours)})
-  ((rule :#slate-3)
-   {:background-color (:soft-yellow colours)
-    :color (:hard-yellow colours)}))
+  common
+  pile
+  slate-1
+  slate-2
+  slate-3)
