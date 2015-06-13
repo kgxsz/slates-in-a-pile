@@ -1,5 +1,5 @@
 (ns slates-in-a-pile.core
-  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require-macros [cljs.core.async.macros :refer [go go-loop]])
   (:require [dommy.core :as dommy :refer-macros [sel1]]
             [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
@@ -10,28 +10,31 @@
 
 (enable-console-print!)
 
-(defn log [& m] (.log js/console (apply str m)))
+(defonce application-state (atom {:dummy-key "dummy-value"}))
 
-(defonce application-state
-  (atom {:dummy-key "dummy-value"}))
+(defn log [& s] (apply println s))
 
-(defn arrow-key-handler [d] (log "Arrow key event received: " (name d)))
+(defn say-direction [d] (log "Received arrow key press: " (name d)))
 
-(defn key-down-handler
-  [event]
-  (case (.-keyCode event)
-    38 (do (.preventDefault event) (arrow-key-handler :up))
-    40 (do (.preventDefault event) (arrow-key-handler :down))
-    39 (do (.preventDefault event) (arrow-key-handler :right))
-    37 (do (.preventDefault event) (arrow-key-handler :left))
-    "default"))
+(defn handle-arrow-key-press
+  [key-code]
+  (let [scroll-to (fn [h] (. js/window (scrollTo 0 h)))])
+  (case key-code
+    38 (say-direction :up)
+    40 (say-direction :down)
+    39 (say-direction :right)
+    37 (say-direction :left)))
 
-(defonce key-down-chan
-  (let [key-down-chan (chan)]
-    (log "registering key down events to the key down channel")
-    (events/listen js/window EventType/KEYDOWN #(put! key-down-chan %))
-    (go (while true (key-down-handler (<! key-down-chan))))
-    key-down-chan))
+(defonce arrow-key-press-chan
+  (let [arrow-key-press-chan (chan)
+        handle-key-press (partial
+                           (fn [e] (when (contains? #{37 38 39 40} (.-keyCode e))
+                                     (.preventDefault e)
+                                     (put! arrow-key-press-chan (.-keyCode e)))))]
+    (log "Registering arrow key press events to the arrow-key-press-chan")
+    (events/listen js/window EventType/KEYDOWN handle-key-press)
+    (go (while true (handle-arrow-key-press (<! arrow-key-press-chan))))
+    arrow-key-press-chan))
 
 (defcomponent slate-1
   [cursor owner]
