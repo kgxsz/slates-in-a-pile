@@ -7,7 +7,8 @@
     boot -- serve -k -d target -- watch -- speak -- reload -- cljs -O none -- garden -s slates-in-a-pile.styles/base
     ```
     
-###Tasks
+##Tasks
+
 - Create slate macro [done].
 - Fix up naming convention for clarity's sake [done].
 - Seperate out slates, rename them, put them in the state.

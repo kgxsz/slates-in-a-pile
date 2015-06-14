@@ -5,7 +5,7 @@
                   [org.clojure/clojurescript "0.0-3308"]
                   [adzerk/boot-cljs "0.0-3269-2"]
                   [adzerk/boot-cljs-repl "0.1.9"]
-                  [adzerk/boot-reload "0.2.6"]
+                  [adzerk/boot-reload "0.3.0"]
                   [pandeiro/boot-http "0.6.2"]
                   [org.martinklepsch/boot-garden "1.2.5-4"]
                   [org.omcljs/om "0.8.8"]
