@@ -7,7 +7,7 @@
   [cursor owner]
   (render-state
     [_ _]
-    (println "Rendering slate-2 component with cursor: " cursor)
+    (println "Rendering slate-2 component with cursor:" cursor)
     (slate :slate-2
       (dom/h1 "SLATE 2")
       (dom/h5 "The second slate in the pile"))))

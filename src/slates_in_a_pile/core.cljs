@@ -1,6 +1,5 @@
 (ns slates-in-a-pile.core
-  (:require-macros [cljs.core.async.macros :refer [go]]
-                   [slates-in-a-pile.utils.helpers :refer [slate]])
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [dommy.core :as dommy :refer-macros [sel1]]
             [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]

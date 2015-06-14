@@ -1,4 +1,4 @@
-(ns slates-in-a-pile.styles
+(ns slates-in-a-pile.styles.core
   (:require [garden.core :refer [css]]
             [garden.def :refer [defstyles defrule]]
             [garden.stylesheet :refer [rule]]))
@@ -19,7 +19,7 @@
 
 (defrule headings :h1 :h2 :h3 :h4 :h5 :h6)
 
-(defstyles common
+(defstyles base
   [:body {:margin 0
           :font-family "Helvetica Neue"}
    (headings {:margin 0})
@@ -51,8 +51,8 @@
   [:#slate-3 {:color (:hard-blue colours)}
    [:.backdrop {:background-color (:soft-blue colours)}]])
 
-(defstyles base
-  common
+(defstyles main
+  base
   pile
   slate-1
   slate-2
