@@ -7,11 +7,15 @@
             [om-tools.dom :as dom :include-macros true]
             [cljs.core.async :refer [put! chan <!]]
             [goog.events :as events]
-            [goog.events.EventType :as EventType]))
+            [goog.events.EventType :as EventType]
+            [slates-in-a-pile.slates.slate-1 :refer [slate-1]]
+            [slates-in-a-pile.slates.slate-2 :refer [slate-2]]
+            [slates-in-a-pile.slates.slate-3 :refer [slate-3]]))
 
 (enable-console-print!)
 
-(defonce application-state (atom {:dummy-key "dummy-value"}))
+(defonce application-state
+  (atom {:slates {:slate-1 {:n 0}}}))
 
 (defn log [& s] (apply println s))
 
@@ -36,30 +40,6 @@
     (events/listen js/window EventType/KEYDOWN handle-key-press)
     (go (while true (handle-arrow-key-press (<! arrow-key-press-chan))))
     arrow-key-press-chan))
-
-(defcomponent slate-1
-  [cursor owner]
-  (render-state
-    [_ _]
-    (slate :slate-1
-      (dom/h1 "SLATES IN A PILE")
-      (dom/h5 "A disgustingly lightweight presentation framework"))))
-
-(defcomponent slate-2
-  [cursor owner]
-  (render-state
-    [_ _]
-    (slate :slate-2
-      (dom/h1 "SLATE 2")
-      (dom/h5 "The second slate in the pile."))))
-
-(defcomponent slate-3
-  [cursor owner]
-  (render-state
-    [_ _]
-    (slate :slate-3
-      (dom/h1 "SLATE 3")
-      (dom/h5 "The third slate in the pile."))))
 
 (defcomponent pile
   [cursor owner]

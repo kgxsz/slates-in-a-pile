@@ -17,4 +17,4 @@
 - Incorporate odd sized slates in movement engine.
 - Extract movement engine.
 - Cleanify the boot build tasks.
-- Test test test.
+- Put the browser repl in place.
