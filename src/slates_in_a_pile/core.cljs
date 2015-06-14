@@ -15,11 +15,11 @@
 (enable-console-print!)
 
 (defonce application-state
-  (atom {:slates {:slate-1 {:n 0}}}))
+  (atom {:slates {:slate-1 {}
+                  :slate-2 {}
+                  :slate-3 {}}}))
 
-(defn log [& s] (apply println s))
-
-(defn say-direction [d] (log "Received arrow key press: " (name d)))
+(defn say-direction [d] (println "Received arrow key press:" (name d)))
 
 (defn handle-arrow-key-press
   [key-code]
@@ -36,15 +36,15 @@
                            (fn [e] (when (contains? #{37 38 39 40} (.-keyCode e))
                                      (.preventDefault e)
                                      (put! arrow-key-press-chan (.-keyCode e)))))]
-    (log "Registering arrow key press events to the arrow-key-press-chan")
+    (println "Registering arrow key press events to the arrow-key-press-chan")
     (events/listen js/window EventType/KEYDOWN handle-key-press)
     (go (while true (handle-arrow-key-press (<! arrow-key-press-chan))))
     arrow-key-press-chan))
 
 (defcomponent pile
-  [cursor owner]
+  [{:keys [slates] :as cursor} owner]
   (render-state [_ _]
-    (log "Rendered root component with state: " cursor)
+    (println "Rendered root component with state:" cursor)
     (dom/div
       {:id "pile"}
       (om/build slate-1 cursor)
