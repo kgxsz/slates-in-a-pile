@@ -1,5 +1,6 @@
 (ns slates-in-a-pile.core
-  (:require-macros [cljs.core.async.macros :refer [go go-loop]])
+  (:require-macros [cljs.core.async.macros :refer [go]]
+                   [slates-in-a-pile.utils.helpers :refer [slate]])
   (:require [dommy.core :as dommy :refer-macros [sel1]]
             [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
@@ -40,40 +41,25 @@
   [cursor owner]
   (render-state
     [_ _]
-    (dom/div
-      {:class "slate-container"}
-      (dom/div
-        {:id "slate-1" :class "slate"}
-        (dom/section
-          {:class "slate-content"}
-          (dom/h1 "SLATE 1")
-          (dom/h5 "The first slate in the pile."))))))
+    (slate :slate-1
+      (dom/h1 "SLATES IN A PILE")
+      (dom/h5 "A disgustingly lightweight presentation framework"))))
 
 (defcomponent slate-2
   [cursor owner]
   (render-state
     [_ _]
-    (dom/div
-      {:class "slate-container"}
-      (dom/div
-        {:id "slate-2" :class "slate"}
-        (dom/section
-          {:class "slate-content"}
-          (dom/h1 "SLATE 2")
-          (dom/h5 "The second slate in the pile."))))))
+    (slate :slate-2
+      (dom/h1 "SLATE 2")
+      (dom/h5 "The second slate in the pile."))))
 
 (defcomponent slate-3
   [cursor owner]
   (render-state
     [_ _]
-    (dom/div
-      {:class "slate-container"}
-      (dom/div
-        {:id "slate-3" :class "slate"}
-        (dom/section
-          {:class "slate-content"}
-          (dom/h1 "SLATE 3")
-          (dom/h5 "The third slate in the pile."))))))
+    (slate :slate-3
+      (dom/h1 "SLATE 3")
+      (dom/h5 "The third slate in the pile."))))
 
 (defcomponent pile
   [cursor owner]

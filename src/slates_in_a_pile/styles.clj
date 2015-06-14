@@ -30,26 +30,26 @@
   [:#pile {:position "absolute"
            :height "100%"
            :width "100%"}
-   [:.slate-container {:display "table"
-                       :height "100%"
-                       :width "100%"}
-    [:.slate {:display "table-cell"
-              :vertical-align "middle"}
-     [:.slate-content {:margin "auto"
-                       :width "1000px"
-                       :text-align "center"}]]]])
+   [:.slate {:display "table"
+             :height "100%"
+             :width "100%"}
+    [:.backdrop {:display "table-cell"
+                 :vertical-align "middle"}
+     [:.content {:margin "auto"
+                 :width "1000px"
+                 :text-align "center"}]]]])
 
 (defstyles slate-1
-  [:#slate-1 {:background-color (:soft-green colours)
-              :color (:hard-green colours)}])
+  [:#slate-1 {:color (:hard-green colours)}
+   [:.backdrop {:background-color (:soft-green colours)}]])
 
 (defstyles slate-2
-  [:#slate-2 {:background-color (:soft-crimson colours)
-              :color (:hard-crimson colours)}])
+  [:#slate-2 {:color (:hard-crimson colours)}
+   [:.backdrop {:background-color (:soft-crimson colours)}]])
 
 (defstyles slate-3
-  [:#slate-3 {:background-color (:soft-blue colours)
-              :color (:hard-blue colours)}])
+  [:#slate-3 {:color (:hard-blue colours)}
+   [:.backdrop {:background-color (:soft-blue colours)}]])
 
 (defstyles base
   common
