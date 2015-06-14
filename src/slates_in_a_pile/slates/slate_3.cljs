@@ -1,5 +1,5 @@
 (ns slates-in-a-pile.slates.slate-3
-  (:require-macros [slates-in-a-pile.utils.helpers :refer [slate]])
+  (:require-macros [slates-in-a-pile.utils.macros :refer [slate]])
   (:require [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom :include-macros true]))
 
