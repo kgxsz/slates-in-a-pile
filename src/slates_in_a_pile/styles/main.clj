@@ -1,4 +1,4 @@
-(ns slates-in-a-pile.styles.core
+(ns slates-in-a-pile.styles.main
   (:require [garden.core :refer [css]]
             [garden.def :refer [defstyles defrule]]
             [slates-in-a-pile.styles.utils.variables :refer :all]
@@ -8,7 +8,7 @@
 
 (defrule headings :h1 :h2 :h3 :h4 :h5 :h6)
 
-(defstyles base
+(defstyles common
   [:body {:margin 0
           :font-family "Helvetica Neue"}
    (headings {:margin 0})
@@ -28,8 +28,8 @@
                  :width "1000px"
                  :text-align "center"}]]]])
 
-(defstyles main
-  base
+(defstyles base
+  common
   pile
   slate-1
   slate-2
