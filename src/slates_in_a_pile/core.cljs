@@ -3,9 +3,7 @@
             [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom :include-macros true]
-            [goog.events :as events]
-            [goog.events.EventType :as EventType]
-            [slates-in-a-pile.interactor :refer [handle-arrow-key-press]]
+            [slates-in-a-pile.interactor :refer [setup-key-press-interaction]]
             [slates-in-a-pile.slates.slate-1 :refer [slate-1]]
             [slates-in-a-pile.slates.slate-2 :refer [slate-2]]
             [slates-in-a-pile.slates.slate-3 :refer [slate-3]]))
@@ -17,13 +15,7 @@
                   :slate-2 {:n 0}
                   :slate-3 {:n 0}}}))
 
-(defonce key-press-handling
-  (events/listen js/window EventType/KEYDOWN
-    #(when (contains? #{37 38 39 40} (.-keyCode %))
-              (.preventDefault %)
-              (handle-arrow-key-press
-                (.-keyCode %)
-                (om/root-cursor application-state)))))
+(defonce key-press-interaction (setup-key-press-interaction application-state))
 
 (defcomponent pile
   [{:keys [slates] :as cursor} owner]
