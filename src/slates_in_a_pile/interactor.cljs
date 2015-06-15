@@ -3,8 +3,6 @@
             [goog.events :as events]
             [goog.events.EventType :as EventType]))
 
-(defn say-direction [d] (println "Received arrow key press:" (name d)))
-
 (defn handle-vertical-arrow-key-press
   [d]
   (let [scroll-to (fn [h] (. js/window (scrollTo 0 h)))]
