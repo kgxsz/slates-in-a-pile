@@ -3,5 +3,5 @@
             [slates-in-a-pile.styles.utils.variables :refer :all]))
 
 (defstyles slate-2
-  [:#slate-2 {:color (:hard-green colours)}
-   [:.backdrop {:background-color (:soft-green colours)}]])
+  [:#slate-2 {:color (:hard-crimson colours)}
+   [:.backdrop {:background-color (:soft-crimson colours)}]])

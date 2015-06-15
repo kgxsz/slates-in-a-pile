@@ -1,4 +1,4 @@
-* ##Notes
+##Notes
 
 - Get boot.
 - Run the following:
@@ -12,9 +12,12 @@
 - Create slate macro [done].
 - Fix up naming convention for clarity's sake [done].
 - Seperate out slates, rename them, put them in the state [done].
-- Seperate out styles, rename them.
+- Seperate out styles, rename them [done].
 - Move slate by slate.
 - Incorporate odd sized slates in movement engine.
 - Extract movement engine.
 - Cleanify the boot build tasks.
 - Put the browser repl in place.
+- Start on the introduction slate
+- Start on the explanation slate
+
