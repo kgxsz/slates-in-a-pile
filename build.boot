@@ -14,8 +14,7 @@
                   [prismatic/schema "0.4.2"]
                   [prismatic/plumbing "0.4.3"]
                   [prismatic/dommy "1.0.0"]
-                  [garden "1.2.5"]
-                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]])
+                  [garden "1.2.5"]])
 
 (require
   '[adzerk.boot-cljs :refer [cljs]]

@@ -14,8 +14,8 @@
 - Seperate out slates, rename them, put them in the state [done].
 - Seperate out styles, rename them [done].
 - Move slate by slate.
-- Incorporate odd sized slates in movement engine.
 - Extract movement engine.
+- Incorporate odd sized slates in movement engine.
 - Cleanify the boot build tasks.
 - Put the browser repl in place.
 - Start on the introduction slate
