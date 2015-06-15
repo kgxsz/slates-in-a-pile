@@ -17,6 +17,11 @@
     :left (om/transact! (om/root-cursor cursor) [:slates :slate-1 :n] dec)))
 
 (defn setup-key-press-interaction
+  "This function sets up a listener on key down events
+   and prevents default bubbling for arrow key events
+   before forwarding them to relevant functions. The
+   cursor is required for interactions that affect the
+   application's state."
   [cursor]
   (events/listen js/window EventType/KEYDOWN
     (fn [e]
