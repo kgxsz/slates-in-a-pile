@@ -5,7 +5,8 @@
 
 (defn handle-vertical-arrow-key-press
   [d]
-  (let [scroll-to (fn [h] (. js/window (scrollTo 0 h)))]
+  (let [
+        scroll-to (fn [h] (. js/window (scrollTo 0 h)))]
     (case d
       :up (scroll-to 200)
       :down (scroll-to 500))))
@@ -14,7 +15,7 @@
   [cursor d]
   (case d
     :right (om/transact! (om/root-cursor cursor) [:slates :slate-1 :n] inc)
-    :left (om/transact! (om/root-cursor cursor) [:slates :slate-1 :n] dec)))
+    :left (om/transact! (om/root-cursor cursor) [:slates :slate-1 :n] #(if (pos? %) (dec %) %))))
 
 (defn setup-key-press-interaction
   "This function sets up a listener on key down events
