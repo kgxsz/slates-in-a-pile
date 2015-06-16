@@ -4,7 +4,7 @@
 - Run the following:
 
     ```
-    boot -- serve -k -d target -- watch -- speak -- reload -- cljs -O none -- garden -s slates-in-a-pile.styles.core/main
+    boot -- serve -k -d target -- watch -- speak -- reload -- cljs -O none -- garden -s slates-in-a-pile.styles.main/base
     ```
     
 ##Tasks
