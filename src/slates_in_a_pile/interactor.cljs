@@ -1,15 +1,17 @@
 (ns slates-in-a-pile.interactor
   (:require [om.core :as om]
             [goog.events :as events]
+            [goog.dom :as dom]
             [goog.events.EventType :as EventType]))
 
 (defn handle-vertical-arrow-key-press
   [d]
-  (let [
+  (let [current-scroll (.. (dom/getDocumentScroll) -y)
         scroll-to (fn [h] (. js/window (scrollTo 0 h)))]
+    (println "Current scroll is:" current-scroll)
     (case d
-      :up (scroll-to 200)
-      :down (scroll-to 500))))
+      :up (scroll-to (- current-scroll 200))
+      :down (scroll-to (+ current-scroll 200)))))
 
 (defn handle-horizontal-arrow-key-press
   [cursor d]
