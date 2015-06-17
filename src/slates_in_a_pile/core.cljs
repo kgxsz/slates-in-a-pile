@@ -15,7 +15,8 @@
                   :slate-2 {:n 0}
                   :slate-3 {:n 0}}}))
 
-(defonce key-press-interaction (setup-key-press-interaction application-state))
+(defonce key-press-interaction
+  (setup-key-press-interaction application-state))
 
 (defcomponent pile
   [{:keys [slates] :as cursor} owner]
