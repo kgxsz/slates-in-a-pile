@@ -10,11 +10,13 @@
   (let [slate-heights (map
                         #(.. (dom/getElement (name %)) -offsetHeight)
                         (-> @cursor :slates keys))
+        slate-boundaries (reduce #(conj %1 (+ %2 (last %1))) [0] slate-heights)
         current-scroll (.. (dom/getDocumentScroll) -y)
         scroll-to (fn [h] (. js/window (scrollTo 0 h)))
         transact-cursor! (partial om/transact! (om/root-cursor cursor))]
     (println "Current scroll is:" current-scroll)
     (println "Slate heights are:" slate-heights)
+    (println "Slate offsets are:" slate-boundaries)
     (case d
       :up (scroll-to (- current-scroll 200))
       :down (scroll-to (+ current-scroll 200))
@@ -27,6 +29,7 @@
    before forwarding them to relevant functions. The
    cursor is required for interactions that affect the
    application's state."
+  ;; TODO try using a vector of codes and use it as a set and zipmap into directions
   [cursor]
   (events/listen js/window EventType/KEYDOWN
     (fn [e]
