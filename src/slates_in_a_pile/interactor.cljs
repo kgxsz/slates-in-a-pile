@@ -10,13 +10,18 @@
   (let [slate-heights (map
                         #(.. (dom/getElement (name %)) -offsetHeight)
                         (-> @cursor :slates keys))
-        slate-boundaries (reduce #(conj %1 (+ %2 (last %1))) [0] slate-heights)
+        slate-boundaries (reduce
+                           #(conj %1 (+ %2 (last %1)))
+                           [0]
+                           slate-heights)
         current-scroll (.. (dom/getDocumentScroll) -y)
+        current-slate (reduce #(if (>= current-scroll %2) (inc %1) %1) 0 slate-boundaries)
         scroll-to (fn [h] (. js/window (scrollTo 0 h)))
         transact-cursor! (partial om/transact! (om/root-cursor cursor))]
     (println "Current scroll is:" current-scroll)
     (println "Slate heights are:" slate-heights)
     (println "Slate offsets are:" slate-boundaries)
+    (println "Current slate is" current-slate)
     (case d
       :up (scroll-to (- current-scroll 200))
       :down (scroll-to (+ current-scroll 200))
