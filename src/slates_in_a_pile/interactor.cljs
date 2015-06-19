@@ -6,7 +6,7 @@
             [goog.events.EventType :as EventType]))
 
 (defn handle-arrow-key-press
-  [d cursor]
+  [direction cursor]
   (let [slate-heights (map #(dommy/px % :height) (sel :.slate))
         slate-boundaries (drop-last (reductions #(+ %1 %2) 0 slate-heights))
         current-scroll (.-y (dom/getDocumentScroll))
@@ -14,8 +14,10 @@
         current-slate-keyword (keyword (str "slate-" (inc current-slate)))
         flush-with-slate? #(contains? (set slate-boundaries) current-scroll)
         scroll-to-slate #(. js/window (scrollTo 0 (nth slate-boundaries % current-scroll)))
-        transact-n-for-slate! (partial om/transact! (om/root-cursor cursor) [:slates current-slate-keyword :n])]
-    (case d
+        transact-n-for-slate! #(let [c (om/root-cursor cursor)
+                                     ks [:slates current-slate-keyword :n]]
+                                 (when (get-in c ks) (om/transact! c ks %)))]
+    (case direction
       :up (scroll-to-slate (if (and (pos? current-slate) (flush-with-slate?))
                              (dec current-slate)
                              current-slate))

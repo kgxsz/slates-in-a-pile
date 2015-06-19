@@ -11,8 +11,8 @@
 (enable-console-print!)
 
 (defonce application-state
-  (atom {:slates {:slate-1 {:n 0}
-                  :slate-2 {:n 0}
+  (atom {:slates {:slate-1 {}
+                  :slate-2 {}
                   :slate-3 {:n 0}}}))
 
 (defonce key-press-interaction
