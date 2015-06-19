@@ -9,12 +9,7 @@
 
 ##Tasks
 
-- Create slate macro [done].
-- Fix up naming convention for clarity's sake [done].
-- Seperate out slates, put them in the state.
-- Seperate out styles.
-- Move slate by slate.
-- Incorporate odd sized slates in movement engine.
-- Extract movement engine.
-- Cleanify the boot build tasks.
+- Clean up boot, add useful tasks.
 - Put the browser repl in place.
+- Get d3 in place.
+- Get some tests running.
