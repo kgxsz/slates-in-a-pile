@@ -20,5 +20,24 @@
   '[adzerk.boot-cljs :refer [cljs]]
   '[adzerk.boot-reload :refer [reload]]
   '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
-  '[pandeiro.boot-http :refer [serve]]
+  '[pandeiro.boot-http :as http]
   '[org.martinklepsch.boot-garden :refer [garden]])
+
+(deftask dev []
+  (set-env! :source-paths #{"src"})
+  (comp (http/serve :dir "target/" :httpkit true)
+        (watch)
+        (speak)
+        (reload)
+        (cljs :optimizations :none)
+        (garden :styles-var 'slates-in-a-pile.styles.main/base)))
+
+(deftask build []
+  (set-env! :source-paths #{"src"})
+  (comp (cljs :optimizations :advanced)
+        (garden :styles-var 'slates-in-a-pile.styles.main/base)))
+
+(deftask serve []
+  (set-env! :source-paths #{"src"})
+  (comp (http/serve :dir "target/" :httpkit true)
+        (watch)))
