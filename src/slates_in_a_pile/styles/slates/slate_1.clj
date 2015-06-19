@@ -4,4 +4,9 @@
 
 (defstyles slate-1
   [:#slate-1 {:color (:hard-green colours)}
-   [:.backdrop {:background-color (:soft-green colours)}]])
+   [:.backdrop {:background-color (:soft-green colours)}
+    [:.content
+     [:span.small {:font-size "20px"}]
+     [:.big {:font-size "90px"
+             :line-height "80px"
+             :margin-bottom "35px"}]]]])
