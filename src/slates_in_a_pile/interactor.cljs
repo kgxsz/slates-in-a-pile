@@ -1,5 +1,5 @@
 (ns slates-in-a-pile.interactor
-  (:require [dommy.core :as dommy :refer-macros [sel1]]
+  (:require [dommy.core :as dommy :refer-macros [sel sel1]]
             [om.core :as om]
             [goog.events :as events]
             [goog.dom :as dom]
@@ -7,28 +7,23 @@
 
 (defn handle-arrow-key-press
   [d cursor]
-  (let [slate-heights (map
-                        #(.. (dom/getElement (name %)) -offsetHeight)
-                        (-> @cursor :slates keys))
-        slate-boundaries (reduce
-                           #(conj %1 (+ %2 (last %1)))
-                           [0]
-                           slate-heights)
-        current-scroll (.. (dom/getDocumentScroll) -y)
-        current-slate (reduce #(if (>= current-scroll %2) (inc %1) %1) 0 slate-boundaries)
+  (let [slate-heights (map #(dommy/px % :height) (sel :.slate))
+        slate-boundaries (drop-last (reductions #(+ %1 %2) 0 slate-heights))
+        current-scroll (.-y (dom/getDocumentScroll))
+        current-slate (reduce #(if (>= current-scroll %2) (inc %1) %1) 0 (rest slate-boundaries))
+        current-slate-keyword (keyword (str "slate-" (inc current-slate)))
         flush-with-slate? #(contains? (set slate-boundaries) current-scroll)
-        scroll-to (fn [h] (. js/window (scrollTo 0 h)))
-        transact-cursor! (partial om/transact! (om/root-cursor cursor))]
-    (println "Current scroll is:" current-scroll)
-    (println "Slate heights are:" slate-heights)
-    (println "Slate offsets are:" slate-boundaries)
-    (println "Current slate is" current-slate)
-    (println "Is it flush? " (flush-with-slate?))
+        scroll-to-slate #(. js/window (scrollTo 0 (nth slate-boundaries % current-scroll)))
+        transact-n-for-slate! (partial om/transact! (om/root-cursor cursor) [:slates current-slate-keyword :n])]
     (case d
-      :up (scroll-to (- current-scroll 200))
-      :down (scroll-to (+ current-scroll 200))
-      :right (transact-cursor! [:slates :slate-1 :n] inc)
-      :left (transact-cursor! [:slates :slate-1 :n] #(if (pos? %) (dec %) %)))))
+      :up (scroll-to-slate (if (and (pos? current-slate) (flush-with-slate?))
+                             (dec current-slate)
+                             current-slate))
+      :down (scroll-to-slate (if (< current-slate (count slate-boundaries))
+                               (inc current-slate)
+                               current-slate))
+      :right (transact-n-for-slate! inc)
+      :left (transact-n-for-slate! #(if (pos? %) (dec %) %)))))
 
 (defn setup-key-press-interaction
   "This function sets up a listener on key down events
