@@ -12,9 +12,11 @@
       (dom/div
         {:id "title"}
         (dom/span "SLATES")
-        (dom/span " IN A ")
+        (dom/span "IN A")
         (dom/span "PILE"))
-     (dom/div
-       {:id "blurb"}
-       (dom/p "A disgustingly lightweight")
-       (dom/p "presentation framework.")))))
+      (dom/div
+        {:id "separator"})
+      (dom/div
+        {:id "blurb"}
+        (dom/p "A disgustingly lightweight")
+        (dom/p "presentation framework.")))))
