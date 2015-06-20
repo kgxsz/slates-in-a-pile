@@ -15,9 +15,6 @@
                   :slate-2 {}
                   :slate-3 {:n 0}}}))
 
-(defonce key-press-interaction
-  (setup-key-press-interaction application-state))
-
 (defcomponent pile
   [{:keys [slates] :as cursor} owner]
   (render-state [_ _]
@@ -28,7 +25,16 @@
       (om/build slate-2 (:slate-2 slates))
       (om/build slate-3 (:slate-3 slates)))))
 
-(om/root
-  pile
-  application-state
-  {:target (sel1 :#application-container)})
+(defn setup-root-component
+  [cursor]
+  (om/root
+    pile
+    cursor
+    {:target (sel1 :#application-container)}))
+
+(defn main
+  []
+  (setup-key-press-interaction application-state)
+  (setup-root-component application-state))
+
+(main)

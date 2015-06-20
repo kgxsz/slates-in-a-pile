@@ -28,13 +28,14 @@
       :left (transact-n-for-slate! #(if (pos? %) (dec %) %)))))
 
 (defn setup-key-press-interaction
-  "This function sets up a listener on key down events
-   and prevents default bubbling for arrow key events
-   before forwarding them to relevant functions. The
-   cursor is required for interactions that affect the
+  "This function sets up a listener idempotently on key
+   down events and prevents default bubbling for arrow
+   key events before forwarding them to relevant functions.
+   The cursor is required for interactions that affect the
    application's state."
   ;; TODO try using a vector of codes and use it as a set and zipmap into directions
   [cursor]
+  (events/removeAll js/window)
   (events/listen js/window EventType/KEYDOWN
     (fn [e]
       (when (contains? #{37 38 39 40} (.-keyCode e))
