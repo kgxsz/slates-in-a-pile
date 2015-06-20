@@ -10,14 +10,7 @@
 
 (defstyles common
   [:body {:margin 0
-          :font-family "Helvetica Neue"}
-   (headings {:margin 0})
-   [:h1 {:font-size "68px"}]
-   [:h3 {:font-size "58px"}]
-   [:h4 {:font-size "38px"}]
-   [:h5 {:font-size "24px"}]
-   [:p {:font-size "18px"
-        :margin 0}]])
+          :font-family "Helvetica Neue"}])
 
 (defstyles pile
   [:#pile {:position "absolute"

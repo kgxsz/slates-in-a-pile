@@ -9,7 +9,12 @@
     [_ _]
     (println "Rendering slate-1 component with cursor:" cursor)
     (slate :slate-1
-      (dom/h4 (dom/span "SLATES") (dom/span {:class "small"} " IN A "))
-      (dom/h1 {:class "big"} "PILE")
-      (dom/p "A disgustingly lightweight")
-      (dom/p "presentation framework."))))
+      (dom/div
+        {:id "title"}
+        (dom/span "SLATES")
+        (dom/span " IN A ")
+        (dom/span "PILE"))
+     (dom/div
+       {:id "blurb"}
+       (dom/p "A disgustingly lightweight")
+       (dom/p "presentation framework.")))))
