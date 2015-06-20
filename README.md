@@ -7,8 +7,6 @@
 
 ##Tasks
 
-- Clean up boot, add useful tasks.
-- Put the browser repl in place.
-- Get d3 in place.
-- Get some tests running.
-- Write out a proper `readme`.
+- Get d3 externs in place.
+- Build dummy d3 elements.
+- Clean up interactor functions
