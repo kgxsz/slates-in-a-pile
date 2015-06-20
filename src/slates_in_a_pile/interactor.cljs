@@ -6,7 +6,6 @@
             [goog.events.EventType :as EventType]))
 
 (defn handle-arrow-key-press
-  ;; TODO Try seperating this out along bounded contexts
   [direction cursor]
   (let [slate-heights (map #(dommy/px % :height) (sel :.slate))
         slate-boundaries (drop-last (reductions #(+ %1 %2) 0 slate-heights))
@@ -34,15 +33,11 @@
    key events before forwarding them to relevant functions.
    The cursor is required for interactions that affect the
    application's state."
-  ;; TODO try using a vector of codes and use it as a set and zipmap into directions
   [cursor]
   (events/removeAll js/window)
   (events/listen js/window EventType/KEYDOWN
     (fn [e]
-      (when (contains? #{37 38 39 40} (.-keyCode e))
-       (.preventDefault e)
-       (case (.-keyCode e)
-         38 (handle-arrow-key-press :up cursor)
-         40 (handle-arrow-key-press :down cursor)
-         39 (handle-arrow-key-press :right cursor)
-         37 (handle-arrow-key-press :left cursor))))))
+      (let [key-map {37 :left 38 :up 39 :right 40 :down}]
+        (when (contains? (set (keys key-map)) (.-keyCode e))
+          (.preventDefault e)
+          (handle-arrow-key-press (get key-map (.-keyCode e)) cursor))))))
