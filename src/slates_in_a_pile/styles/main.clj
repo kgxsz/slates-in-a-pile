@@ -10,7 +10,9 @@
 
 (defstyles common
   [:body {:margin 0
-          :font-family "Helvetica Neue"}])
+          :font-family "Helvetica Neue"}]
+  [:p {:font-size "16px"
+       :margin "0"}])
 
 (defstyles pile
   [:#pile {:position "absolute"

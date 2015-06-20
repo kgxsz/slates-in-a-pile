@@ -12,7 +12,7 @@
         (nth-child
           "1" {:font-size "54px"}
           "2" {:font-size "18px"
-               :padding "0 10px"}
+               :padding "0 8px"}
           "3" {:font-size "120px"
                :line-height "90px"
                :display "block"})]]
@@ -20,6 +20,4 @@
                    :height "1px"
                    :margin "auto"
                    :background-color (:hard-green colours)}]
-     [:#blurb {:margin "25px 0"}
-      [:p {:font-size "16px"
-           :margin "0"}]]]]])
+     [:#blurb {:margin "25px 0"}]]]])
