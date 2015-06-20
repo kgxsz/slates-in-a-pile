@@ -1,0 +1,2 @@
+{:require  [slates-in-a-pile.core]
+ :init-fns [slates-in-a-pile.core/main]}

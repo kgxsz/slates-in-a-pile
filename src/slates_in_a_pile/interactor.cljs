@@ -6,6 +6,7 @@
             [goog.events.EventType :as EventType]))
 
 (defn handle-arrow-key-press
+  ;; TODO Try seperating this out along bounded contexts
   [direction cursor]
   (let [slate-heights (map #(dommy/px % :height) (sel :.slate))
         slate-boundaries (drop-last (reductions #(+ %1 %2) 0 slate-heights))

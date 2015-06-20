@@ -36,5 +36,3 @@
   []
   (setup-key-press-interaction application-state)
   (setup-root-component application-state))
-
-(main)

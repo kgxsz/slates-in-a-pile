@@ -25,27 +25,17 @@
 
 (deftask dev []
   (set-env! :source-paths #{"src"})
-  (comp (http/serve
-          :dir "target/"
-          :httpkit true)
+  (comp (http/serve :dir "target/" :httpkit true)
         (watch)
         (speak)
-        (reload)
-        (cljs
-          :optimizations :none
-          :compiler-options {:output-to "scripts/main.js"})
-        (garden
-          :styles-var 'slates-in-a-pile.styles.main/base
-          :output-to "styles/main.css")))
+        (reload :on-jsload 'slates-in-a-pile.core/main)
+        (cljs :optimizations :none)
+        (garden :styles-var 'slates-in-a-pile.styles.main/base)))
 
 (deftask build []
   (set-env! :source-paths #{"src"})
-  (comp (cljs
-          :optimizations :advanced
-          :compiler-options {:output-to "scripts/main.js"})
-        (garden
-          :styles-var 'slates-in-a-pile.styles.main/base
-          :output-to "styles/main.css")))
+  (comp (cljs :optimizations :advanced)
+        (garden :styles-var 'slates-in-a-pile.styles.main/base)))
 
 (deftask serve []
   (set-env! :source-paths #{"src"})
