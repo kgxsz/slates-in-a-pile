@@ -1,10 +1,10 @@
 (set-env!
   :source-paths   #{"src"}
   :resource-paths #{"resources"}
-  :dependencies '[[org.clojure/clojure "1.6.0"]
-                  [org.clojure/clojurescript "0.0-3308"]
-                  [adzerk/boot-cljs "0.0-3269-2"]
-                  [adzerk/boot-cljs-repl "0.1.9"]
+  :dependencies '[[org.clojure/clojure "1.7.0-RC2"]
+                  [org.clojure/clojurescript "0.0-3123"]
+                  [adzerk/boot-cljs "0.0-3308-0"]
+                  [adzerk/boot-cljs-repl "0.1.10-SNAPSHOT"]
                   [adzerk/boot-reload "0.3.0"]
                   [pandeiro/boot-http "0.6.2"]
                   [org.martinklepsch/boot-garden "1.2.5-4"]
@@ -29,6 +29,7 @@
         (watch)
         (speak)
         (reload :on-jsload 'slates-in-a-pile.core/main)
+        (cljs-repl)
         (cljs :optimizations :none)
         (garden :styles-var 'slates-in-a-pile.styles.main/base)))
 
