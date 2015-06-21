@@ -4,4 +4,6 @@
 
 (defstyles slate-3
   [:#slate-3 {:color (:hard-yellow colours)}
-   [:.backdrop {:background-color (:soft-yellow colours)}]])
+   [:.backdrop {:background-color (:soft-yellow colours)}]
+    [:.content
+     [:circle {:fill (:hard-yellow colours)}]]])
