@@ -17,7 +17,7 @@
     [_]
     (initialize-canvas)
     (let [svg (.select js/d3 "svg")
-          circle (-> svg (.selectAll "circle") (.data (clj->js (range 1))))
+          circle (-> svg (.selectAll "circle") (.data (clj->js (range (:n cursor)))))
           circleEnter (-> circle .enter (.append "circle"))]
       (-> circleEnter
           (.attr "cy" 75)
