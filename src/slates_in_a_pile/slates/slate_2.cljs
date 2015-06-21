@@ -1,7 +1,8 @@
 (ns slates-in-a-pile.slates.slate-2
   (:require-macros [slates-in-a-pile.utils.macros :refer [slate]])
   (:require [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :as dom :include-macros true]))
+            [om-tools.dom :as dom :include-macros true]
+            [cljsjs.d3 :as d3]))
 
 (defn initialize-canvas []
   (-> (.select js/d3 "#slate-2 .content")

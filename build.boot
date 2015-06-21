@@ -9,6 +9,7 @@
                   [pandeiro/boot-http "0.6.2"]
                   [org.martinklepsch/boot-garden "1.2.5-4"]
                   [org.omcljs/om "0.8.8"]
+                  [cljsjs/d3 "3.5.5-3"]
                   [prismatic/om-tools "0.3.10" :exclude [prismatic/schema
                                                          prismatic/plumbing]]
                   [prismatic/schema "0.4.2"]

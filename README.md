@@ -7,6 +7,4 @@
 
 ##Tasks
 
-- Get d3 externs in place.
 - Build dummy d3 elements.
-- Clean up interactor functions
