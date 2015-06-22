@@ -4,42 +4,39 @@
             [om-tools.dom :as dom :include-macros true]
             [cljsjs.d3 :as d3]))
 
-(defn initialize-canvas []
+(defn initialize-canvas
+  []
   (-> (.select js/d3 "#slate-3 .content")
       (.append "svg")
       (.attr "class" "canvas")
       (.attr "width" 700)
       (.attr "height" 150)))
 
+(defn circle
+  [data]
+  (-> (.select js/d3 "svg")
+      (.selectAll "circle")
+      (.data data)))
+
+(defn circle-enter
+  [circle]
+  (-> (.enter circle)
+      (.append "circle")
+      (.attr "cy" 75)
+      (.attr "cx" (fn [d i] (+ 30 (* i 50))))
+      (.attr "r" 5)))
+
 (defcomponent slate-3
-  [cursor owner]
+  [{:keys [n] :as cursor} owner]
   (did-mount
     [_]
     (initialize-canvas)
-    (let [svg (.select js/d3 "svg")
-          circle (-> svg (.selectAll "circle") (.data (clj->js (range (:n cursor)))))
-          circleEnter (-> circle .enter (.append "circle"))]
-      (-> circleEnter
-          (.attr "cy" 75)
-          (.attr "cx" (fn [d i] (+ 30 (* i 50))))
-          (.attr "r" 5))))
+    (-> (clj->js (range n)) circle circle-enter))
   (did-update
     [_ _ _]
-    (let [data (clj->js (range (:n cursor)))
-          svg (.select js/d3 "svg")]
-      (-> svg
-          (.selectAll "circle")
-          (.data data)
-          .exit
-          .remove)
-      (-> svg
-          (.selectAll "circle")
-          (.data data)
-          .enter
-          (.append "circle")
-          (.attr "cy" 75)
-          (.attr "cx" (fn [d i] (+ 30 (* i 50))))
-          (.attr "r" 5))))
+    (let [circle (circle (clj->js (range n)))]
+      (-> circle circle-enter)
+      (-> circle .exit .remove)))
   (render-state
     [_ _]
     (println "Rendering slate-3 component with cursor:" cursor)
