@@ -20,4 +20,16 @@
                    :height "1px"
                    :margin "auto"
                    :background-color (:hard-green colours)}]
-     [:#blurb {:margin "25px 0"}]]]])
+     [:#blurb {:margin "15px 0"}]
+     [:#directions {:margin "25px 0"
+                    :height "24px"}
+      [:p {:display "inline-block"
+           :position "relative"
+           :top "-8px"
+           :height "24px"}]
+      [:#arrow {:display "inline-block"
+                :width "24px"
+                :height "24px"}]
+      [:svg {:width "24px"
+             :height "24px"}
+       [:circle {:fill (:hard-green colours)}]]]]]])

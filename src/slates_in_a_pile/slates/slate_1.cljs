@@ -14,9 +14,16 @@
         (dom/span "SLATES")
         (dom/span "IN A")
         (dom/span "PILE"))
-      (dom/div
-        {:id "separator"})
+      (dom/div {:id "separator"})
       (dom/div
         {:id "blurb"}
         (dom/p "A disgustingly lightweight")
-        (dom/p "presentation framework.")))))
+        (dom/p "presentation framework."))
+      (dom/div {:id "separator"})
+      (dom/div
+        {:id "directions"}
+        (dom/p "Press ")
+        (dom/div
+          {:id "arrow"}
+          (dom/svg
+            (dom/circle {:r 7 :cx 10 :cy 10})))))))

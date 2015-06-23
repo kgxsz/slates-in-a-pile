@@ -14,7 +14,7 @@
 
 (defn circle
   [data]
-  (-> (.select js/d3 "svg")
+  (-> (.select js/d3 "#slate-3 svg")
       (.selectAll "circle")
       (.data data)))
 
