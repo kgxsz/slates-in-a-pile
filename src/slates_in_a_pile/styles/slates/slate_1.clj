@@ -7,7 +7,7 @@
   [:#slate-1 {:color (:hard-green colours)}
    [:.backdrop {:background-color (:soft-green colours)}
     [:.content
-     [:#title {:padding "40px 0"}
+     [:#title {:padding-bottom "40px"}
       [:span {:font-weight "bold"}
         (nth-child
           "1" {:font-size "54px"}
@@ -21,7 +21,7 @@
                    :margin "auto"
                    :background-color (:hard-green colours)}]
      [:#blurb {:padding "20px 0"}]
-     [:#directions {:padding "100px 0 20px 0"
+     [:#directions {:padding-top "100px"
                     :height "24px"}
       [:p {:display "inline-block"
            :position "relative"

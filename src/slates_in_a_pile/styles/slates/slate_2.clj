@@ -4,4 +4,6 @@
 
 (defstyles slate-2
   [:#slate-2 {:color (:hard-crimson colours)}
-   [:.backdrop {:background-color (:soft-crimson colours)}]])
+   [:.backdrop {:background-color (:soft-crimson colours)}
+    [:.content
+     [:h1 {:padding-bottom "150px"}]]]])

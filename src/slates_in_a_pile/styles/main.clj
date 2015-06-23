@@ -6,13 +6,12 @@
             [slates-in-a-pile.styles.slates.slate-2 :refer [slate-2]]
             [slates-in-a-pile.styles.slates.slate-3 :refer [slate-3]]))
 
-(defrule headings :h1 :h2 :h3 :h4 :h5 :h6)
-
 (defstyles common
   [:body {:margin 0
-          :font-family "Helvetica Neue"}]
-  [:p {:font-size "16px"
-       :margin "0"}])
+          :font-family "Helvetica Neue"}
+   [:h1 :h2 :h3 :h4 :h5 :h6 {:margin 0}]
+   [:p {:font-size "16px"
+        :margin "0"}]])
 
 (defstyles pile
   [:#pile {:position "absolute"
@@ -23,7 +22,7 @@
              :width "100%"}
     [:.backdrop {:display "table-cell"
                  :vertical-align "middle"}
-     [:.content {:margin "auto"
+     [:.content {:margin "60px auto"
                  :width "1000px"
                  :text-align "center"}]]]])
 

@@ -41,4 +41,4 @@
     [_ _]
     (println "Rendering slate-3 component with cursor:" cursor)
     (slate :slate-3
-      (dom/h1 "SLATE 3"))))
+      (dom/h1 "HOW?"))))
