@@ -22,8 +22,10 @@
       (dom/div {:id "separator"})
       (dom/div
         {:id "directions"}
-        (dom/p "Press ")
+        (dom/p "( press ")
         (dom/div
           {:id "arrow"}
           (dom/svg
-            (dom/circle {:r 7 :cx 10 :cy 10})))))))
+            (dom/line {:x1 12 :x2 12 :y1 0 :y2 16})
+            (dom/polygon {:points "7,16 17,16 12,23"})))
+        (dom/p " )")))))

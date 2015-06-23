@@ -7,7 +7,7 @@
   [:#slate-1 {:color (:hard-green colours)}
    [:.backdrop {:background-color (:soft-green colours)}
     [:.content
-     [:#title {:margin "40px 0"}
+     [:#title {:padding "40px 0"}
       [:span {:font-weight "bold"}
         (nth-child
           "1" {:font-size "54px"}
@@ -20,8 +20,8 @@
                    :height "1px"
                    :margin "auto"
                    :background-color (:hard-green colours)}]
-     [:#blurb {:margin "15px 0"}]
-     [:#directions {:margin "25px 0"
+     [:#blurb {:padding "20px 0"}]
+     [:#directions {:padding "100px 0 20px 0"
                     :height "24px"}
       [:p {:display "inline-block"
            :position "relative"
@@ -30,6 +30,10 @@
       [:#arrow {:display "inline-block"
                 :width "24px"
                 :height "24px"}]
-      [:svg {:width "24px"
+      [:svg {:display "block"
+             :width "24px"
              :height "24px"}
-       [:circle {:fill (:hard-green colours)}]]]]]])
+       [:line {:stroke (:hard-green colours)
+               :stroke-width "2"}]
+       [:polygon {:stroke (:hard-green colours)
+                  :fill (:hard-green colours)}]]]]]])
