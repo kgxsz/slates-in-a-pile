@@ -21,15 +21,13 @@
                    :margin "auto"
                    :background-color (:hard-green colours)}]
      [:#blurb {:padding "20px 0"}]
-     [:#directions {:padding-top "100px"
-                    :height "24px"}
-      [:p {:display "inline-block"
-           :position "relative"
-           :top "-8px"
-           :height "24px"}]
-      [:#arrow {:display "inline-block"
+     [:#directions {:padding-top "100px"}
+      [:p {:display "inline"}]
+      [:#arrow {:display "inline"
+                :position "relative"
                 :width "24px"
-                :height "24px"}]
+                :height "24px"
+                :top "7px"}]
        [:line {:stroke (:hard-green colours)
                :stroke-width "2"}]
        [:polygon {:stroke (:hard-green colours)
