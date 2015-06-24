@@ -30,10 +30,7 @@
       [:#arrow {:display "inline-block"
                 :width "24px"
                 :height "24px"}]
-      [:svg {:display "block"
-             :width "24px"
-             :height "24px"}
        [:line {:stroke (:hard-green colours)
                :stroke-width "2"}]
        [:polygon {:stroke (:hard-green colours)
-                  :fill (:hard-green colours)}]]]]]])
+                  :fill (:hard-green colours)}]]]]])

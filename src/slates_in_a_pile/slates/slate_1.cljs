@@ -23,9 +23,8 @@
       (dom/div
         {:id "directions"}
         (dom/p "( press ")
-        (dom/div
+        (dom/svg
           {:id "arrow"}
-          (dom/svg
-            (dom/line {:x1 12 :x2 12 :y1 0 :y2 16})
-            (dom/polygon {:points "7,16 17,16 12,23"})))
+          (dom/line {:x1 12 :x2 12 :y1 0 :y2 16})
+          (dom/polygon {:points "7,16 17,16 12,23"}))
         (dom/p " )")))))
