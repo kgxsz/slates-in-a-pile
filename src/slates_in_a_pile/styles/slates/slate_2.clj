@@ -5,5 +5,13 @@
 (defstyles slate-2
   [:#slate-2 {:color (:hard-crimson colours)}
    [:.backdrop {:background-color (:soft-crimson colours)}
-    [:.content
-     [:h1 {:padding-bottom "150px"}]]]])
+    [:.content {:padding-left "130px"
+                }
+     [:#title {:padding-bottom "14px"
+               :text-align "left"}]
+     [:#separator {:width "620px"
+                   :height "1px"
+                   :background-color (:hard-crimson colours)}]
+     [:#points {:padding "14px 0 120px 0px"
+                :text-align "left"}
+     [:p {:padding "7px 0"}]]]]])
