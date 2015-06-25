@@ -15,5 +15,17 @@
       (dom/div {:id "separator"})
       (dom/div
         {:id "points"}
-        (dom/p "> Slates in a Pile is a simple framework for building beautiful d3 enabled presentations.")
-        (dom/p "> It's 100% Clojure(Script), so no templating languages, no styling languages, nothing. ")))))
+        (dom/div
+          {:class "point"}
+          (dom/svg
+            {:id "pointer"}
+            (dom/line {:x1 1 :x2 7 :y1 4 :y2 10})
+            (dom/line {:x1 1 :x2 7 :y1 14 :y2 8}))
+          (dom/p "Slates in a Pile is a simple framework for building beautiful d3 enabled presentations."))
+        (dom/div
+          {:class "point"}
+          (dom/svg
+            {:id "pointer"}
+            (dom/line {:x1 1 :x2 7 :y1 4 :y2 10})
+            (dom/line {:x1 1 :x2 7 :y1 14 :y2 8}) )
+          (dom/p "It's 100% Clojure(Script), so no templating languages, no styling languages, nothing."))))))

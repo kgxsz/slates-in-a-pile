@@ -14,4 +14,12 @@
                    :background-color (:hard-crimson colours)}]
      [:#points {:padding "14px 0 120px 0px"
                 :text-align "left"}
-     [:p {:padding "7px 0"}]]]]])
+      [:.point {:padding "7px 0"}
+       [:#pointer {:display "inline"
+                   :position "relative"
+                   :width "18px"
+                   :height "18px"
+                   :top "4px"}
+        [:line {:stroke (:hard-crimson colours)
+                :stroke-width "3"}]]
+       [:p {:display "inline"}]]]]]])
