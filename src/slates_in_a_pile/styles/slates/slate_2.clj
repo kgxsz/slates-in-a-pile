@@ -8,7 +8,8 @@
     [:.content {:padding-left "130px"
                 }
      [:#title {:padding-bottom "14px"
-               :text-align "left"}]
+               :text-align "left"
+               :font-size "30px"}]
      [:#separator {:width "620px"
                    :height "1px"
                    :background-color (:hard-crimson colours)}]

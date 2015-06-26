@@ -12,7 +12,6 @@
       (dom/div
         {:id "title"}
         (dom/h1 "WHAT?"))
-      (dom/div {:id "separator"})
       (dom/div
         {:id "points"}
         (dom/div
