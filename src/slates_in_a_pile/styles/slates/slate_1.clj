@@ -7,21 +7,21 @@
   [:#slate-1 {:color (:hard-green colours)}
    [:.backdrop {:background-color (:soft-green colours)}
     [:.content
-     [:#title
-      [:h1 {:display "inline"
-            :line-height "0.7em"}
+     [:#title {:margin-top "10px"}
+      [:h1 {:line-height "0.7em"}
         (nth-child
-          "1" {:font-size "6.6em"}
-          "2" {:font-size "3em"
+          "1" {:display "inline"
+               :font-size "6.6em"}
+          "2" {:display "inline"
+               :font-size "3em"
                :padding "0 8px"}
-          "3" {:font-size "15em"
-               :display "block"})]]
-     [:#separator {:width "190px"
-                   :height "1px"
-                   :margin "auto"
-                   :background-color (:hard-green colours)}]
-     [:#blurb {:padding "20px 0"}]
-     [:#directions {:padding-top "100px"}
+          "3" {:font-size "15em"})]]
+     [:#divider {:margin " 35px auto 0 auto"
+                 :width "460px"
+                 :height "10px"}
+      [:line {:stroke (:hard-green colours)
+              :stroke-width "3"}]]
+     [:#directions {:margin-top "60px"}
       [:p {:display "inline"}]
       [:#arrow {:display "inline"
                 :position "relative"

@@ -9,11 +9,17 @@
     [_ _]
     (println "Rendering slate-1 component with cursor:" cursor)
     (slate :slate-1
+      (dom/svg
+        {:id "divider"}
+        (dom/line {:x1 0 :x2 465 :y1 1 :y2 1 }))
       (dom/div
         {:id "title"}
         (dom/h1 "SLATES")
         (dom/h1 "IN A")
         (dom/h1 "PILE"))
+      (dom/svg
+        {:id "divider"}
+        (dom/line {:x1 0 :x2 465 :y1 1 :y2 1}))
       (dom/div
         {:id "directions"}
         (dom/p "( press")
