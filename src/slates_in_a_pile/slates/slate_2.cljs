@@ -11,8 +11,8 @@
     (slate :slate-2
       (dom/div
         {:id "title"}
-        (dom/h1 "WHAT?"))
-      (dom/div
+        (dom/h1 "?/"))
+      #_(dom/div
         {:id "points"}
         (dom/div
           {:class "point"}

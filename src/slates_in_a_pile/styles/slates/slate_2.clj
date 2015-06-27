@@ -8,7 +8,8 @@
     [:.content
      [:#title {:padding-bottom "14px"
                :text-align "left"
-               :font-size "30px"}]
+               :font-size "10em"
+               :opacity "0.3"}]
      [:#separator {:width "620px"
                    :height "1px"
                    :background-color (:hard-blue colours)}]
