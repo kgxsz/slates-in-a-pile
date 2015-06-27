@@ -12,4 +12,5 @@
    :soft-yellow "#FEF6E8"
    :hard-yellow "#FAA61A"
    :soft-green "#F3F9EB"
-   :hard-green "#8CC63F"})
+   :hard-green "#8CC63F"
+   :white "#FAFAFA"})

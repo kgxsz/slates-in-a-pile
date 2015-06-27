@@ -7,14 +7,14 @@
   [:#slate-1 {:color (:hard-green colours)}
    [:.backdrop {:background-color (:soft-green colours)}
     [:.content
-     [:#title {:padding-bottom "40px"}
-      [:span {:font-weight "bold"}
+     [:#title
+      [:h1 {:display "inline"
+            :line-height "0.7em"}
         (nth-child
-          "1" {:font-size "54px"}
-          "2" {:font-size "18px"
+          "1" {:font-size "6.6em"}
+          "2" {:font-size "3em"
                :padding "0 8px"}
-          "3" {:font-size "120px"
-               :line-height "90px"
+          "3" {:font-size "15em"
                :display "block"})]]
      [:#separator {:width "190px"
                    :height "1px"

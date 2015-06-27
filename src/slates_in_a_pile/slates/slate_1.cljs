@@ -11,15 +11,9 @@
     (slate :slate-1
       (dom/div
         {:id "title"}
-        (dom/span "SLATES")
-        (dom/span "IN A")
-        (dom/span "PILE"))
-      (dom/div {:id "separator"})
-      (dom/div
-        {:id "blurb"}
-        (dom/p "A disgustingly lightweight")
-        (dom/p "presentation framework."))
-      (dom/div {:id "separator"})
+        (dom/h1 "SLATES")
+        (dom/h1 "IN A")
+        (dom/h1 "PILE"))
       (dom/div
         {:id "directions"}
         (dom/p "( press")
