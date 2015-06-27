@@ -11,8 +11,12 @@
     (slate :slate-2
       (dom/div
         {:id "title"}
-        (dom/h1 "?/"))
-      #_(dom/div
+        (dom/h1 "WHAT")
+        (dom/h1 "?"))
+      (dom/svg
+        {:id "divider"}
+        (dom/line {:x1 0 :x2 465 :y1 1 :y2 1 }))
+      (dom/div
         {:id "points"}
         (dom/div
           {:class "point"}
