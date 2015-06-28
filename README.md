@@ -9,8 +9,5 @@
 
 ##Tasks
 
-- Build out points for slate 2
-- Build out header and point for slate 3
-- Design the d3 section of slate 3
 - Slate 4 'where' slate
 

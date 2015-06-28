@@ -18,9 +18,8 @@
           "3" {:font-size "15em"})]]
      [:.divider {:margin "auto"
                  :width "460px"
-                 :height "5px"
-                 :opacity "0.5"}
-      [:line {:stroke (:hard-green colours)
+                 :height "5px"}
+      [:line {:stroke (:faded-green colours)
               :stroke-width "3"}]]
      [:#directions {:margin "60px auto 0 auto"}
       [:p {:display "inline"}]

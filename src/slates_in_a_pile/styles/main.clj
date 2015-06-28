@@ -3,6 +3,7 @@
             [garden.def :refer [defstyles defrule]]
             [garden.stylesheet :refer :all]
             [slates-in-a-pile.styles.utils.variables :refer :all]
+            [slates-in-a-pile.styles.utils.helpers :refer :all]
             [slates-in-a-pile.styles.slates.slate-1 :refer [slate-1]]
             [slates-in-a-pile.styles.slates.slate-2 :refer [slate-2]]
             [slates-in-a-pile.styles.slates.slate-3 :refer [slate-3]]))

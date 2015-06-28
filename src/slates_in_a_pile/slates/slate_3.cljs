@@ -46,7 +46,7 @@
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "Each slate has it's state defined as an integer n. The left & right arrow keys can change the value of n."))
+        (dom/p "This is a slate; It's state is represented by an integer n. The left & right arrow keys can change the value of n."))
       (dom/div
         {:id "canvas-container"}
         (dom/h1 "n")

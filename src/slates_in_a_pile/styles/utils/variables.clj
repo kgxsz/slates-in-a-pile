@@ -3,6 +3,7 @@
 (def colours
   {:soft-blue "#E5F7FD"
    :hard-blue "#2DBCF0"
+   :faded-blue "#ADE5F9"
    :soft-violet "#EAEAF4"
    :hard-violet "#2E3192"
    :soft-pink "#FDE5F3"
@@ -11,6 +12,8 @@
    :hard-crimson "#C4161C"
    :soft-yellow "#FEF6E8"
    :hard-yellow "#FAA61A"
+   :faded-yellow "#FDDEA9"
    :soft-green "#F3F9EB"
    :hard-green "#8CC63F"
+   :faded-green "#C0E095"
    :white "#FAFAFA"})

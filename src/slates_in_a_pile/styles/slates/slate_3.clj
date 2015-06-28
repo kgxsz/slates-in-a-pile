@@ -8,9 +8,8 @@
    [:.backdrop {:background-color (:soft-yellow colours)}
     [:.content
      [:#title {:float "left"
-               :width "200px"
-               :opacity "0.3"}
-      [:h1
+               :width "300px"}
+      [:h1 {:color (:faded-yellow colours)}
        (nth-child
          "1" {:font-size "4em"
               :line-height "0.7em"}
@@ -18,22 +17,21 @@
               :line-height "0.8em"})]]
      [:.blurb {:float "left"
                :text-align "left"
-               :margin "10px 0 10px 70px"}
+               :margin "10px 0"}
       [:#pointer {:float "left"
-                  :width "60px"
+                  :width "80px"
                   :height "58px"}
        [:line {:stroke (:hard-yellow colours)
                :stroke-width "15"}]]
       [:p {:width "510px"
-           :padding-left "20px"
            :float "left"}]]
      [:#canvas-container {:float "left"
-                          :width "500px"
+                          :width "700px"
                           :height "180px"
-                          :text-align "left"
-                          :margin-left "145px"}
+                          :text-align "left"}
       [:h1 {:float "left"
-            :font-size "8em"}]
+            :font-size "8em"
+            :padding-left "75px"}]
       [:h2 {:float "left"
             :font-size "3em"
             :width "80px"
