@@ -53,4 +53,8 @@
         (dom/h3 "=")
         (dom/h2 (if (< n 1000) n 999))
         (dom/h3 "=")
-        (dom/svg {:id "canvas"})))))
+        (dom/svg {:id "canvas"}))
+      (dom/div
+        {:class "blurb"}
+        (pointer)
+        (dom/p "Each time n changes, some function of n generates data. That data is used by d3. Super simple stuff.")))))
