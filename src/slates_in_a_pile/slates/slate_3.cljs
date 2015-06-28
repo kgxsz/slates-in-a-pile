@@ -26,19 +26,33 @@
       (.attr "cx" (fn [d i] (+ 30 (* i 50))))
       (.attr "r" 5)))
 
+(defn pointer
+  []
+  (dom/svg
+    {:id "pointer"}
+    (dom/line {:x1 20 :x2 48 :y1 7 :y2 35 :opacity 0.5})
+    (dom/line {:x1 20 :x2 48 :y1 53 :y2 25 :opacity 0.5})))
+
 (defcomponent slate-3
   [{:keys [n] :as cursor} owner]
   (did-mount
     [_]
-    (initialize-canvas)
+    #_(initialize-canvas)
     (-> (clj->js (range n)) circle circle-enter))
   (did-update
     [_ _ _]
-    (let [circle (circle (clj->js (range n)))]
+    #_(let [circle (circle (clj->js (range n)))]
       (-> circle circle-enter)
       (-> circle .exit .remove)))
   (render-state
     [_ _]
     (println "Rendering slate-3 component with cursor:" cursor)
     (slate :slate-3
-      (dom/h1 "HOW?"))))
+      (dom/div
+        {:id "title"}
+        (dom/h1 "HOW")
+        (dom/h1 "?"))
+      (dom/div
+        {:class "blurb"}
+        (pointer)
+        (dom/p "Something something something something something something something something")))))

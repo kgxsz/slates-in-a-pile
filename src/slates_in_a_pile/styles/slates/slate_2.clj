@@ -6,7 +6,7 @@
 (defstyles slate-2
   [:#slate-2 {:color (:hard-blue colours)}
    [:.backdrop {:background-color (:soft-blue colours)}
-    [:.content {:text-align "left"}
+    [:.content
      [:#title {:float "left"
                :width "200px"
                :opacity "0.3"}
@@ -27,5 +27,5 @@
        [:line {:stroke (:hard-blue colours)
                :stroke-width "15"}]]
       [:p {:width "450px"
-           :margin "4px 15px"
+           :padding "4px 0 0 20px"
            :float "left"}]]]]])
