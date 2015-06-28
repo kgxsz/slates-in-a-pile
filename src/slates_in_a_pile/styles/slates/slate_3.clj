@@ -18,7 +18,7 @@
               :line-height "0.8em"})]]
      [:.blurb {:float "left"
                :text-align "left"
-               :margin "0 0 10px 70px"}
+               :margin "10px 0 10px 70px"}
       [:#pointer {:float "left"
                   :width "60px"
                   :height "58px"}
@@ -28,10 +28,10 @@
            :padding-left "20px"
            :float "left"}]]
      [:#canvas-container {:float "left"
-                          :width "700px"
+                          :width "500px"
                           :height "180px"
                           :text-align "left"
-                          :margin-left "70px"}
+                          :margin-left "145px"}
       [:h1 {:float "left"
             :font-size "8em"}]
       [:h2 {:float "left"
@@ -42,6 +42,6 @@
       [:h3 {:float "left"
             :font-size "2em"
             :padding "75px 15px 0 15px"}]
-      [:#canvas {:width "320px"
+      [:#canvas {:width "220px"
                  :height "180px"}
        [:circle {:fill (:hard-yellow colours)}]]]]]])
