@@ -12,22 +12,20 @@
                :opacity "0.3"}
       [:h1
         (nth-child
-          "1" {:font-size "4em"}
+          "1" {:font-size "4em"
+               :line-height "0.7em"}
           "2" {:font-size "24em"
-               :line-height "0.7em"})]]
-     [:#divider {:float "left"
-                   :width "2px"
-                   :height "300px"}]
-     [:#points {:float "left"
-                :width "500px"
-                :padding "14px 0 120px 0px"
-                :text-align "left"}
-      [:.point {:padding "7px 0"}
-       [:#pointer {:display "inline"
-                   :position "relative"
-                   :width "18px"
-                   :height "18px"
-                   :top "4px"}
-        [:line {:stroke (:hard-blue colours)
-                :stroke-width "3"}]]
-       [:p {:display "inline"}]]]]]])
+               :line-height "0.8em"})]]
+     [:.blurb {:float "left"
+               :text-align "left"
+               :margin "60px 0 30px 70px"}
+      [:#pointer {:float "left"
+                  :position "relative"
+                  :width "60px"
+                  :height "60px"
+                  :top "4px"}
+       [:line {:stroke (:hard-blue colours)
+               :stroke-width "15"}]]
+      [:p {:width "450px"
+           :margin "4px 15px"
+           :float "left"}]]]]])

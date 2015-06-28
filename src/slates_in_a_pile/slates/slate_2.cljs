@@ -3,6 +3,13 @@
   (:require [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom :include-macros true]))
 
+(defn pointer
+  []
+  (dom/svg
+    {:id "pointer"}
+    (dom/line {:x1 20 :x2 48 :y1 7 :y2 35 :opacity 0.5})
+    (dom/line {:x1 20 :x2 48 :y1 53 :y2 25 :opacity 0.5})))
+
 (defcomponent slate-2
   [cursor owner]
   (render-state
@@ -13,22 +20,11 @@
         {:id "title"}
         (dom/h1 "WHAT")
         (dom/h1 "?"))
-      (dom/svg
-        {:id "divider"}
-        (dom/line {:x1 0 :x2 465 :y1 1 :y2 1 }))
       (dom/div
-        {:id "points"}
-        (dom/div
-          {:class "point"}
-          (dom/svg
-            {:id "pointer"}
-            (dom/line {:x1 1 :x2 7 :y1 4 :y2 10})
-            (dom/line {:x1 1 :x2 7 :y1 14 :y2 8}))
-          (dom/p "Slates in a Pile is a simple framework for building beautiful d3 enabled presentations."))
-        (dom/div
-          {:class "point"}
-          (dom/svg
-            {:id "pointer"}
-            (dom/line {:x1 1 :x2 7 :y1 4 :y2 10})
-            (dom/line {:x1 1 :x2 7 :y1 14 :y2 8}) )
-          (dom/p "It's 100% Clojure(Script), so no templating languages, no styling languages, nothing."))))))
+        {:class "blurb"}
+        (pointer)
+        (dom/p "Slates in a Pile is a simple template for building beautiful d3 enabled presentations."))
+      (dom/div
+        {:class "blurb"}
+        (pointer)
+        (dom/p "It's 100% Clojure(Script) - so no templating languages and no styling languages.")))))
