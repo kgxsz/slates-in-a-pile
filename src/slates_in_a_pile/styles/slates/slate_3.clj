@@ -23,7 +23,7 @@
                   :height "58px"}
        [:line {:stroke (:hard-yellow colours)
                :stroke-width "15"}]]
-      [:p {:width "510px"
+      [:p {:width "530px"
            :float "left"}]]
      [:#canvas-container {:float "left"
                           :width "700px"

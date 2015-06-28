@@ -51,4 +51,4 @@
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "Each time n changes, some function of n generates data. That data is used by d3. Super simple stuff.")))))
+        (dom/p "Each time n changes, some function of n generates data. That data can be displayed with the power of d3.")))))
