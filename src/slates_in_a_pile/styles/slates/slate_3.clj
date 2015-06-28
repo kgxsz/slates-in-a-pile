@@ -20,12 +20,12 @@
                :text-align "left"
                :margin "20px 0 10px 70px"}
       [:#pointer {:float "left"
-                  :position "relative"
                   :width "60px"
-                  :height "60px"
-                  :top "4px"}
+                  :height "58px"}
        [:line {:stroke (:hard-yellow colours)
                :stroke-width "15"}]]
       [:p {:width "450px"
-           :padding "4px 0 0 20px"
-           :float "left"}]]]]])
+           :padding-left "20px"
+           :float "left"}]]
+     [:.canvas {:float "left"
+                :width "800px"}]]]])

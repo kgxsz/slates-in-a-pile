@@ -55,4 +55,8 @@
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "Something something something something something something something something")))))
+        (dom/p "Something something something something something something something something"))
+      (dom/div
+        {:class "canvas"}
+        (pointer)
+        (dom/h1 "N =")))))
