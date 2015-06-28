@@ -24,6 +24,6 @@
                   :height "58px"}
        [:line {:stroke (:hard-blue colours)
                :stroke-width "15"}]]
-      [:p {:width "450px"
+      [:p {:width "460px"
            :padding-left "20px"
            :float "left"}]]]]])

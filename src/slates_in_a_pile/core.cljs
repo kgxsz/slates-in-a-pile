@@ -13,7 +13,7 @@
 (defonce application-state
   (atom {:slates {:slate-1 {}
                   :slate-2 {}
-                  :slate-3 {:n 50}}}))
+                  :slate-3 {:n 30}}}))
 
 (defcomponent pile
   [{:keys [slates] :as cursor} owner]

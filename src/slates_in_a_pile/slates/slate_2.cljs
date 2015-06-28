@@ -27,4 +27,4 @@
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "It's 100% Clojure(Script) - so no templating languages and no styling languages.")))))
+        (dom/p "It's 100% Clojure(Script) - so no messing around with awkward templating and styling languages.")))))
