@@ -17,7 +17,7 @@
                :line-height "0.8em"})]]
      [:.blurb {:float "left"
                :text-align "left"
-               :margin "60px 0 30px 0"}
+               :margin "60px 0 25px 0"}
       [:#pointer {:float "left"
                   :width "80px"
                   :height "58px"}

@@ -2,6 +2,7 @@
   (:require-macros [slates-in-a-pile.utils.macros :refer [slate]])
   (:require [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom :include-macros true]
+            [slates-in-a-pile.utils.objects :refer [pointer]]
             [cljsjs.d3 :as d3]))
 
 (defn circle
@@ -14,16 +15,9 @@
   [circle]
   (-> (.enter circle)
       (.append "circle")
-      (.attr "cy" (fn [_ i] (+ 130 (- (* (mod i 5) 20)))))
-      (.attr "cx" (fn [_ i] (+ 30 (* ( int (/ i 5)) 20))))
+      (.attr "cy" (fn [_ i] (->> (mod i 5) (* 20) (- 130))))
+      (.attr "cx" (fn [_ i] (->> (/ i 5) int (* 20) (+ 30))))
       (.attr "r" 5)))
-
-(defn pointer
-  []
-  (dom/svg
-    {:id "pointer"}
-    (dom/line {:x1 20 :x2 48 :y1 7 :y2 35 :opacity 0.5})
-    (dom/line {:x1 20 :x2 48 :y1 53 :y2 25 :opacity 0.5})))
 
 (defcomponent slate-3
   [{:keys [n] :as cursor} owner]
