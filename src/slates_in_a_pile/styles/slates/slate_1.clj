@@ -7,7 +7,7 @@
   [:#slate-1 {:color (:hard-green colours)}
    [:.backdrop {:background-color (:soft-green colours)}
     [:.content
-     [:#title {:margin-top "10px"}
+     [:#title {:margin "23px auto 27px auto"}
       [:h1 {:line-height "0.7em"}
         (nth-child
           "1" {:display "inline"
@@ -16,13 +16,13 @@
                :font-size "3em"
                :padding "0 8px"}
           "3" {:font-size "15em"})]]
-     [:#divider {:margin " 35px auto 0 auto"
+     [:.divider {:margin "auto"
                  :width "460px"
-                 :height "10px"
+                 :height "5px"
                  :opacity "0.5"}
       [:line {:stroke (:hard-green colours)
               :stroke-width "3"}]]
-     [:#directions {:margin-top "60px"}
+     [:#directions {:margin "60px auto 0 auto"}
       [:p {:display "inline"}]
       [:#arrow {:display "inline"
                 :position "relative"
