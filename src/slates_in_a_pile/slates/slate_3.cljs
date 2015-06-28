@@ -4,17 +4,9 @@
             [om-tools.dom :as dom :include-macros true]
             [cljsjs.d3 :as d3]))
 
-(defn initialize-canvas
-  []
-  (-> (.select js/d3 "#slate-3 .content")
-      (.append "svg")
-      (.attr "class" "canvas")
-      (.attr "width" 700)
-      (.attr "height" 150)))
-
 (defn circle
   [data]
-  (-> (.select js/d3 "#slate-3 svg")
+  (-> (.select js/d3 "#slate-3 #canvas")
       (.selectAll "circle")
       (.data data)))
 
@@ -22,8 +14,8 @@
   [circle]
   (-> (.enter circle)
       (.append "circle")
-      (.attr "cy" 75)
-      (.attr "cx" (fn [d i] (+ 30 (* i 50))))
+      (.attr "cy" (fn [_ i] (+ 130 (- (* (mod i 5) 20)))))
+      (.attr "cx" (fn [_ i] (+ 30 (* ( int (/ i 5)) 20))))
       (.attr "r" 5)))
 
 (defn pointer
@@ -37,11 +29,10 @@
   [{:keys [n] :as cursor} owner]
   (did-mount
     [_]
-    #_(initialize-canvas)
     (-> (clj->js (range n)) circle circle-enter))
   (did-update
     [_ _ _]
-    #_(let [circle (circle (clj->js (range n)))]
+    (let [circle (circle (clj->js (range n)))]
       (-> circle circle-enter)
       (-> circle .exit .remove)))
   (render-state
@@ -55,8 +46,11 @@
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "Something something something something something something something something"))
+        (dom/p "Each slate has it's state defined as an integer n. The left & right arrow keys can change the value of n."))
       (dom/div
-        {:class "canvas"}
-        (pointer)
-        (dom/h1 "N =")))))
+        {:id "canvas-container"}
+        (dom/h1 "n")
+        (dom/h3 "=")
+        (dom/h2 (if (< n 1000) n 999))
+        (dom/h3 "=")
+        (dom/svg {:id "canvas"})))))
