@@ -34,4 +34,4 @@ A slate can have state. That state is represented by an integer n. This slate st
 
 You can use any function of n to generate data on state transitions. You can decorate that data with d3.
 
-It's that simple. Now go Have fun.
+It's that simple. Now go have fun.
