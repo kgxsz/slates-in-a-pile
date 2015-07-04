@@ -10,7 +10,7 @@ Slates in a Pile solves this first-world-problem by giving you a no-frills, ligh
 
 
 ## What's in the box?
-The code is completely written in Clojure and ClojureScript. It's backed by [Om](https://github.com/omcljs/om) and the styling is in Clojure, compiled by the [Garden](https://github.com/noprompt/garden) library. The codebase is just enough to a) get you started with what you need, and b) understand completely in a lazy afternoon. Once you have a good grasp of what's going on, it should be pretty simple for you to extend it to build whatever creation you
+The code is completely written in Clojure and ClojureScript. It's backed by [Om](https://github.com/omcljs/om) and the styling is in Clojure, compiled by the [Garden](https://github.com/noprompt/garden) library. The codebase is just enough to a) get you started with what you need, and b) understand completely in a lazy afternoon. Once you have a good grasp of what's going on, it should be pretty simple for you to extend it to build whatever creation you desire.
 
 
 ## Local development setup

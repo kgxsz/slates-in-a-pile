@@ -5,10 +5,10 @@
             [slates-in-a-pile.utils.objects :refer [pointer]]))
 
 (defcomponent slate-2
-  [cursor owner]
+  [state owner]
   (render-state
     [_ _]
-    (println "Rendering slate-2 component with cursor:" cursor)
+    (println "Rendering slate-2 component with state:" state)
     (slate :slate-2
       (dom/div
         {:id "title"}
