@@ -6,7 +6,8 @@
             [slates-in-a-pile.styles.utils.helpers :refer :all]
             [slates-in-a-pile.styles.slates.slate-1 :refer [slate-1]]
             [slates-in-a-pile.styles.slates.slate-2 :refer [slate-2]]
-            [slates-in-a-pile.styles.slates.slate-3 :refer [slate-3]]))
+            [slates-in-a-pile.styles.slates.slate-3 :refer [slate-3]]
+            [slates-in-a-pile.styles.slates.slate-4 :refer [slate-4]]))
 
 (defstyles common
   (at-font-face {:font-family "Source Sans Pro Bold"
@@ -14,9 +15,9 @@
   (at-font-face {:font-family "Source Sans Pro Regular"
                  :src "url('fonts/source-sans-pro-regular.otf')"})
   [:body {:margin 0
-          :font-family "Source Sans Pro Regular"}
+          :font-family "\"Source Sans Pro Regular\", Arial"}
    [:h1 :h2 :h3 :h4 :h5 :h6 {:margin 0
-                             :font-family "Source Sans Pro Bold"}]
+                             :font-family "\"Source Sans Pro Bold\", Arial"}]
    [:p {:font-size "1.4em"
         :margin "0"}]])
 
@@ -39,4 +40,5 @@
   pile
   slate-1
   slate-2
-  slate-3)
+  slate-3
+  slate-4)

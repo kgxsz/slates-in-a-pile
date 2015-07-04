@@ -6,14 +6,16 @@
             [slates-in-a-pile.interactor :refer [setup-key-press-interaction]]
             [slates-in-a-pile.slates.slate-1 :refer [slate-1]]
             [slates-in-a-pile.slates.slate-2 :refer [slate-2]]
-            [slates-in-a-pile.slates.slate-3 :refer [slate-3]]))
+            [slates-in-a-pile.slates.slate-3 :refer [slate-3]]
+            [slates-in-a-pile.slates.slate-4 :refer [slate-4]]))
 
 (enable-console-print!)
 
 (defonce state
   (atom {:slates {:slate-1 {}
                   :slate-2 {}
-                  :slate-3 {:n 30}}}))
+                  :slate-3 {:n 30}
+                  :slate-4 {:n 0}}}))
 
 (defcomponent pile
   [{:keys [slates] :as state} owner]
@@ -23,7 +25,8 @@
       {:id "pile"}
       (om/build slate-1 (:slate-1 slates))
       (om/build slate-2 (:slate-2 slates))
-      (om/build slate-3 (:slate-3 slates)))))
+      (om/build slate-3 (:slate-3 slates))
+      #_(om/build slate-4 (:slate-4 slates)))))
 
 (defn setup-root-component
   [state]

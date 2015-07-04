@@ -1,15 +1,15 @@
-(ns slates-in-a-pile.styles.slates.slate-3
+(ns slates-in-a-pile.styles.slates.slate-4
   (:require [garden.def :refer [defstyles]]
             [slates-in-a-pile.styles.utils.variables :refer :all]
             [slates-in-a-pile.styles.utils.helpers :refer :all]))
 
-(defstyles slate-3
-  [:#slate-3 {:color (:hard-yellow colours)}
-   [:.backdrop {:background-color (:soft-yellow colours)}
+(defstyles slate-4
+  [:#slate-4 {:color (:hard-violet colours)}
+   [:.backdrop {:background-color (:soft-violet colours)}
     [:.content
      [:#title {:float "left"
                :width "300px"}
-      [:h1 {:opacity 0.3}
+      [:h1 {:color (:faded-violet colours)}
        (nth-child
          "1" {:font-size "4em"
               :line-height "0.7em"}
@@ -21,9 +21,9 @@
       [:#pointer {:float "left"
                   :width "80px"
                   :height "58px"}
-       [:line {:stroke (:hard-yellow colours)
+       [:line {:stroke (:hard-violet colours)
                :stroke-width "15"}]]
-      [:p {:width "530px"
+      [:p {:width "570px"
            :float "left"}]]
      [:#canvas-container {:float "left"
                           :width "700px"
@@ -42,4 +42,4 @@
             :padding "75px 15px 0 15px"}]
       [:#canvas {:width "220px"
                  :height "180px"}
-       [:circle {:fill (:hard-yellow colours)}]]]]]])
+       [:circle {:fill (:hard-violet colours)}]]]]]])
