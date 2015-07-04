@@ -30,7 +30,7 @@ Slates are analogous to slides. Your presentation is a pile of slates. To add a 
 - Include your new slate's state in the global state atom in `core.cljs`.
 
 #### State n transitions
-A slate can have state. That state is represented by an integer n. this slate state is defined in the `state` atom in `core.cljs`. When you press the left or right arrow key whilst on a slate, you will decrease or increase n. This state transition will cause that slate to invoke both it's `render-state` and `did-update` functions. 
+A slate can have state. That state is represented by an integer n. This slate state is defined in the `state` atom in `core.cljs`. When you press the left or right arrow key whilst on a slate, you will decrease or increase n. This state transition will cause that slate to invoke both it's `render-state` and `did-update` functions. 
 
 You can use any function of n to generate data on state transitions. You can decorate that data with d3.
 
