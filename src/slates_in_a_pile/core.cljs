@@ -10,15 +10,15 @@
 
 (enable-console-print!)
 
-(defonce application-state
+(defonce state
   (atom {:slates {:slate-1 {}
                   :slate-2 {}
                   :slate-3 {:n 30}}}))
 
 (defcomponent pile
-  [{:keys [slates] :as cursor} owner]
+  [{:keys [slates] :as state} owner]
   (render-state [_ _]
-    (println "Rendered root component with state:" cursor)
+    (println "Rendered root component with state:" state)
     (dom/div
       {:id "pile"}
       (om/build slate-1 (:slate-1 slates))
@@ -26,13 +26,13 @@
       (om/build slate-3 (:slate-3 slates)))))
 
 (defn setup-root-component
-  [cursor]
+  [state]
   (om/root
     pile
-    cursor
+    state
     {:target (sel1 :#application-container)}))
 
 (defn main
   []
-  (setup-key-press-interaction application-state)
-  (setup-root-component application-state))
+  (setup-key-press-interaction state)
+  (setup-root-component state))

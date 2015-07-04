@@ -5,7 +5,7 @@
             [slates-in-a-pile.utils.objects :refer [pointer]]
             [cljsjs.d3 :as d3]))
 
-(defn circle
+(defn circle-select
   [data]
   (-> (.select js/d3 "#slate-3 #canvas")
       (.selectAll "circle")
@@ -20,18 +20,18 @@
       (.attr "r" 5)))
 
 (defcomponent slate-3
-  [{:keys [n] :as cursor} owner]
+  [{:keys [n] :as state} owner]
   (did-mount
     [_]
-    (-> (clj->js (range n)) circle circle-enter))
+    (-> (clj->js (range n)) circle-select circle-enter))
   (did-update
     [_ _ _]
-    (let [circle (circle (clj->js (range n)))]
+    (let [circle (circle-select (clj->js (range n)))]
       (-> circle circle-enter)
       (-> circle .exit .remove)))
   (render-state
     [_ _]
-    (println "Rendering slate-3 component with cursor:" cursor)
+    (println "Rendering slate-3 component with state:" state)
     (slate :slate-3
       (dom/div
         {:id "title"}

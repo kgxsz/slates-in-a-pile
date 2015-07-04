@@ -17,10 +17,10 @@
     (dom/polygon {:points "7,16 17,16 12,23"})))
 
 (defcomponent slate-1
-  [cursor owner]
+  [state owner]
   (render-state
     [_ _]
-    (println "Rendering slate-1 component with cursor:" cursor)
+    (println "Rendering slate-1 component with state:" state)
     (slate :slate-1
       (divider)
       (dom/div
