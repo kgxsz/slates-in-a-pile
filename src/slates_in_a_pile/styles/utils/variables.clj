@@ -9,6 +9,7 @@
    :faded-violet "#B1B2D7"
    :soft-pink "#FDE5F3"
    :hard-pink "#ED0F93"
+   :faded-pink "#F8A4D6"
    :soft-crimson "#F9E7E8"
    :hard-crimson "#C4161C"
    :soft-yellow "#FEF6E8"

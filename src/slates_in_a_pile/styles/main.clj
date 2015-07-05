@@ -7,7 +7,8 @@
             [slates-in-a-pile.styles.slates.slate-1 :refer [slate-1]]
             [slates-in-a-pile.styles.slates.slate-2 :refer [slate-2]]
             [slates-in-a-pile.styles.slates.slate-3 :refer [slate-3]]
-            [slates-in-a-pile.styles.slates.slate-4 :refer [slate-4]]))
+            [slates-in-a-pile.styles.slates.slate-4 :refer [slate-4]]
+            [slates-in-a-pile.styles.slates.slate-5 :refer [slate-5]]))
 
 (defstyles common
   (at-font-face {:font-family "Source Sans Pro Bold"
@@ -41,4 +42,5 @@
   slate-1
   slate-2
   slate-3
-  slate-4)
+  slate-4
+  slate-5)
