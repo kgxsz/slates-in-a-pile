@@ -9,7 +9,7 @@
     [:.content
      [:#title {:float "left"
                :width "300px"}
-      [:h1 {:opacity 0.3}
+      [:h1 {:color (:faded-yellow colours)}
        (nth-child
          "1" {:font-size "4em"
               :line-height "0.7em"}
