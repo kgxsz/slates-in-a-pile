@@ -6,45 +6,50 @@
             [slates-in-a-pile.utils.data :refer [data]]
             [cljsjs.d3 :as d3]))
 
-(def d3-force (-> js/d3 .-layout .force
-                  (.charge -120)
-                  (.linkDistance 35)
-                  (.size (clj->js [700 450]))))
+(def canvas-dimensions [700 450])
+
+(def charge-force (-> js/d3 .-layout .force
+                      (.charge -120)
+                      (.linkDistance 35)
+                      (.size (clj->js canvas-dimensions))))
+
+(defn enterfy-data
+  [canvas data class svg-type]
+  (-> (.selectAll canvas (str "." class))
+      (.data data) .enter
+      (.append svg-type)
+      (.attr "class" class)))
+
+(defn datarize-attributes
+  [entity relations]
+  (doseq [{:keys [attr data-korks]} relations]
+    (.attr entity attr (fn [d] (apply (partial aget d) data-korks)))))
+
+(defn update-entities
+  [link node]
+  (datarize-attributes link [{:attr "x1" :data-korks ["source" "x"]}
+                             {:attr "y1" :data-korks ["source" "y"]}
+                             {:attr "x2" :data-korks ["target" "x"]}
+                             {:attr "y2" :data-korks ["target" "y"]}])
+  (datarize-attributes node [{:attr "cx" :data-korks "x"}
+                             {:attr "cy" :data-korks "y"}]))
 
 (defn graphify
   [data]
   (let [canvas (-> js/d3 (.select "#slate-4 #canvas"))
-        link (-> canvas
-                 (.selectAll ".link")
-                 (.data (.-links data))
-                 .enter
-                 (.append "line")
-                 (.attr "class" "link")
-                 (.style "stroke-width" (fn [d] (-> js/Math (.sqrt (.-value d))))))
-        node (-> canvas
-                 (.selectAll ".node")
-                 (.data (.-nodes data))
-                 .enter
-                 (.append "circle")
-                 (.attr "class" "node")
+        link (-> (enterfy-data canvas (.-links data) "link" "line")
+                 (.style "stroke-width" (fn [d] (->> d .-value (.sqrt js/Math)))))
+        node (-> (enterfy-data canvas (.-nodes data) "node" "circle")
                  (.attr "r" 6)
-                 (.call (.-drag d3-force)))]
-    (-> d3-force
-        (.nodes (.-nodes data))
-        (.links (.-links data))
-        .start)
+                 (.call (.-drag charge-force)))]
     (-> node
         (.append "title")
         (.text (fn [d] (.-name d))))
-    (-> d3-force
-        (.on "tick" #(do (-> link
-                             (.attr "x1" (fn [d] (-> d .-source .-x)))
-                             (.attr "y1" (fn [d] (-> d .-source .-y)))
-                             (.attr "x2" (fn [d] (-> d .-target .-x)))
-                             (.attr "y2" (fn [d] (-> d .-target .-y))))
-                         (-> node
-                             (.attr "cx" (fn [d] (.-x d)))
-                             (.attr "cy" (fn [d] (.-y d)))))))))
+    (-> charge-force
+        (.nodes (.-nodes data))
+        (.links (.-links data))
+        .start)
+    (-> charge-force (.on "tick" #(update-entities link node)))))
 
 (defcomponent slate-4
   [{:keys [n] :as state} owner]
