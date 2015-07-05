@@ -6,26 +6,21 @@
             [slates-in-a-pile.utils.data :refer [data]]
             [cljsjs.d3 :as d3]))
 
-(def colour (-> js/d3 .-scale .category20))
-(def d3-force (-> js/d3
-                  .-layout
-                  .force
+(def d3-force (-> js/d3 .-layout .force
                   (.charge -120)
-                  (.linkDistance 40)
+                  (.linkDistance 35)
                   (.size (clj->js [700 450]))))
 
 (defn graphify
   [data]
-  (let [
-        canvas (-> js/d3 (.select "#slate-4 #canvas"))
+  (let [canvas (-> js/d3 (.select "#slate-4 #canvas"))
         link (-> canvas
                  (.selectAll ".link")
                  (.data (.-links data))
                  .enter
                  (.append "line")
                  (.attr "class" "link")
-                 (.style "stroke" "#B1B2D7")
-                 (.style "stroke-width" "1.5px"))
+                 (.style "stroke-width" (fn [d] (-> js/Math (.sqrt (.-value d))))))
         node (-> canvas
                  (.selectAll ".node")
                  (.data (.-nodes data))
@@ -33,9 +28,6 @@
                  (.append "circle")
                  (.attr "class" "node")
                  (.attr "r" 6)
-                 (.style "stroke" "#EAEAF4")
-                 (.style "stroke-width" "1.5px")
-                 (.style "fill" "#2E3192")
                  (.call (.-drag d3-force)))]
     (-> d3-force
         (.nodes (.-nodes data))

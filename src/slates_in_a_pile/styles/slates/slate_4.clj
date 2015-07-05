@@ -28,4 +28,8 @@
            :float "left"}]]
      [:#canvas {:width "700px"
                 :height "450px"
-                :float "left"}]]]])
+                :float "left"}
+      [:.link {:stroke (:faded-violet colours)}]
+      [:.node {:stroke (:soft-violet colours)
+               :stroke-width 1
+               :fill (:hard-violet colours)}]]]]])
