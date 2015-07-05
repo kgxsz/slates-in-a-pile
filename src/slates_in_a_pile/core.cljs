@@ -26,7 +26,7 @@
       (om/build slate-1 (:slate-1 slates))
       (om/build slate-2 (:slate-2 slates))
       (om/build slate-3 (:slate-3 slates))
-      #_(om/build slate-4 (:slate-4 slates)))))
+      (om/build slate-4 (:slate-4 slates)))))
 
 (defn setup-root-component
   [state]
