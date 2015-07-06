@@ -2,7 +2,7 @@
   :source-paths   #{"src"}
   :resource-paths #{"resources"}
   :dependencies '[[org.clojure/clojure "1.7.0-RC2"]
-                  [org.clojure/clojurescript "0.0-3123"]
+                  [org.clojure/clojurescript "0.0-3308"]
                   [adzerk/boot-cljs "0.0-3308-0"]
                   [adzerk/boot-cljs-repl "0.1.10-SNAPSHOT"]
                   [adzerk/boot-reload "0.3.0"]
