@@ -20,7 +20,8 @@
    [:h1 :h2 :h3 :h4 :h5 :h6 {:margin 0
                              :font-family "\"Source Sans Pro Bold\", Arial"}]
    [:p {:font-size "1.4em"
-        :margin "0"}]])
+        :margin "0"}]
+   [:a {:text-decoration "none"}]])
 
 (defstyles pile
   [:#pile {:position "absolute"

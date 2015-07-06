@@ -25,11 +25,9 @@
                :stroke-width "15"}]]
       [:p {:width "510px"
            :float "left"}]]
-     [:a {:color (:soft-pink colours)
+     [:a {:float "left"
+          :color (:soft-pink colours)
           :font-size "2em"
           :background-color "#F68FCC"
-          :padding "8px 18px"
-          :float "left"
-          :margin "30px 15px"
-          :text-decoration "none"
-          :font-family "Source Sans Pro Regular"}]]]])
+          :padding "10px 20px"
+          :margin "30px 15px"}]]]])

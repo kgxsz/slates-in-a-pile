@@ -19,5 +19,5 @@
         (pointer)
         (dom/p "For the code itself, check out the repository on Github. You'll also find more information in the readme."))
       (dom/a
-        {:href "https://github.com/kgxsz/slates-in-a-pile"}
+        {:href "https://github.com/kgxsz/slates-in-a-pile" :target "_blank"}
         "https://github.com/kgxsz/slates-in-a-pile"))))
