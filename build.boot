@@ -1,7 +1,7 @@
 (set-env!
   :source-paths   #{"src"}
   :resource-paths #{"resources"}
-  :dependencies '[[org.clojure/clojure "1.7.0-RC2"]
+  :dependencies '[[org.clojure/clojure "1.7.0"]
                   [org.clojure/clojurescript "0.0-3308"]
                   [adzerk/boot-cljs "0.0-3308-0"]
                   [adzerk/boot-cljs-repl "0.1.10-SNAPSHOT"]
