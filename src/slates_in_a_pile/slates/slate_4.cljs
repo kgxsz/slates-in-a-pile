@@ -36,7 +36,7 @@
 
 (defn graphify
   [data]
-  (let [canvas (-> js/d3 (.select "#slate-4 #canvas"))
+  (let [canvas (.select js/d3 "#slate-4 #canvas")
         link (-> (enterfy-data canvas (.-links data) "link" "line")
                  (.style "stroke-width" (fn [d] (->> d .-value (.sqrt js/Math)))))
         node (-> (enterfy-data canvas (.-nodes data) "node" "circle")
