@@ -20,6 +20,9 @@
                   :slate-5 {}}}))
 
 (defcomponent pile
+  "This guy is the root component, it's the pile in
+   which you put the slates. When you want a new slate,
+   add it here and pass it it's state."
   [{:keys [slates] :as state} owner]
   (render-state [_ _]
     (println "Rendered root component with state:" state)
