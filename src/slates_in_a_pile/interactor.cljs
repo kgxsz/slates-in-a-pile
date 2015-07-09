@@ -6,7 +6,12 @@
             [goog.events.EventType :as EventType]))
 
 (defn handle-arrow-key-press
-  "This function deals solely with arrow key press events."
+  "This function deals solely with arrow key press events. When the up
+   or down key is pressed, the current slate is calculated, and the window
+   is scrolled to the previous or next slate, depending on whether or not
+   the current window is flush with the current slate. The left and right
+   arrow keys transact the n state with either an increment or decrement,
+   however, n is bound to non-negative integers."
   [direction state]
   (let [slate-heights (map #(dommy/px % :height) (sel :.slate))
         slate-boundaries (drop-last (reductions #(+ %1 %2) 0 slate-heights))

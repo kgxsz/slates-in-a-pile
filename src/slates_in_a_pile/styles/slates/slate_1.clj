@@ -7,7 +7,7 @@
   [:#slate-1 {:color (:hard-green colours)}
    [:.backdrop {:background-color (:soft-green colours)}
     [:.content
-     [:#title {:margin "23px auto 27px auto"}
+     [:#heading {:margin "23px auto 27px auto"}
       [:h1 {:line-height "0.7em"}
         (nth-child
           "1" {:display "inline"

@@ -34,13 +34,14 @@
     (println "Rendering slate-3 component with state:" state)
     (slate :slate-3
       (dom/div
-        {:id "title"}
+        {:class "title"}
         (dom/h1 "HOW")
         (dom/h1 "?"))
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "This is a slate; It's state is represented by an integer n. The left & right arrow keys can change the value of n."))
+        (dom/p "This is a slate; It's state is represented by an integer n.")
+        (dom/p "The left & right arrow keys can change the value of n."))
       (dom/div
         {:id "canvas-container"}
         (dom/h1 "n")
@@ -51,4 +52,5 @@
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "Each time n changes, some function of n generates data. That data can be displayed with the power of d3.")))))
+        (dom/p "Each time n changes, some function of n generates data.")
+        (dom/p "That data can be displayed with the power of d3.")))))

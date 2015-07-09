@@ -7,21 +7,10 @@
   [:#slate-2 {:color (:hard-blue colours)}
    [:.backdrop {:background-color (:soft-blue colours)}
     [:.content
-     [:#title {:float "left"
-               :width "300px"}
-      [:h1 {:color (:faded-blue colours)}
-        (nth-child
-          "1" {:font-size "4em"
-               :line-height "0.7em"}
-          "2" {:font-size "24em"
-               :line-height "0.8em"})]]
+     (slate-title (:faded-blue colours))
      [:.blurb {:float "left"
                :text-align "left"
+               :width "700px"
                :margin "60px 0 25px 0"}
-      [:#pointer {:float "left"
-                  :width "80px"
-                  :height "58px"}
-       [:line {:stroke (:hard-blue colours)
-               :stroke-width "15"}]]
-      [:p {:width "460px"
-           :float "left"}]]]]])
+      (pointer (:hard-blue colours))
+      [:p {:float "left"}]]]]])

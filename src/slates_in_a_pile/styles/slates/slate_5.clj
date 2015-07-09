@@ -7,27 +7,18 @@
   [:#slate-5 {:color (:hard-pink colours)}
    [:.backdrop {:background-color (:soft-pink colours)}
     [:.content
-     [:#title {:float "left"
-               :width "300px"}
-      [:h1 {:color (:faded-pink colours)}
-        (nth-child
-          "1" {:font-size "4em"
-               :line-height "0.7em"}
-          "2" {:font-size "24em"
-               :line-height "0.8em"})]]
+     (slate-title (:faded-pink colours))
      [:.blurb {:float "left"
                :text-align "left"
+               :width "700px"
                :margin "60px 0 25px 0"}
-      [:#pointer {:float "left"
-                  :width "80px"
-                  :height "58px"}
-       [:line {:stroke (:hard-pink colours)
-               :stroke-width "15"}]]
-      [:p {:width "510px"
-           :float "left"}]]
+      (pointer (:hard-pink colours))
+      [:p {:float "left"}]]
      [:a {:float "left"
           :color (:soft-pink colours)
           :font-size "2em"
-          :background-color "#F68FCC"
+          :background-color (:hard-pink colours)
+          :opacity 0.5
           :padding "10px 20px"
-          :margin "30px 15px"}]]]])
+          :margin "30px 15px"}]
+     [:a:hover {:opacity 0.8}]]]])

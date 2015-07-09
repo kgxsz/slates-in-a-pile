@@ -11,13 +11,14 @@
     (println "Rendering slate-5 component with state:" state)
     (slate :slate-5
       (dom/div
-        {:id "title"}
+        {:class "title"}
         (dom/h1 "WHERE")
         (dom/h1 "?"))
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "For the code itself, check out the repository on Github. You'll also find more information in the readme."))
+        (dom/p "For the code itself, check out the repository on Github.")
+        (dom/p "You'll also find more information in the readme."))
       (dom/a
         {:href "https://github.com/kgxsz/slates-in-a-pile" :target "_blank"}
         "https://github.com/kgxsz/slates-in-a-pile"))))

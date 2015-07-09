@@ -61,12 +61,13 @@
     (println "Rendering slate-4 component with state:" state)
     (slate :slate-4
       (dom/div
-        {:id "title"}
+        {:class "title"}
         (dom/h1 "MORE")
         (dom/h1 "?"))
       (dom/div
         {:class "blurb"}
         (pointer)
-        (dom/p "Here is example using d3's force directed graph to represent the co-occurences of characters in 'Les Miserables'."))
+        (dom/p "Here is an example using d3's force directed graph to represent")
+        (dom/p "the co-occurences of characters in 'Les Miserables'."))
       (dom/svg
         {:id "canvas"}))))

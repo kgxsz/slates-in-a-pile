@@ -39,7 +39,7 @@
   (om/root
     pile
     state
-    {:target (sel1 :#application-container)}))
+    {:target (sel1 :#application)}))
 
 (defn main
   []
