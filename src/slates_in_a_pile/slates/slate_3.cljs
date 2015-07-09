@@ -5,13 +5,13 @@
             [slates-in-a-pile.utils.objects :refer [pointer]]
             [cljsjs.d3 :as d3]))
 
-(defn circle-select
-  [data]
-  (-> (.select js/d3 "#slate-3 #canvas")
-      (.selectAll "circle")
-      (.data data)))
+(defn get-canvas [] (.select js/d3 "#slate-3 #canvas"))
 
-(defn circle-enter
+(defn datarize-circle
+  [canvas data]
+  (-> canvas (.selectAll "circle") (.data data)))
+
+(defn enterfy-circle
   [circle]
   (-> (.enter circle)
       (.append "circle")
@@ -19,16 +19,20 @@
       (.attr "cx" (fn [_ i] (->> (/ i 5) int (* 20) (+ 30))))
       (.attr "r" 5)))
 
+(defn exitize-circle [circle] (-> circle .exit .remove))
+
 (defcomponent slate-3
   [{:keys [n] :as state} owner]
   (did-mount
     [_]
-    (-> (clj->js (range n)) circle-select circle-enter))
+    (let [canvas (get-canvas)
+          data (clj->js (range n))]
+      (enterfy-circle (datarize-circle canvas data))))
   (did-update
     [_ _ _]
-    (let [circle (circle-select (clj->js (range n)))]
-      (-> circle circle-enter)
-      (-> circle .exit .remove)))
+    (let [canvas (get-canvas)
+          data (clj->js (range n))]
+      ((juxt enterfy-circle exitize-circle) (datarize-circle canvas data))))
   (render-state
     [_ _]
     (println "Rendering slate-3 component with state:" state)
