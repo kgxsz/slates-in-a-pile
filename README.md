@@ -1,6 +1,6 @@
 # Slates in a Pile
 
-#####A simple template for building beautiful d3 enabled presentations - see an example [here](http://production.slates-in-a-pile.divshot.io/).
+#####A simple template for building beautiful d3 enabled presentations - see an example [here](http://slates-in-a-pile.divshot.io/).
 [![Build Status](https://travis-ci.org/kgxsz/slates-in-a-pile.svg?branch=master)](https://travis-ci.org/kgxsz/slates-in-a-pile)
 
 ## Introduction
