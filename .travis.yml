@@ -4,14 +4,8 @@ jdk:
   - oraclejdk8
 
 install:
-  - wget -O boot https://github.com/boot-clj/boot/releases/download/2.2.0/boot.sh
+  - wget -O boot https://github.com/boot-clj/boot-bin/releases/download/2.4.2/boot.sh
   - chmod 755 boot
   - ./boot -V
 
 script: ./boot build
-
-deploy:
-  provider: divshot
-  api_key:
-    secure: n8fLpYqJaU2osPARvUaTrNeFz6p6rqS4DqxHqaMvuf897XKpT4t/Yp9kqAnkA/tbZ3vQSWB7sOLZmPvMdK8CGwZBGi3JQdrw4zPBP/mVy1GFV/5/XaV47+9m8sdl2GBNgrQkcVWsFY2AnFBtbpBTOEeYVQ4XhWG+2jHgr3fbdPlz6o/1nFxor2VmUyajYjqKyb2FyM38AdWYwxjQdQVtZyJx2gPHYiAXs2oTx008235m5zFkr6r1wQc5JF5kVtk2tMa1rP2JToZIkIxOjl7l5KmnDEcd0oTM2MY7FSDhIR2xg+Zs6Y8KmR131nLT6ae7YXxPHJ7i7OFviLOmBHhDQhe65yzbz42MPMs+jdb/M393VucDtDbYtDiP3kzLXKTWuBfygFnqg+3RB2SbjVMUqCe1q86vZ7SZgR10C93NQIPCsYSeeKniPjhvlKFLzASo13t1EUv9TVmWOcbAZinWoScGvoypa3B3VKDIxJZzVC6mxS7yOeu2ZVmFGnfsQmsQ9jKXkrZ/pvD7hhzpEpNR4lb0ad/4Dy583va0hLM+SuobLfTUrNtOXn2ca1uUDgiBa2V4YEV37N6w9Aa7WMayOs5Ssf0ZlbHNme6unpXBH7qg+Ehnf1fVyS79GB7EIYAD4xoNzANgrXwH59s4fMsluMMTup4Bd9qs4C+M8GzExJU=
-  skip_cleanup: true
