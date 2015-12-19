@@ -1,0 +1,9 @@
+{
+  "firebase": "slates-in-a-pile",
+  "public": "./target",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
