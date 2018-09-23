@@ -1,7 +1,6 @@
 # Slates in a Pile
 
-##### A simple template for building d3 enabled presentations - see an example [here](https://slates-in-a-pile.keigo.io).
-[![Build Status](https://travis-ci.org/kgxsz/slates-in-a-pile.svg?branch=master)](https://travis-ci.org/kgxsz/slates-in-a-pile)
+##### A simple template for building d3 enabled presentations.
 
 ## Local development setup
 
